@@ -1,0 +1,32 @@
+zh-CN:
+  refinery:
+    plugins:
+      features:
+        title: Features
+    features:
+      admin:
+        features:
+          actions:
+            create_new: 建立新的 Feature
+            reorder: 对 Features 重新排序
+            reorder_done: 对 Features 的重新排序结束
+          records:
+            title: Features
+            sorry_no_results: 对不起，未找到结果。 #Sorry! There are no results found.
+
+            # There are no Features yet. Click "Add New Feature" to add your first feature.
+            no_items_yet: 目前没有 Features . 点击 "Add New Feature" 创建一个feature.
+          feature:
+            view_live_html: 查看 feature 的最新内容.<br/><em>(新窗口中打开)</em>
+            edit: 编辑 feature
+            delete: 永久删除 feature
+      features:
+        show:
+          other: 其他 Features
+  activerecord:
+    attributes:
+      'refinery/features/feature':
+        title: Title
+        description: Description
+        photo: Photo
+        video_url: Video Url

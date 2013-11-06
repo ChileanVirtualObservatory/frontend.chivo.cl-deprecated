@@ -20,9 +20,14 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'bootstrap-sass', '~> 3.0.0.0.rc'
+  gem 'font-awesome-rails'
 end
 
 gem 'jquery-rails'
+gem 'jquery-migrate-rails'
+gem 'flexslider', path: 'flexslider'
+gem 'parallax-slider', path: 'parallax-slider'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -48,3 +53,6 @@ gem 'refinerycms-acts-as-indexed', '~> 1.0.0'
 #  gem 'refinerycms-inquiries', '~> 2.1.0'
 #  gem 'refinerycms-search', '~> 2.1.0'
 #  gem 'refinerycms-page-images', '~> 2.1.0'
+gem "refinerycms-news", '~> 2.1.0'
+
+gem 'refinerycms-features', :path => 'vendor/extensions'

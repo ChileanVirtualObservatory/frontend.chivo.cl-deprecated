@@ -1,0 +1,30 @@
+it:
+  refinery:
+    plugins:
+      features:
+        title: Features
+    features:
+      admin:
+        features:
+          actions:
+            create_new: Aggiungi Nuovo Feature
+            reorder: Riordina Features
+            reorder_done: Termina il Riordino di Features
+          records:
+            title: Features
+            sorry_no_results: "Spiacenti! Nessun risultato trovato"
+            no_items_yet: Non ci sono ancora Features. Clicca "Aggiungi Nuovo Feature" per aggiungere il tuo primo feature.
+          feature:
+            view_live_html: Guarda live questo feature <br/><em>(apre una nuova finestra)</em>
+            edit: Modifica questo feature
+            delete: Rimuovi per sempre questo feature
+      features:
+        show:
+          other: Altri Features
+  activerecord:
+    attributes:
+      'refinery/features/feature':
+        title: Title
+        description: Description
+        photo: Photo
+        video_url: Video Url

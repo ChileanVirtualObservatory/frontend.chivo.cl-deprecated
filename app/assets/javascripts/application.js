@@ -12,4 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require jquery-migrate-min
+//= require bootstrap
+//= require hover-dropdown.min
+//= require back-to-top
+//= require jquery.flexslider-min
+//= require modernizr
+//= require jquery.cslider
+//= require app
+//= require index
