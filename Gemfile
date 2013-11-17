@@ -36,8 +36,10 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'bootstrap-sass', '~> 3.0.2.0'
 gem 'font-awesome-rails'
-gem 'flexslider', path: 'flexslider'
-gem 'parallax-slider', path: 'parallax-slider'
+gem 'flexslider', path: 'vendor'
+gem 'parallax-slider', path: 'vendor'
+# gem 'flexslider', git: 'git://github.com/ChileanVirtualObservatory/flexslider.git'
+# gem 'parallax-slider', git: 'git://github.com/ChileanVirtualObservatory/parallax-slider.git'
 gem 'jquery-migrate-rails'
 
 group :doc do

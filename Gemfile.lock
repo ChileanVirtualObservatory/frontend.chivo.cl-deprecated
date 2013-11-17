@@ -1,12 +1,10 @@
 PATH
-  remote: flexslider
+  remote: vendor
   specs:
     flexslider (0.0.1)
-
-PATH
-  remote: parallax-slider
-  specs:
+      railties (>= 3.1.0)
     parallax-slider (0.0.1)
+      railties (>= 3.1.0)
 
 GEM
   remote: https://rubygems.org/
