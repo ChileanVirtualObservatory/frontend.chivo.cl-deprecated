@@ -1,8 +1,12 @@
 PATH
-  remote: vendor
+  remote: vendor/flexslider
   specs:
     flexslider (0.0.1)
       railties (>= 3.1.0)
+
+PATH
+  remote: vendor/parallax-slider
+  specs:
     parallax-slider (0.0.1)
       railties (>= 3.1.0)
 
