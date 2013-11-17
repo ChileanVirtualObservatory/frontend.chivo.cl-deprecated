@@ -3,7 +3,7 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head>
-  <title>ChiVO</title>
+  <title>ChiVO -  Chilean Virtual Observatory</title>
 
   <!-- Meta -->
   <meta charset="utf-8">
@@ -60,13 +60,13 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown active">
+          <li class="dropdown <%= 'active' if controller.action_name == 'index' %>">
             <%= link_to 'Home', root_path %>
           </li>
-          <li class="dropdown">
+          <li class="dropdown <%= 'active' if controller.action_name == 'institutions' %>">
             <%= link_to 'Institutions', institutions_path %>
           </li>
-          <li class="dropdown">
+          <li class="dropdown <%= 'active' if controller.action_name == 'about' %>">
             <%= link_to 'About Us', about_path %>
           </li>
         </ul>
