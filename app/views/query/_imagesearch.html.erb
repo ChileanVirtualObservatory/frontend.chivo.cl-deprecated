@@ -2,19 +2,45 @@
   <h1>Simple Image Search</h1>
 </div>
 
-<%= form_tag '#',  class: 'form-horizontal' do %>
-	<%= label_tag :ra, 'RA'%>
-	<%= text_field_tag :ra %>
-
-	<%= label_tag :dec, 'DEC'%>
-	<%= text_field_tag :dec %>
-
-	<%= label_tag :angular, 'Angular Size'%>
-	<%= text_field_tag :angular %>
-
-	<%= select_tag :format, options_for_select(["FITS", "VOTable", "JPG"])%>
-	
-    <div class="form-actions">
-		<%= submit_tag 'Search'%>  
+<%= form_tag '#',id: 'imagesearch-form' , class: 'form-horizontal', role: 'form' do %>
+	<div class="form-group">
+		<%= label_tag :ra, 'RA', class: 'col-sm-2 control-label' %>
+		<div class="col-sm-10">
+			<%= text_field_tag :ra , nil, class: 'form-control form-control-small' %>
+		</div>
 	</div>
+
+   <div class="form-group">
+		<%= label_tag :dec, 'DEC', class: 'col-sm-2 control-label' %>
+		<div class="col-sm-10">
+			<%= text_field_tag :dec, nil, class: 'form-control form-control-small' %>
+		</div>
+   </div>
+	
+   <div class="form-group">
+		<%= label_tag :angular, 'Angular Size', class: 'col-sm-2 control-label'%>
+		
+		<div class="col-sm-10">
+			<%= text_field_tag :angular, nil, class: 'form-control form-control-small' %>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<%= label_tag :angular, 'Data type', class: 'col-sm-2 control-label'%>
+		
+		<div class="col-sm-10">
+   	 	<%= select_tag :format, options_for_select(["FITS", "VOTable", "JPG"]), class: 'form-control form-control-small'%>
+		</div>
+   </div>
+
+
+   <div class="form-group">
+     <div class="col-sm-offset-2 col-sm-10">
+		   <%= button_tag(type: 'submit', class: "btn btn-default") do %> Search <% end %>
+	  </div>
+	</div>
+
 <% end %>
+
+</br></br></br></br></br></br>
+
