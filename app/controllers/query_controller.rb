@@ -7,12 +7,26 @@ class QueryController < ApplicationController
   end
 
   def conesearch
-    url = URI.parse('http://dachs.lirae.cl:5000/alma/scs')
+    # url = URI.parse('http://dachs.lirae.cl:5000/alma/scs')
     
-    url.query = URI.encode_www_form(params)
-
-    vo = Nokogiri::XML(Net::HTTP.get(url))
-    vos = vo.xpath("//TABLEDATA")
-    logger.debug "DATA: #{vos}"
+    # url.query = URI.encode_www_form(params)
+    
+    # vo = Nokogiri::XML(Net::HTTP.get(url))
+    # vos = vo.xpath("//TABLEDATA")
+    # logger.debug "DATA: #{vos}"
   end
+  
+  def imagesearch
+  end
+  
+  def spectralsearch
+  end
+  
+  def tablesearch
+  end
+  
+  def advancesearch
+  end
+  
+  
 end

@@ -60,13 +60,16 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown <%= 'active' if controller.action_name == 'index' %>">
+          <li class="dropdown <%= 'active' if controller.controller_name == 'home' and controller.action_name == 'index' %>">
             <%= link_to 'Home', root_path %>
           </li>
-          <li class="dropdown <%= 'active' if controller.action_name == 'institutions' %>">
+          <li class="dropdown <%= 'active' if controller.controller_name == 'home' and controller.action_name == 'institutions' %>">
             <%= link_to 'Institutions', institutions_path %>
           </li>
-          <li class="dropdown <%= 'active' if controller.action_name == 'about' %>">
+          <li class="dropdown <%= 'active' if controller.controller_name == 'query' and controller.action_name == 'index' %>">
+            <%= link_to 'Services', query_path %>
+          </li>
+          <li class="dropdown <%= 'active' if controller.controller_name == 'home' and controller.action_name == 'about' %>">
             <%= link_to 'About Us', about_path %>
           </li>
         </ul>
@@ -75,7 +78,9 @@
   </div>  
 </div><!--/header-->
 <!--=== End Header ===-->  
-<%= yield %>
+<div class="container">
+		<%= yield %>
+</div>
 
 <!--=== Copyright ===-->
 <div class="copyright">

@@ -12,11 +12,18 @@
    border-radius: 0 !important;
 }
 
+body, html{
+	height: 100%;
+}
+
 body { 
+	position: relative;
    color: #333; 
    font-size: 13px;
    line-height: 1.6;
+   
 }
+
 
 p, a, li { 
    color: #555;

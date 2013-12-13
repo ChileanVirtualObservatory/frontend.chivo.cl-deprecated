@@ -1,0 +1,120 @@
+<div class="page-header">
+  <h1>Advance Search</h1>
+</div>
+<%= form_tag '#', class: 'form-horizontal' do %>
+	<div class="row">
+		<div class="span6">
+			<legend>Position</legend>
+			<%= label_tag :sesame, "Source name (Sesame)" %>
+			<%= text_field_tag :sesame %>
+
+			<%= label_tag :alma, "Source name (ALMA)" %>
+			<%= text_field_tag :alma %>
+
+			<%= label_tag :radec, "RA/DEC" %>
+			<%= text_field_tag :radec %>
+
+			<%= label_tag :radius, "Source name (ALMA)" %>
+			<%= text_field_tag :radius %>
+		</div>
+
+		<div class="span6">
+			<legend>Energy</legend>
+			<%= field_set_tag :frequency do %>
+		    	<%= text_field_tag 'Frequency' %>
+
+				<%= text_field_tag :f1, nil, class: 'span1' %>
+				to
+				<%= text_field_tag :f2, nil, class: 'span1' %>
+			<% end %>
+
+			<%= field_set_tag :bandwidth do %>
+		    	<%= text_field_tag 'Bandwidth' %>
+
+				<%= text_field_tag :b1, nil, class: 'span1' %>
+				to
+				<%= text_field_tag :b2, nil, class: 'span1' %>
+			<% end %>
+
+			<%= field_set_tag :spectral do %>
+		    	<%= text_field_tag 'Spectral resolution' %>
+
+				<%= text_field_tag :s1, nil, class: 'span1' %>
+				to
+				<%= text_field_tag :s2, nil, class: 'span1' %>
+			<% end %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="span6">
+		<legend>Time</legend>  
+		<%= field_set_tag :otime do %>
+	    	<%= text_field_tag 'Observation time' %>
+
+			<%= text_field_tag :t1, nil, class: 'span1' %>
+			to
+			<%= text_field_tag :t2, nil, class: 'span1' %>
+		<% end %>
+
+
+		<%= field_set_tag :integration do %>
+	    	<%= text_field_tag 'Integration time' %>
+
+			<%= text_field_tag :i1, nil, class: 'span1' %>
+			to
+			<%= text_field_tag :i2, nil, class: 'span1' %>
+		<% end %>
+		  
+
+	  </div>
+	  <div class="span6">
+	      <legend>Polarisation</legend>
+		  <%= label_tag :pol, "Polarization type"%>
+		  <%= select_tag :pol, options_for_select([ "Stoke I", "Single" , "Dual", "Full"]) %>
+	  </div>
+	</div>	  
+
+	<div class="row">
+		<div class="span6">
+	        <legend>Observation</legend>
+			<%= label_tag :water, 'Water vapour'%>
+	    	<%= text_field_tag :water %>
+	
+			<%= label_tag :scan, 'Scan intent'%>
+			<%= select_tag :scan, options_for_select([ "Observe target", "Amplitude" , "Bandpass", "Phase", "Pointing"]) %>
+
+		</div>
+
+	    <div class="span6">
+			<legend>Project</legend>
+  
+			<%= label_tag :code, 'Project code'%>
+			<%= text_field_tag :code %>
+  	
+			<%= label_tag :title, 'Project title'%>
+			<%= text_field_tag :title %>
+	
+			<%= label_tag :pi, 'PI Name'%>
+			<%= text_field_tag :pi %>
+  
+	    </div>
+	</div>
+
+
+
+	<div class="row">
+		<div class="span6">
+			  <legend>Options</legend>
+			  <%= check_box_tag :view_raw, 'raw data'%>
+	  		  <%= check_box_tag :view_project, 'project'%>
+		</div>
+	</div>
+
+
+
+	<div class="form-actions">
+		<%= button_tag 'Search' %>
+	</div>
+<% end %>

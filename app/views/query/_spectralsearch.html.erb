@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>Simple Spectral Search</h1>
+</div>
+
+<%= form_tag '#',  class: 'form-horizontal' do %>
+	<%= label_tag :ra, 'RA'%>
+	<%= text_field_tag :ra %>
+
+	<%= label_tag :dec, 'DEC'%>
+	<%= text_field_tag :dec %>
+
+	<%= label_tag :diameter, 'Diameter'%>
+	<%= text_field_tag :diameter %>
+
+	<%= select_tag :format, options_for_select(["FITS", "VOTable", "JPG", "Native", "Graphic"])%>
+	
+    <div class="form-actions">
+		<%= submit_tag 'Search'%>  
+	</div>
+<% end %>

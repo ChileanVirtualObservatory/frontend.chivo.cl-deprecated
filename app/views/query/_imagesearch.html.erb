@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>Simple Image Search</h1>
+</div>
+
+<%= form_tag '#',  class: 'form-horizontal' do %>
+	<%= label_tag :ra, 'RA'%>
+	<%= text_field_tag :ra %>
+
+	<%= label_tag :dec, 'DEC'%>
+	<%= text_field_tag :dec %>
+
+	<%= label_tag :angular, 'Angular Size'%>
+	<%= text_field_tag :angular %>
+
+	<%= select_tag :format, options_for_select(["FITS", "VOTable", "JPG"])%>
+	
+    <div class="form-actions">
+		<%= submit_tag 'Search'%>  
+	</div>
+<% end %>

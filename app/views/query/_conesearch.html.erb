@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h1>Simple Cone Search</h1>
+</div>
+
+<%= form_tag '#',  class: 'form-horizontal' do %>
+	<%= label_tag :ra, 'RA'%>
+	<%= text_field_tag :ra %>
+
+	<%= label_tag :dec, 'DEC'%>
+	<%= text_field_tag :dec %>
+
+	<%= label_tag :radius, 'Radius (SR)'%>
+	<%= text_field_tag :radius %>
+
+	<%= label_tag :verbose, 'Verbosity'%>
+	<%= select_tag :verbose, options_for_select([[1],[2],[3]]) %>	
+
+	<%= submit_tag 'Search'%>  
+<% end %>
