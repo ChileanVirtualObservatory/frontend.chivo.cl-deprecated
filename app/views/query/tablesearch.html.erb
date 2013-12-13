@@ -1,0 +1,67 @@
+<%= javascript_include_tag "voview" %>
+<%= stylesheet_link_tag  "voview", media: "all" %>
+
+<script type="text/javascript">//<![CDATA[
+  /**
+    Make a new VOView object.  The form containing the input information is 
+    specified, as well as the widgetID, which is used below to indicate where 
+    in the page the VOView display will be placed.
+  **/
+  myVoview =  new voview({input: {form: "searchForm"}, widgetID: "voviewTab"});
+  /**
+    Uncomment the line below to show an example of reformatting a column.  This
+    example really only works with the example_input.xml file.
+  **/
+  // myVoview.renderObject.columnFormat("name", "<a onclick=\"return nw(this.href, this.target)\" href=\"http://simbad.u-strasbg.fr/sim-id.pl?protcol=html&Ident=@@&Frame3=G\" title=\"Link to Simbad details\">@@</a>");
+  myVoview.renderObject.enableRowSelection();
+  //]]>
+</script>
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-40">
+  <div class="container">
+    <h1 class="pull-left">Simple Table Search</h1>
+    <ul class="pull-right breadcrumb">
+      <li><%= link_to 'Home', root_path %></li>
+      <li>Services</li>
+      <li class="active">Simple Table Search</li>
+    </ul>
+  </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<!--=== Content Part ===-->
+<div class="container">   
+  <div class="row margin-bottom-30">
+    <div class="col-md-6 md-margin-bottom-40 col-md-offset-3">
+      <%= form_tag "", class: 'form-horizontal', role: 'form', method: 'get', name: 'searchForm', onsubmit: 'return myVoview.start()' do %>
+        <div class="form-group">
+          <%= label_tag :language, 'Language', class: 'col-sm-2 control-label' %>
+          <div class="col-sm-8">
+            <%= select_tag :language, options_for_select(["ADQL", "PQL"]), class: 'form-control' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= label_tag :query, 'Query', class: 'col-sm-2 control-label' %>
+          <div class="col-sm-8">
+            <%= text_area_tag :query, nil, class: 'form-control', row: '5' %>
+          </div>
+        </div>
+        <%= hidden_field_tag :sterm, "http://localhost:3000/example_input.xml", name: 'query_string' %>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" name="_submit">Process</button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row margin-bottom-30">
+    <div class="col-md-12 md-margin-bottom-40">
+      <div class="voviewTab">
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br>

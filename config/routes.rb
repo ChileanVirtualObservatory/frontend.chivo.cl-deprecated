@@ -9,6 +9,4 @@ Web::Application.routes.draw do
   match 'query/spectralsearch' => 'query#spectralsearch', via: [:get, :post]
   match 'query/tablesearch' => 'query#tablesearch', via: [:get, :post]
   match 'query/advancesearch' => 'query#advancesearch', via: [:get, :post]
-  
-  
 end
