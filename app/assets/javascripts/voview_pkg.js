@@ -601,7 +601,7 @@ voview.prototype.makeFilter = function(filterParams) {
         function ready() {
             var tempDOM;
             var xmlstring;
-            alert("ready called filterDOM = "+filterDOM+", preProcDOM = "+preProcDOM);
+            // alert("ready called filterDOM = "+filterDOM+", preProcDOM = "+preProcDOM);
             if (filterDOM !== null && preProcDOM !== null) {
                 // Do the actual filtering work and call back with the result.
                 preprocess();
