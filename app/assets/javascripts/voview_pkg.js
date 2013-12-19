@@ -47,9 +47,12 @@ function voview(vovParams) {
      * 
      * @param {XML Dom object} table The table that has been downloaded.
      */
-    var gotVotable = function(table) {
+    this.gotVotable = function(table) {
+				 
         meVoview.filterObject.setInputTable({ tableDOM: table });
-        meVoview.renderObject.render({ renderCallback: meVoview.renderObject.displayHTML });
+		  
+		  
+		  meVoview.renderObject.render({ renderCallback: meVoview.renderObject.displayHTML });
     };
 
     /**
@@ -68,6 +71,7 @@ function voview(vovParams) {
          */
 
         if (inputParams.form) {
+			  	inputParams.form
             urlForm = document.getElementsByName(inputParams.form)[0];
             meVoview.votableUrl = urlForm.query_string.value;
 
@@ -597,8 +601,7 @@ voview.prototype.makeFilter = function(filterParams) {
         function ready() {
             var tempDOM;
             var xmlstring;
-            // alert("ready called filterDOM = "+filterDOM+", preProcDOM =
-            // "+preProcDOM);
+            alert("ready called filterDOM = "+filterDOM+", preProcDOM = "+preProcDOM);
             if (filterDOM !== null && preProcDOM !== null) {
                 // Do the actual filtering work and call back with the result.
                 preprocess();
@@ -806,6 +809,9 @@ voview.prototype.makeFilter = function(filterParams) {
          */
         this.setInputTable = function(setInputParams) {
             votableDOM = setInputParams.tableDOM;
+				
+				console.log('setInputParams: '+ votableDOM);
+				
             preProcessed = false;
             filtered = false;
         };
