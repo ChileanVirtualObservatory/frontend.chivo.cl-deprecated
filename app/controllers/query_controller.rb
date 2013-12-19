@@ -6,10 +6,12 @@ class QueryController < ApplicationController
   def conesearch
     @votable = RestClient.get(
       "http://dachs.lirae.cl:5000/alma/scs",
-      { params: { 
-        ra: params[:ra], 
-        dec: params[:dec], 
-        sr: params[:sr]}
+      { 
+        params: { 
+          ra: params[:ra], 
+          dec: params[:dec], 
+          sr: params[:sr]}
+        }
       }
       ).html_safe
 
