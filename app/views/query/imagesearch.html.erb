@@ -42,7 +42,7 @@
         <div class="form-group">
           <%= label_tag :formato, 'Data type', class: 'col-sm-2 control-label'%>
           <div class="col-sm-8">
-            <%= select_tag "formato", options_for_select([ "FITS", "VOTable", "JPG" ], "FITS"), class: 'form-control' %>
+            <%= select_tag :formato, options_for_select([ "FITS", "VOTable", "JPG" ], "FITS"), class: 'form-control' %>
           </div>
         </div>
         <div class="form-group">

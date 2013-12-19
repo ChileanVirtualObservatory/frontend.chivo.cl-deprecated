@@ -45,10 +45,9 @@
 			    	<%= text_field_tag :verbose, nil, class: 'form-control' %>
 			    </div>
 			  </div>
-			  <%= hidden_field_tag :sterm, "http://localhost:3000/example_input.xml", name: 'query_string' %>
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-default" name="_submit">Process</button>
+            <%= submit_tag 'Process', class: 'btn btn-default' %>
 			    </div>
 			  </div>
 			<% end %>
