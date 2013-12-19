@@ -37,9 +37,7 @@ gem 'font-awesome-rails'
 gem 'flexslider', path: 'vendor/flexslider'
 gem 'parallax-slider', path: 'vendor/parallax-slider'
 gem 'jquery-migrate-rails'
-gem 'nokogiri'
 gem 'rest-client'
-
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
