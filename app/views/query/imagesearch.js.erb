@@ -1,0 +1,3 @@
+myVoview =  new voview({input: {form: "searchForm"}, widgetID: "voviewTab"});
+myVoview.renderObject.enableRowSelection();
+myVoview.gotVotable($.parseXML("<%= escape_javascript(@votable) %>"));
