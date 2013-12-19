@@ -42,11 +42,13 @@ class QueryController < ApplicationController
       "http://dachs.lirae.cl:5000/alma/ssa",{ 
         params: { 
           pos: "#{params[:ra]},#{params[:dec]}",
-          size: params[:diameter], 
-          format: params[:formato]
+          size: params[:diameter],
+          # format: params[:formato]
         }
       }).html_safe
 
+      p @votable
+      
     respond_to do |format|
       format.html
       format.js
