@@ -66,12 +66,12 @@
           <li class="dropdown <%= 'active' if controller.controller_name == 'home' and controller.action_name == 'institutions' %>">
             <%= link_to 'Institutions', institutions_path %>
           </li>
-          <li class="dropdown <%= 'active' if controller.controller_name == 'query' and controller.action_name == 'index' %>">
+          <!-- <li class="dropdown <%#= 'active' if controller.controller_name == 'query' and controller.action_name == 'index' %>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
               Services
-              <%= fa_icon 'angle-down' %>
+              <%#= fa_icon 'angle-down' %>
             </a>
-            <!-- <ul class="dropdown-menu">
+            <ul class="dropdown-menu">
               <li>
                 <%#= link_to 'Cone Search', query_conesearch_path %>
               </li>
