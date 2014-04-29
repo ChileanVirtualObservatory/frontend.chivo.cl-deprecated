@@ -1,3 +1,5 @@
+<%= javascript_include_tag "service/option" %>
+<%= javascript_include_tag "service/size_panel" %>
 <%= javascript_include_tag "voview" %>
 <%= stylesheet_link_tag  "voview", media: "all" %>
 
@@ -14,51 +16,83 @@
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
+<%= render 'pop_boxes' %>
+
+<!--=== Content Part ===-->
 <div class="container">   
   <div class="row margin-bottom-30">
-    <div class="col-md-6 md-margin-bottom-40 col-md-offset-3">
-      <%= form_tag "/query/imagesearch", class: 'form-horizontal', role: 'form', method: 'get', name: 'searchForm', remote: true do %>
-        <div class="form-group">
-          <%= label_tag :ra, 'RA', class: 'col-sm-2 control-label' %>
-          <div class="col-sm-8">
-            <%= text_field_tag :ra , nil, class: 'form-control' %>
-          </div>
-        </div>
+    <div class="col-md-8 md-margin-bottom-40 col-md-offset-2">
+      
+      <!--=== Panel ===-->
+      <div class="panel panel-default margin-bottom-40">
+        
+        <%= render 'panel_heading' %>
 
-        <div class="form-group">
-          <%= label_tag :dec, 'DEC', class: 'col-sm-2 control-label' %>
-          <div class="col-sm-8">
-            <%= text_field_tag :dec, nil, class: 'form-control' %>
-          </div>
-        </div>
+        <div class="panel-body">                    
+          <!--=== Form ===-->
+          <%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm' do %>
+            <div class="form-group">
+              <%= label_tag :ra, 'RA', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                <%= text_field_tag :ra, nil, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= label_tag :dec, 'DEC', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5"  data-popbox='default'>
+                  <%= text_field_tag :dec, nil, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= label_tag :size, 'Angular Size', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                  <%= text_field_tag :size, nil, class: 'form-control' %>
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <%= label_tag :data_type, 'Data Type', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                <%= select_tag :data_type, options_for_select([ "FITS", "VOTable", "JPG" ], "FITS"), class: 'form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= label_tag :catalogs, 'Catalogs', class: 'col-sm-4 control-label' %>
+              <div id='check_cats' class="col-sm-5" data-popbox='default'>
+                  <div class= "input-group">
+                      <span class="input-group-addon">
+                          <%= check_box_tag :c1, 1, true %>
+                      </span>
+                      <%= label_tag :c1, 'dachs', class: "form-control" %>
+                  </div>
+                  <div class="margin-bottom-10"></div>    
+                  <div class= "input-group">
+                      <span class="input-group-addon">
+                          <%= check_box_tag :c2 %>
+                      </span>
+                      <%= label_tag :c2, 'irsa', class: "form-control" %>
+                  </div>
+              </div>          
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-4 col-sm-5">
+                  <%= submit_tag 'Process', class: 'btn btn-default btn-block' %>
+              </div>
+            </div>
+          <% end %> <!--=== End Form ===-->   
+        </div> <!--/panel-body-->
+      </div> <!--=== End Panel ===-->
 
-        <div class="form-group">
-          <%= label_tag :size, 'Angular Size', class: 'col-sm-2 control-label'%>
-          <div class="col-sm-8">
-            <%= text_field_tag :size, nil, class: 'form-control' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <%= label_tag :formato, 'Data type', class: 'col-sm-2 control-label'%>
-          <div class="col-sm-8">
-            <%= select_tag :formato, options_for_select([ "FITS", "VOTable", "JPG" ], "FITS"), class: 'form-control' %>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <%= submit_tag 'Process', class: 'btn btn-default' %>
-          </div>
-        </div>
-      <% end %>
     </div>
-  </div>
+  </div>  
+  <button id='panel_medium' style="display: none;"></button>
   <div class="row margin-bottom-30">
-    <div class="col-md-12 md-margin-bottom-40">
-      <div class="voviewTab">
+      <div class="col-md-12 md-margin-bottom-40">
+          <div class="voviewTab">
+          </div>
       </div>
-    </div>
   </div>
 </div>
+<!--=== End Content Part ===-->
 
 <br><br><br><br><br><br><br>
