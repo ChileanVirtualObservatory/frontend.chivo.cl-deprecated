@@ -86,6 +86,31 @@
               </li>
             </ul>
           </li>
+          <!-- form options -->
+          <li class="dropdown <%= 'active' if controller.controller_name == 'form_option' and controller.action_name == 'index' %>">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+              Forms
+              <%= fa_icon 'angle-down' %>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to 'Option1', form_option_option1_path %>
+              </li>
+              <li>
+                <%= link_to 'Option2', form_option_option2_path %>
+              </li>
+              <li>
+                <%= link_to 'Option3', form_option_option3_path %>
+              </li>
+              <li>
+                <%= link_to 'Alma', form_option_alma_path %>
+              </li>
+              <li>
+                <%= link_to 'Alma2', form_option_alma2_path %>
+              </li>
+            </ul>
+          </li>
+          <!-- end form options -->
           <li class="dropdown <%= 'active' if controller.controller_name == 'home' and controller.action_name == 'about' %>">
             <%= link_to 'About Us', about_path %>
           </li>

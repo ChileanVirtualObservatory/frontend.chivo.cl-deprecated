@@ -1,0 +1,176 @@
+<%= javascript_include_tag "service/option" %>
+<%= javascript_include_tag "service/size_panel" %>
+<%= javascript_include_tag "voview" %>
+<%= stylesheet_link_tag  "voview", media: "all" %>
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-40">
+    <div class="container">
+        <h1 class="pull-left">Search</h1>
+        <ul class="pull-right breadcrumb">
+            <li><%= link_to 'Home', root_path %></li>
+            <li>Forms</li>
+            <li class="active">Search</li>
+        </ul>
+    </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<%= render 'pop_boxes' %>
+
+<!--=== Content Part ===-->
+<div class="container">   
+    <div class="row margin-bottom-30">
+
+        <div class="alert alert-info" id="info">
+            <strong>Attention!</strong>  Change some things to modify the form layout.
+        </div>
+        <div class="clearfix margin-bottom-20"></div>
+        <div class="col-md-8 md-margin-bottom-40 col-md-offset-2">
+            
+            <!--=== Panel ===-->
+            <div  class="panel panel-default margin-bottom-40">
+
+                <%= render 'panel_heading' %>
+
+                <div class="panel-body">
+                    
+                    <!--=== Form ===-->
+                    <%= form_tag "/form_option/option2", class: 'form-horizontal', role: 'form', method: 'get', name: 'searchForm', remote: true do %>
+                        <div class="col-sm-6 ">
+                            <div class="form-group">
+                                <%= label_tag :ra, 'RA', class: 'col-md-4 control-label' %>
+                                <div class="col-sm-6" data-popbox='default' >
+                                    <%= text_field_tag :ra , nil, class: 'form-control' %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <%= label_tag :dec, 'DEC', class: 'col-sm-4 control-label' %>
+                                <div class="col-sm-6" data-popbox='default' >
+                                    <%= text_field_tag :dec, nil, class: 'form-control' %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <%= label_tag :diameter, 'Diameter', class: 'col-sm-4 control-label' %>
+                                <div class="col-sm-6" data-popbox='default' >
+                                    <%= text_field_tag :diameter, nil, class: 'form-control' %>
+                                </div>
+                            </div>
+                            <div class="form-group" id="select_type1">                            
+                                <%= label_tag :format_type1, 'Format', class: 'col-sm-4 control-label' %>
+                                <div class="col-sm-6" data-popbox='default' >
+                                    <%= select_tag :format_type1, options_for_select([ "FITS", "VOTable", "JPG" ], "FITS"), class: 'form-control' %>
+                                </div>
+                            </div>
+                            <div class="form-group" id="select_type2">
+                                <%= label_tag :format_type2, 'Format', class: 'col-sm-4 control-label' %>
+                                <div class="col-sm-5">
+                                    <input id="format_type2" name="format_type2" type='text' class="form-control" style="display: none;">
+                                    <div data-popbox='default'>
+                                        <span id='select_test' class="form-control"><span></span><i class="fa fa-angle-down"></i></span>
+                                    </div>
+                                    <div id="select_default" class="multiselect_default" data-popbox='default'>
+                                        <div class= "input-group">
+                                            <span class="input-group-addon" style="solid;border-top:#bbb 0px solid;" >
+                                                <%= radio_button_tag 'format', 'fits'%>
+                                            </span>
+                                            <%= label_tag :format_fits, 'FITS', class: "form-control", style: "border-top:#bbb 0px solid; font-weight: normal;" %>
+                                        </div>  
+                                        <div class= "input-group">
+                                            <span class="input-group-addon" style="solid;border-top:#bbb 0px solid;">
+                                                <%= radio_button_tag 'format', 'votable'%>
+                                            </span>
+                                            <%= label_tag :format_votable, 'VOTable', class: "form-control", style: "border-top:#bbb 0px solid;font-weight: normal;" %>
+                                        </div>
+                                        <div class= "input-group">
+                                            <span class="input-group-addon" style="solid;border-top:#bbb 0px solid;">
+                                                <%= radio_button_tag 'format', 'jpg'%>
+                                            </span>
+                                            <%= label_tag :format_jpg, 'JPG', class: "form-control", style: "border-top:#bbb 0px solid;font-weight: normal;" %>
+                                        </div>
+                                        <div class= "input-group">
+                                            <span class="input-group-addon" style="solid;border-top:#bbb 0px solid;">
+                                                <%= radio_button_tag 'format', 'all'%>
+                                            </span>
+                                            <%= label_tag :format_all, 'ALL', class: "form-control", style: "border-top:#bbb 0px solid;font-weight: normal;" %>
+                                        </div>
+                                        <div class= "input-group">
+                                            <span class="input-group-addon" style="solid;border-top:#bbb 0px solid;">
+                                                <%= radio_button_tag 'format', 'metadata'%>
+                                            </span>
+                                            <%= label_tag :format_metadata, 'Metadata', class: "form-control", style: "border-top:#bbb 0px solid;font-weight: normal;" %>
+                                        </div>         
+                                    </div>                                                               
+                                </div>                                
+                            </div>
+                        </div>                           
+                        <div class="col-md-6">
+
+                            <div class="form-group" id="catalogs_type2">
+                                <%= label_tag :multi_select_test, 'Catalogs', class: 'col-sm-4 control-label' %>
+                                <div class="col-sm-5">
+                                    <div data-popbox='default'>
+                                        <span id='multi_select_test' class="form-control"><i class="fa fa-angle-down"></i></span>
+                                    </div>
+                                    <div id="check_cats_type2" class="multiselect_default" data-popbox='default'>
+                                        <div class= "input-group">
+                                            <span class="input-group-addon" style="border-bottom:#bbb 0px solid;border-top:#bbb 0px solid;" >
+                                                <%= check_box_tag :c1_type2%>
+                                            </span>
+                                            <%= label_tag :c1_type2, 'dachs', class: "form-control", style: "border-bottom:#bbb 0px solid; border-top:#bbb 0px solid; font-weight: normal;" %>
+                                        </div>  
+                                        <div class= "input-group">
+                                            <span class="input-group-addon">
+                                                <%= check_box_tag :c2_type2 %>
+                                            </span>
+                                            <%= label_tag :c2_type2, 'irsa', class: "form-control", style: "font-weight: normal;" %>
+                                        </div>      
+                                    </div>                                                               
+                                </div>
+                                    
+                            </div>
+                            <div class="form-group" id="catalogs_type1">
+                                <%= label_tag :catalogs, 'Catalogs', class: 'col-sm-4 control-label' %>
+                                <div id='check_cats_type1' class="col-sm-6 " data-popbox='default'>                                    
+                                    <div class= "input-group">
+                                        <span class="input-group-addon">
+                                            <%= check_box_tag :c1_type1, 1, true %>
+                                        </span>
+                                        <%= label_tag :c1_type1, 'dachs', class: "form-control" %>
+                                    </div>
+                                    <div class="margin-bottom-10"></div>    
+                                    <div class= "input-group">
+                                        <span class="input-group-addon">
+                                            <%= check_box_tag :c2_type1, 0, false %>
+                                        </span>
+                                        <%= label_tag :c2_type1, 'irsa', class: "form-control" %>
+                                    </div>
+                                    <div class="margin-bottom-10"></div>
+                                </div>
+                            </div>
+                            <div class="form-group" id="catalogs_type3">
+                                <div id='check_cats' data-popbox='default'>
+                                    <%= label_tag :catalogs, 'Catalogs:' %>
+                                    <br>
+                                    <%= label_tag :c1_type3, 'dachs', class: "col-md-offset-3"%>
+                                    <%= check_box_tag :c1_type3, 1, true%>                                        
+                                    <%= label_tag :c2_typ3, 'twomass-dsa', class: "col-md-offset-3" %>
+                                    <%= check_box_tag :c2_type3  %>        
+                                </div>                                  
+                            </div>                 
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-6">
+                                    <%= submit_tag 'Process', class: 'btn btn-default btn-block' %>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    <% end %><!--=== End Form ===-->                     
+                </div> <!--/panel-body-->
+            </div> <!--=== End Panel ===--> 
+        </div>
+    </div>
+    <%= render 'settings' %>
+</div>
+
+<br><br><br><br><br><br><br>

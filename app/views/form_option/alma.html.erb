@@ -1,0 +1,512 @@
+<%= javascript_include_tag "service/option_alma" %>
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-40">
+ 	<div class="container">
+    	<h1 class="pull-left">Search</h1>
+    	<ul class="pull-right breadcrumb">
+      		<li><%= link_to 'Home', root_path %></li>
+      		<li>Forms Options</li>
+      		<li class="active">Alma</li>
+    	</ul>
+  	</div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<!--=== Pop Boxes ===-->
+
+<!--=== End Pop Boxes ===-->
+
+<div class="container"> <!--== Content Part ==-->										
+	<div class="tab-v2 col-sm-12" style="margin-left:50px;">                
+		<ul class="nav nav-tabs">         
+			<li class="active" ><a href="#query_form" data-toggle="tab">Query Form</a></li>                    
+			<li><a href="#result_table" data-toggle="tab">Result table</a></li>               
+		</ul>
+
+
+		<div class="tab-content">
+			                      
+			<div class="tab-pane active" id="query_form" >
+				<%= form_tag "/form_option/alma", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'almaSearch' do %>
+					<br>
+					<table id="table_query" class="" >
+						<thead>
+							<tr>
+								<th>	
+									<%= submit_tag 'Process', class: 'btn btn-default ' %>
+									<%= button_tag 'Reset', type: 'reset', class: 'btn btn-default ' %>							  	
+								</th>
+								<th></th>
+								<th></th>
+								<th>
+									<span id="flag" class="fa-stack fa-lg" style="float:right">
+									  <i class="fa fa-circle fa-stack-2x"></i>
+									  <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+									</span>
+
+									<span class="fa-stack fa-lg" style="float:right">
+									  <i class="fa fa-circle fa-stack-2x"></i>
+									  <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+									</span>
+								</th>		
+				  			</tr>	
+						</thead>
+						<tbody>
+							<tr>
+								<td class="tag-box tag-box-v6 col-sm-3" >
+									<h4>Position</h4>                        
+									<div class="group">
+								  		<%= label_tag :source_name_sesame, 'Source name (Sesame)', class: 'control-label' %>
+								    	<div class="container-input">
+								    		<%= text_field_tag :source_name_sesame, nil, class: 'form-control' %>
+								    	</div>
+								    	<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Souce name (Sesame)</strong> 
+												<p>Source name to be resolved with <a href="http://cdsweb.u-strasbg.fr/cgi-bin/Sesame" target="_blank">Sesame</a></p><br>
+												<strong>Description</strong> 
+												<p>We use the external resolver Sesame to obtain
+														coordinates for the source. Sesame queries the Simbad,
+														NED and VizieR services.</p><br>
+												<strong>Example</strong> 
+												<p>M87</p>
+												<p>NGC3375</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :source_name_alma, 'Source name (ALMA)', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :source_name_alma, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Souce name (ALMA)</strong> 
+												<p>ALMA source name.</p><br>
+												<strong>Description</strong> 
+												<p>Name of the source as registered in the ASDM. 
+													Partial matches through wildcards (?, *), and 
+													boolean OR expressions ("|"), can be used.</p><br>
+												<strong>Example</strong> 
+												<p>GRB021004</p>
+												<p>"R Scl"</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :ra_dec, 'RA Dec', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :ra_dec, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>RA Dec</strong> 
+												<p>Right Ascension and Declination</p><br>
+												<strong>Description</strong> 
+												<p>Right Ascension (RA) and Declination, separated 
+													by whitespace, either in decimal degrees, or in 
+													Hours:Minutes:Seconds for RA, +Degrees:Minutes:Seconds 
+													for Declination.</p><br>
+												<strong>Unit</strong> 
+												<p>Hours:Minutes:Seconds and Degrees:Minutes:Seconds</p><br>	
+												<strong>Example</strong> 
+												<p>04:18:21.27 +38:01:35.7</p>
+												<p>064.5886550 +38.0266111</p>
+												<p>04:18:21.27 +38.0266111</p>
+												<p>064.5886550 +38:01:35.7</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group" >
+								  		<%= label_tag :search_radius, 'Search radius', class: 'control-label' %>
+							    		<%= text_field_tag :search_radius, nil, class: 'form-control' %>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Search radius</strong> 
+												<p>Search radius of the cone centered around RA/Dec.</p><br>
+												<strong>Description</strong> 
+												<p>Search radius, in sexagesimal or in decimal degrees, of 
+													the cone centered around RA/Dec.</p><br>
+												<strong>Example</strong> 
+												<p>0:10:00</p>
+												<p>0.166667</p>
+												<p>1:00:00</p>
+												<p>1.0</p>
+												<p>0:00:30</p>
+												<p>0.008333</p>
+											</div>
+										</div>  
+								  	</div>
+								</td>
+								<td class="tag-box tag-box-v6 col-sm-3">
+									<h2>Energy</h2>                        
+									<div class="group">
+								  		<%= label_tag :frecuency, 'Frecuency', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :frecuency, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Frequency</strong> 
+												<p>Reference sky frequency.</p><br>
+												<strong>Description</strong> 
+												<p>Observed (tuned) reference frequency on the sky.</p><br>
+												<strong>Unit</strong> 
+												<p>GHz</p><br>
+												<strong>Example</strong> 
+												<p>&gt;100</p>
+												<p>&lt;300</p>
+												<p>100 .. 300</p> 
+												<p>!(100 .. 300)</p> 
+												<p>100 .. 300 | 600 .. 900</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :bandwidth, 'Bandwidth', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :bandwidth, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Bandwidth</strong> 
+												<p>Total bandwidth.</p><br>
+												<strong>Description</strong> 
+												<p>Total Bandwidth.</p><br>
+												<strong>Unit</strong> 
+												<p>GHz</p><br>
+												<strong>Example</strong> 
+												<p>1.2 .. 2.5</p> 
+												<p>&gt;2.5</p> 
+												<p>&lt;1.2</p>
+												<p>&lt;1.2 | &gt;4.0</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :spectral_resolution, 'Spectral Resolution', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :spectral_resolution, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Spectral resolution</strong> 
+												<p>Estimated frequency resolution (in kHz).</p><br>
+												<strong>Description</strong> 
+												<p>Estimated frequency resolution from all the spectral 
+													windows, using median values of channel widths.</p><br>
+												<strong>Unit</strong> 
+												<p>kHz</p><br>
+												<strong>Example</strong> 
+												<p>&lt;70</p>       
+												<p>&gt;1e6</p>     
+												<p>2e6 .. 3e6</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :band, 'Band', class: 'control-label' %>
+							    		<%= select_tag :band, options_for_select([
+											["3 &nbsp;&nbsp;&nbsp; (84-116 GHz)", "3"],
+											["6 &nbsp;&nbsp;&nbsp; (211-275 GHz)", "6"],
+											["7 &nbsp;&nbsp;&nbsp; (275-373 GHz)", "7"],
+											["9 &nbsp;&nbsp;&nbsp; (602-720 GHz)", "9"]]), 
+											class: 'form-control', multiple: true %>
+										<div class="multiselect-band">
+									    	<button type="button" id="band_button" name="band_button" class="form-control">           
+						    					<%= fa_icon 'angle-down' %>   
+						    				</button>
+						    				<div>					    				
+												<ul>
+													<li>
+														<label for="3"><%= check_box_tag '3' %>3 &nbsp;&nbsp;&nbsp; (84-116 GHz)</label>
+													</li>
+													<li>
+														<label for="6"><%= check_box_tag '6' %>6 &nbsp;&nbsp;&nbsp; (211-275 GHz)</label>
+													</li>
+													<li>
+														<label for="7"><%= check_box_tag '7' %>7 &nbsp;&nbsp;&nbsp; (275-373 GHz)</label>
+													</li>
+													<li>
+														<label for="9"><%= check_box_tag '9' %>9 &nbsp;&nbsp;&nbsp; (602-720 GHz)</label>
+													</li>
+												</ul>
+											</div>										
+									  	</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Band</strong> 
+												<p>ALMA receiver band.</p><br>
+												<strong>Description</strong> 
+												<p>ALMA receiver band.</p><br>
+											</div>
+										</div>  
+								  	</div>
+								</td>
+								<td class="tag-box tag-box-v6 col-sm-3">
+									<h2>Time</h2>                        
+									<div class="group">
+								  		<%= label_tag :observation_date, 'Observation time', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :observation_date, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Observation date</strong> 
+												<p>Field integration start timestamp.</p><br>
+												<strong>Description</strong> 
+												<p>Start time of the first integration on the field.</p><br>
+												<strong>Example</strong> 
+												<p>&gt;01-01-2011</p>   
+												<p>&lt;31-12-2011</p>     
+												<p>01-01-2011 .. 01-02-2011</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :integration_time, 'Integration time', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :integration_time, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Integration time</strong> 
+												<p>Total field integration time.</p><br>
+												<strong>Description</strong> 
+												<p>Aggregated integration time for the field in the ASDM.</p><br>
+												<strong>Example</strong> 
+												<p>&gt;12.5</p>     
+												<p>&lt;30</p>     
+												<p>30 .. 60</p>      
+												<p>!(1 .. 300)</p>
+											</div>
+										</div>  
+								  	</div>								  	
+								</td>
+								<td class="tag-box tag-box-v6 col-sm-3">
+									<h2>Polarisation</h2>                        
+									<div class="group">
+								  		<%= label_tag :polarisation_type, 'Polarisation type', class: 'control-label' %>
+							    		<%= select_tag :polarisation_type, options_for_select([
+											["Stokes I", "stoke_i"],
+											["Single", "single"],
+											["Dual", "dual"],
+											["Full", "full"]]), 
+											class: 'form-control', multiple: true %>
+										<div class="multiselect-polarisation-type">
+									    	<button type="button" id="polarisation_type_button" name="polarisation_type_button" class="form-control">           
+						    					<%= fa_icon 'angle-down' %>   
+						    				</button>
+						    				<div>					    				
+												<ul>
+													<li>
+														<label for="stoke_i"><%= check_box_tag 'stoke_i' %>Stoke I</label>
+													</li>
+													<li>
+														<label for="single"><%= check_box_tag 'single' %>Single</label>
+													</li>
+													<li>
+														<label for="dual"><%= check_box_tag 'dual' %>Dual</label>
+													</li>
+													<li>
+														<label for="full"><%= check_box_tag 'full' %>Full</label>
+													</li>
+												</ul>
+											</div>										
+									  	</div>
+									  	<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Polarisation type</strong> 
+												<p>Polarisation products.</p><br>
+												<strong>Description</strong> 
+												<p>Polarisation products provided.</p><br>
+											</div>
+										</div>  
+								  	</div>								  	
+								</td>
+							</tr>
+							<tr>
+								<td class="tag-box tag-box-v6 col-sm-3" >
+									<h2>Observation</h2>                        
+									<div class="group">
+								  		<%= label_tag :water_vapour, 'Water vapour', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :water_vapour, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Water vapour</strong> 
+												<p>Estimated precipitable water vapour (in mm).</p><br>
+												<strong>Description</strong> 
+												<p>Estimated precipitable water vapour from the XML_CALWVR_ENTITIES table.</p><br>
+												<strong>Example</strong> 
+												<p>!null</p>         
+												<p>&lt;0.5|null</p>   
+												<p>&lt; 0.49 | &gt;55.5</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :scan_intent, 'Scan intent', class: 'control-label' %>
+							    		<%= select_tag :scan_intent, options_for_select([
+											["Observe target", "observe_target"],
+											["Amplitude", "amplitude"],
+											["Bandpass", "bandpass"],
+											["Phase", "phase"],
+											["Pointing", "pointing"]
+											]), 
+											class: 'form-control', multiple: true %>
+										<div class="multiselect-scan-intent">
+									    	<button type="button" id="scan_intent_button" name="scan_intent_button" class="form-control">           
+						    					<%= fa_icon 'angle-down' %>   
+						    				</button>
+						    				<div>					    				
+												<ul>   	
+													<li class="dropdown-header" style="text-align:center">Science</li>
+													<hr style="backgroun-color:#e5e5e5;margin-top:0px;margin-bottom:5px;"></hr>
+													<li>
+														<label for="observe_target"><%= check_box_tag 'observe_target' %>Observe target</label>
+													</li>		
+													<li class="dropdown-header" style="text-align:center">Standar Calibration</li>
+													<hr style="backgroun-color:#e5e5e5;margin-top:0px; margin-bottom:5px;"></hr>
+													<li>
+														<label for="amplitude"><%= check_box_tag 'amplitude' %>Amplitude</label>
+													</li>
+													<li>
+														<label for="bandpass"><%= check_box_tag 'bandpass' %>Bandpass</label>
+													</li>
+													<li>
+														<label for="phase"><%= check_box_tag 'phase' %>Phase</label>
+													</li>
+													<li>
+														<label for="pointing"><%= check_box_tag 'pointing' %>Pointing</label>
+													</li>
+												</ul>
+											</div>									
+									  	</div>
+									  	<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Scan intent</strong> 
+												<p>Scan intent of searched fields.</p><br>
+												<strong>Description</strong> 
+												<p>Scan intent list for the observed field.</p><br>
+											</div>
+										</div>  						
+								  	</div>									  	
+								</td>
+								<td class="tag-box tag-box-v6 col-sm-3" >
+									<h2>Project</h2>                        
+									<div class="group">
+								  		<%= label_tag :project_code, 'Project code', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :project_code, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Project code</strong> 
+												<p>Project code.</p><br>
+												<strong>Description</strong> 
+												<p>Project code, in the form YYYY.NNNNN.C.AAA, where:</p><br>
+												<strong>Example</strong> 
+												<p>2010.2.00010.N</p>      
+												<p>2010.*</p>      
+												<p>2010.?.*.CSV</p>        
+												<p>*.CSV</p>     
+												<p>!(*.CSV | *.SIM)</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :project_title, 'Project Title', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :project_title, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Project Title</strong> 
+												<p>ALMA Project Title</p><br>
+												<strong>Description</strong> 
+												<p>Case-insensitive search over the project title.</p><br>
+												<strong>Example</strong> 
+												<p>*GALAXY*</p>
+												<p>*?ebula*</p>
+											</div>
+										</div>  
+								  	</div>
+								  	<div class="group">
+								  		<%= label_tag :pi_name, 'PI Name', class: 'control-label' %>
+							    		<div class="container-input">
+							    			<%= text_field_tag :pi_name, nil, class: 'form-control' %>
+							    		</div>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>PI Full Name</strong> 
+												<p>ALMA PI name.</p><br>
+												<strong>Description</strong> 
+												<p>case-insensitive partial match over the full PI name. Wildcards can be used.</p><br>
+												<strong>Example</strong> 
+												<p>Smith, Fred</p>
+												<p>SMI*</p>
+												<p>fr?d</p>
+											</div>
+										</div>  
+								  	</div>
+								</td>
+								<td class="tag-box tag-box-v6 col-sm-3">
+									<div >                        
+										<h4></h4>                        
+										<p></p>						    	                   
+									</div>
+								</td>
+								<td class="tag-box tag-box-v6 col-sm-3" >
+									<h2>Options</h2>                        
+									<div class="group">
+								  		<%= label_tag :result_view, 'Results view', class: 'control-label' %> <br>					    		
+	                                    <%= radio_button_tag 'result_view', 'raw_data', true %><%= label_tag :result_view_raw_data, 'raw data', class: ""%>                              
+	                                    <%= radio_button_tag 'result_view', 'project' %><%= label_tag :result_view_project, 'project', class: "" %>
+	                                    <div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Results View</strong> 
+												<p>Alter the format of the results displayed.</p><br>
+												<strong>Description</strong> 
+												<p>Select a project-oriented view of the search results, 
+													or a more detailed view of the execution blocks.</p><br>
+											</div>
+										</div>  
+								  	</div>
+								  	<br>
+								  	<div class="group">
+								  		<%= label_tag :release_status, 'Release status', class: 'control-label' %>
+								  		<br>
+							    		<%= radio_button_tag 'release_status', 'public', true %><%= label_tag :release_status_public, 'public data', class: ""%> 
+							    		<%= radio_button_tag 'release_status', 'all' %><%= label_tag :release_status_all, 'all data', class: ""%>
+							    		<div class="container-tooltip" >
+								    		<div class="alert-info">
+												<strong>Filter data</strong> 
+												<p>Filter only Public data or show all of it.</p><br>
+												<strong>Description</strong> 
+												<p>Filter down only the Public data, or attempt 
+													to download proprietary data by selecting 'No filter'.</p>
+											</div>
+										</div>  
+								  	</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				<% end %> <!--=== End Form ===-->
+            </div>   
+            <div class="tab-pane" id="result_table">
+                <div class="alert alert-danger fade in">                
+                	<button type="button" class="close" data-dismiss="alert">×</button>                
+                	<strong>Oh snap!</strong> Change a few things up and try submitting again.            
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> <!--== End Content Part ==-->
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
