@@ -47,6 +47,8 @@ end
 # Use nokogiri to join VOTables 
 gem  'nokogiri'
 
+# Devise is a flexible authentication solution for Rails based on Warden
+gem 'devise'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
