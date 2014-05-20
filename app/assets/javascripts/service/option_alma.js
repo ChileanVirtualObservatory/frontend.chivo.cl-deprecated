@@ -288,6 +288,38 @@ $(document).ready(function () {
  			.click();		
 
  	});
+
+ 	/* listener to the source name sesame for resolver*/
+ 	$("#source_name_sesame").keyup(function (event) {
+ 		if (!this.value){
+ 			$(this).closest(".container-input").removeClass("has-error has-success");
+ 			$(this).closest(".container-input").find("#sesame_search")
+ 				.removeClass("btn-u btn-u-default btn btn-danger btn-success")
+ 				.addClass("btn-u btn-u-default");
+ 			/*
+ 			$ra_dec = $("#ra_dec");
+ 			$ra_dec.val("");
+ 			$("#ra_dec").closest(".container_input").slideUp("fast");
+ 			*/
+ 		}
+ 	})
+ 	/* when is needed sesame resolver */
+ 	$("#sesame_search").on('click', function (event) {
+ 		$this = $(this);
+ 		$ra_dec = $("#ra_dec");
+ 		$container_input = $(this).closest(".container-input");
+		$input = $container_input.find("#source_name_sesame");
+
+ 		if (!$input.val()){ /*if is empty cancel the submit*/
+ 			$container_input.removeClass("has-error has-success").addClass("has-error"); /* make it visible */
+ 			$this.removeClass("btn-u btn-u-default btn btn-danger btn-success").addClass("btn btn-danger");
+ 			$ra_dec.val(" ");
+ 			event.preventDefault(); /* cancel submit */
+ 			return false;
+ 		}
+ 		$this.find("i").removeClass("fa fa-angle-right fa-lg").addClass("fa fa-spinner fa-spin"); /* change the icon */
+ 		$input.css('width', "144px");
+ 	});
  	/*
 	function windowResize () {
 		$table = $("table#table_query");
