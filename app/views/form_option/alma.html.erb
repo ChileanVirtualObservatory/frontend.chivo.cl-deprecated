@@ -51,7 +51,7 @@
 									</span>
 								</th>		
 				  			</tr>	
-						</thead>
+						</thead>container-input
 						<tbody>
 							<tr>
 								<td class="tag-box tag-box-v6 col-sm-3" >
@@ -59,7 +59,12 @@
 									<div class="group">
 								  		<%= label_tag :source_name_sesame, 'Source name (Sesame)', class: 'control-label' %>
 								    	<div class="container-input">
-								    		<%= text_field_tag :source_name_sesame, nil, class: 'form-control' %>
+								    		<%= text_field_tag :source_name_sesame, nil, class: 'form-control', style:"width:149px; display:inline-block;" %>
+								    		<span class="input-group-btn" style="display:inline-block;margin-left:-3px;">
+								    			<%= button_tag(type: "submit", class: "btn-u btn-u-default", name: "commit", value:"sesame_search", id: 'sesame_search') do %>
+												    <i class="fa fa-angle-right fa-lg"></i>
+												<% end %>
+                                			</span>
 								    	</div>
 								    	<div class="container-tooltip" >
 								    		<div class="alert-info">
@@ -507,6 +512,6 @@
         </div>
     </div>
 </div> <!--== End Content Part ==-->
-
+<!--=== Form ===-->
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
