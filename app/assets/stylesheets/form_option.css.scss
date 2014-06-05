@@ -30,12 +30,14 @@ table#table_query {
     
     td { 
         vertical-align:baseline;
+        position:relative;
+        #plus_position:hover{
+            cursor:pointer;
+        }
     }
 
-    th { 
-
-        #flag {
-
+    th {
+        #flag, #info_states {
             &:hover {
                 cursor: pointer;
             }
