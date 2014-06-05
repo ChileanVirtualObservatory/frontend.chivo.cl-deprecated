@@ -3,25 +3,30 @@ $container_input = $("#source_name_sesame").closest(".container-input"); /* cont
 $button = $container_input.find("#sesame_search"); /* button for resolve sesame */
 $icon = $button.find("i");
 
-<% if @ra_dec == "ERROR" %> /* if the resolve has error make visible*/
-	
-	$container_input.removeClass("has-success has-error");
-	$container_input.addClass("has-error");
+$actions_state = $("#actions_states");
 
-	$button.removeClass("btn-u btn-u-default btn btn-danger btn-success");
-	$button.addClass("btn btn-danger");
+<% if @ra_dec == "ERROR" %> /* if the resolve has error make visible*/
+	$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+	$actions_state.addClass("alert-danger");
+	$actions_state.text(" ");
+	$actions_state.append("<strong></strong>");
+	$actions_state.find("strong").text("Oh snap!");
+	$actions_state.append(" something is wrong with the ra and dec cordinates");
+	
+	$ra_dec.val("");
+	
 <% else %>
 	
 	$ra_dec.val("<%= @ra_dec %>"); /* put ra and dec resolved into input w/ id=ra_dec */
-	$ra_dec.closest(".container-input").slideDown("fast"); /* just for see that */
+	$ra_dec.closest(".container-input").slideDown("slow"); /* just for see that */
 
-	$container_input.removeClass("has-success has-error")
-		.addClass("has-success"); /* make visible the ok resolve */
-
+	$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+	$actions_state.addClass("alert-success");
+	$actions_state.text(" ");
+	$actions_state.append("<strong></strong>");
+	$actions_state.find("strong").text("Well done!");
+	$actions_state.append(" the sesame source name has been resolved");
 	
-	$button.removeClass("btn-u btn-u-default btn btn-danger btn-success")
-		.addClass("btn btn-success"); /* make visible the ok resolve */
-
 <% end %>
 
 $icon.removeClass("fa fa-spinner fa-spin")
