@@ -20,8 +20,9 @@
 <div class="container"> <!--== Content Part ==-->										
 	<div class="tab-v2 col-sm-12" style="margin-left:50px;">                
 		<ul class="nav nav-tabs">         
-			<li class="active" ><a href="#query_form" data-toggle="tab">Query Form</a></li>                    
-			<li><a href="#result_table" data-toggle="tab">Result table</a></li>               
+			<li class="active" ><a href="#query_form" data-toggle="tab">Query Form</a></li>
+			<li><a href="#query_list" data-toggle="tab" >Query List</a></li>       
+			<li><a href="#result_table" data-toggle="tab">Result Table</a></li>               
 		</ul>
 
 
@@ -29,15 +30,19 @@
 			                      
 			<div class="tab-pane active" id="query_form" >
 				<%= form_tag "/form_option/alma", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'almaSearch' do %>
-					<br>
+
+					<div id="actions_states" class="alert fade in alert-info" style="margin-bottom:0px">
+		                <strong>Heads up! </strong> This will show the states of actions
+		            </div>
 					<table id="table_query" class="" >
 						<thead>
 							<tr>
 								<th>	
-									<%= submit_tag 'Process', class: 'btn btn-default ' %>
-									<%= button_tag 'Reset', type: 'reset', class: 'btn btn-default ' %>							  	
+									<%= submit_tag 'Process', class: 'btn btn-default ', style: "display:inline-block" %>
+									<%= button_tag 'Reset', type: 'reset', class: 'btn btn-default ', style: "display:inline-block" %>	
 								</th>
-								<th></th>
+								<th>
+								</th>
 								<th></th>
 								<th>
 									<span id="flag" class="fa-stack fa-lg" style="float:right">
@@ -45,7 +50,7 @@
 									  <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
 									</span>
 
-									<span class="fa-stack fa-lg" style="float:right">
+									<span id="info_states" class="fa-stack fa-lg" style="float:right">
 									  <i class="fa fa-circle fa-stack-2x"></i>
 									  <i class="fa fa-info fa-stack-1x fa-inverse"></i>
 									</span>
@@ -54,8 +59,11 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td class="tag-box tag-box-v6 col-sm-3" >
-									<h4>Position</h4>                        
+								<td id="position" class="tag-box tag-box-v6 col-sm-3" >
+									<h2 style="display:inline-block">Position</h2>
+									<span id="plus_position" style="display:none; float:right;">
+										<i class="fa fa-plus"></i>
+									</span>                       
 									<div class="group">
 								  		<%= label_tag :source_name_sesame, 'Source name (Sesame)', class: 'control-label' %>
 								    	<div class="container-input">
@@ -501,6 +509,21 @@
 						</tbody>
 					</table>
 				<% end %> <!--=== End Form ===-->
+            </div>
+
+            <div class="tab-pane" id="query_list">
+                <table id= "query_list" class="table">
+					<thead>
+						<tr>
+							<th>Sesame Name</th>
+							<th>Ra Dec</th>
+							<th>Search Radius</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
             </div>   
             <div class="tab-pane" id="result_table">
                 <div class="alert alert-danger fade in">                
