@@ -1,5 +1,6 @@
 
-var isTooLtipaCtivated = true; /* var to know if the user activate tooltip */
+var isTooLtipaCtivated = false; /* var to know if the user activate tooltip */
+var isStateInfoActivated = true; /* var to know if the user activate state info */
 var delayTime = 300; /* delay time to slide down all the form controls */
 
 /* function that make visible the container-tooltip class of an determinated gropu if is activated */
@@ -29,13 +30,22 @@ $(document).ready(function () {
 	$("table#table_query").find(".container-input").find(".form-control").show();
 	$(".container-input").hide();
 	$("#search_radius").val('0:10:00'); /* #search_radio contron form w text by default */
-	$("table#table_query").find("#flag").children().first().css("border", "none").addClass("icon-color-blue");
+	//$("table#table_query").find("#flag").children().first().css("border", "none").addClass("icon-color-blue");
+	$("table#table_query").find("#flag").children().first().css("border", "none");
 	$("table#table_query").find("#flag").click(function (event) {
 		event.preventDefault();
 		(isTooLtipaCtivated) ? isTooLtipaCtivated = false: isTooLtipaCtivated = true;
 		var $divColor = $(this).children().first();
 		(isTooLtipaCtivated) ? $divColor.addClass("icon-color-blue"): $divColor.removeClass("icon-color-blue");
 	});
+	$("table#table_query").find("#info_states").children().first().css("border", "none").addClass("icon-color-blue");
+	$("table#table_query").find("#info_states").click(function (event) {
+		(isStateInfoActivated) ? isStateInfoActivated = false: isStateInfoActivated = true;
+		var $divColor = $(this).children().first();
+		(isStateInfoActivated) ? $divColor.addClass("icon-color-blue"): $divColor.removeClass("icon-color-blue");
+		
+		$("#actions_states").slideToggle("fast");
+	})
  	/* listener for class name group */
 	$("table#table_query").find(".group").on({
 		mouseenter: function (event) {
@@ -289,37 +299,127 @@ $(document).ready(function () {
 
  	});
 
- 	/* listener to the source name sesame for resolver*/
- 	$("#source_name_sesame").keyup(function (event) {
- 		if (!this.value){
- 			$(this).closest(".container-input").removeClass("has-error has-success");
- 			$(this).closest(".container-input").find("#sesame_search")
- 				.removeClass("btn-u btn-u-default btn btn-danger btn-success")
- 				.addClass("btn-u btn-u-default");
- 			/*
- 			$ra_dec = $("#ra_dec");
- 			$ra_dec.val("");
- 			$("#ra_dec").closest(".container_input").slideUp("fast");
- 			*/
- 		}
- 	})
+ 	/* change the sumbit button */
+ 	$("#source_name_sesame").keydown(function (event) {
+ 		if (event.keyCode==13) {
+    		$(this).closest(".container-input").find("#sesame_search").click();
+    	}
+    	else {
+    		$("#ra_dec").val("");
+			$("#ra_dec").closest(".container-input").slideUp();
+    	}
+ 	});
+
  	/* when is needed sesame resolver */
  	$("#sesame_search").on('click', function (event) {
  		$this = $(this);
  		$ra_dec = $("#ra_dec");
  		$container_input = $(this).closest(".container-input");
 		$input = $container_input.find("#source_name_sesame");
+		
+		$actions_state = $("#actions_states");
 
  		if (!$input.val()){ /*if is empty cancel the submit*/
- 			$container_input.removeClass("has-error has-success").addClass("has-error"); /* make it visible */
- 			$this.removeClass("btn-u btn-u-default btn btn-danger btn-success").addClass("btn btn-danger");
- 			$ra_dec.val(" ");
+ 			$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+			$actions_state.addClass("alert-danger");
+			$actions_state.text(" ");
+			$actions_state.append("<strong></strong>");
+			$actions_state.find("strong").text("Oh snap!");
+			$actions_state.append("empty source name sesame field");
+			
+ 			$ra_dec.val(""); 			
+			$ra_dec.closest(".container-input").slideUp();
  			event.preventDefault(); /* cancel submit */
+ 			return false;
+ 		}
+ 		var isAdded = false;
+ 		$("#query_list").find("td").each(function (event) {
+ 			if($(this).text() == $input.val()){
+ 				isAdded = true;
+ 			}
+ 		});
+ 		if (isAdded){
+ 			$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+			$actions_state.addClass("alert-danger");
+			$actions_state.text(" ");
+			$actions_state.append("<strong></strong>");
+			$actions_state.find("strong").text("Oh snap!");
+			$actions_state.append("the sesame name source is added");
+			event.preventDefault(); /* cancel submit */
  			return false;
  		}
  		$this.find("i").removeClass("fa fa-angle-right fa-lg").addClass("fa fa-spinner fa-spin"); /* change the icon */
  		$input.css('width', "144px");
  	});
+
+ 	$("table#table_query").find("#position").on({
+		mouseenter: function (event) {
+			$this = $(this);
+			$this.find("#plus_position").clearQueue().finish()
+					.delay(delayTime).show("slow");
+		},
+		mouseleave: function (event) {
+			$this.find("#plus_position").clearQueue().finish().hide();
+		}
+	});
+
+	$("#plus_position").on("click", function (event) {
+		$actions_state = $("#actions_states");		
+
+		$position = $(this).closest("#position")
+		$ra_dec = $position.find("#ra_dec");
+		$search_radius = $position.find("#search_radius");
+		$source_name_sesame = $position.find("#source_name_sesame");
+
+		if ( !$ra_dec.val()){
+			$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+			$actions_state.addClass("alert-danger");
+			$actions_state.text(" ");
+			$actions_state.append("<strong></strong>");
+			$actions_state.find("strong").text("Oh snap!");
+			$actions_state.append(" cordinates not added to the query list by empty RA Dec field ");
+			return false;
+		}
+		else if (!$search_radius.val()){
+			$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+			$actions_state.addClass("alert-danger");
+			$actions_state.text(" ");
+			$actions_state.append("<strong></strong>");
+			$actions_state.find("strong").text("Oh snap!");
+			$actions_state.append(" cordinates not added to the query list by empty Search Radius field ");
+			return false;
+		}
+		else {
+			
+			$tr = 	$("<tr>" +
+						"<td>" + $source_name_sesame.val() + "</td>" +
+						"<td>" + $ra_dec.val() + "</td>" +
+						"<td>" + $search_radius.val() + "</td>"+
+						"<td></td>" +							
+					"</tr>");
+			var del = $('<button/>',
+			    {
+			        class: 'btn btn-danger btn-xs',
+			        text: 'Delete',
+			        click: function () {
+			        	$(this).closest("tr").remove();
+			         }
+			    });
+			$tr.find("td").last().append(del)
+			$("#query_list").find("tbody").append($tr);
+			$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+			$actions_state.addClass("alert-success");
+			$actions_state.text(" ");
+			$actions_state.append("<strong></strong>");
+			$actions_state.find("strong").text("Well done!");
+			$actions_state.append(" cordinates added to the query list");
+			$ra_dec.val("");
+			$ra_dec.closest(".container-input").slideUp();
+
+			$source_name_sesame.val("");
+		}
+	});
+
  	/*
 	function windowResize () {
 		$table = $("table#table_query");
