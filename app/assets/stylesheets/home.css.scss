@@ -3,7 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .ivoa {
-	position:relative;
-	left:900px;
-	bottom:950px;
+  position:relative;
+   left:60px;
+   top:10px;
+	}
+
+.list-heading{
+	font-size: 20px;
+	color: #585F69;
+	margin: 0px 0px -2px;
+	padding-bottom: 5px;
+	display: inline-block;
 	}
