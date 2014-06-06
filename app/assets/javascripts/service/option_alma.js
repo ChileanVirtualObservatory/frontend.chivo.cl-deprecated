@@ -148,8 +148,10 @@ $(document).ready(function () {
 			}
 			else {
 				/* slide up the form control */
-				$this.find(".container-input").clearQueue().finish()
-					.slideUp("fast");
+				if (!$this.find(".container-input").find("input").val()){
+					$this.find(".container-input").clearQueue().finish()
+						.slideUp("fast");
+				}
 			}
 
 			/* hide the tooltip of whatever form control  if is activated*/
@@ -417,6 +419,7 @@ $(document).ready(function () {
 			$ra_dec.closest(".container-input").slideUp();
 
 			$source_name_sesame.val("");
+			$source_name_sesame.closest(".container-input").slideUp();
 		}
 	});
 
