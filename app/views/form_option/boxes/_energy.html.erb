@@ -1,0 +1,103 @@
+<h2>Energy</h2>                        
+<div class="group">
+	<%= label_tag :frecuency, 'Frecuency', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :frecuency, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Frequency</strong> 
+			<p>Reference sky frequency.</p><br>
+			<strong>Description</strong> 
+			<p>Observed (tuned) reference frequency on the sky.</p><br>
+			<strong>Unit</strong> 
+			<p>GHz</p><br>
+			<strong>Example</strong> 
+			<p>&gt;100</p>
+			<p>&lt;300</p>
+			<p>100 .. 300</p> 
+			<p>!(100 .. 300)</p> 
+			<p>100 .. 300 | 600 .. 900</p>
+		</div>
+	</div>  
+</div>
+<div class="group">
+	<%= label_tag :bandwidth, 'Bandwidth', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :bandwidth, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Bandwidth</strong> 
+			<p>Total bandwidth.</p><br>
+			<strong>Description</strong> 
+			<p>Total Bandwidth.</p><br>
+			<strong>Unit</strong> 
+			<p>GHz</p><br>
+			<strong>Example</strong> 
+			<p>1.2 .. 2.5</p> 
+			<p>&gt;2.5</p> 
+			<p>&lt;1.2</p>
+			<p>&lt;1.2 | &gt;4.0</p>
+		</div>
+	</div>  
+</div>
+<div class="group">
+	<%= label_tag :spectral_resolution, 'Spectral Resolution', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :spectral_resolution, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Spectral resolution</strong> 
+			<p>Estimated frequency resolution (in kHz).</p><br>
+			<strong>Description</strong> 
+			<p>Estimated frequency resolution from all the spectral 
+				windows, using median values of channel widths.</p><br>
+			<strong>Unit</strong> 
+			<p>kHz</p><br>
+			<strong>Example</strong> 
+			<p>&lt;70</p>       
+			<p>&gt;1e6</p>     
+			<p>2e6 .. 3e6</p>
+		</div>
+	</div>  
+</div>
+<div class="group">
+	<%= label_tag :band, 'Band', class: 'control-label' %>
+	<%= select_tag :band, options_for_select([
+		["3 &nbsp;&nbsp;&nbsp; (84-116 GHz)", "3"],
+		["6 &nbsp;&nbsp;&nbsp; (211-275 GHz)", "6"],
+		["7 &nbsp;&nbsp;&nbsp; (275-373 GHz)", "7"],
+		["9 &nbsp;&nbsp;&nbsp; (602-720 GHz)", "9"]]), 
+		class: 'form-control', multiple: true %>
+	<div class="multiselect-band">
+    	<button type="button" id="band_button" name="band_button" class="form-control">           
+			<%= fa_icon 'angle-down' %>   
+		</button>
+		<div>					    				
+			<ul>
+				<li>
+					<label for="3"><%= check_box_tag '3' %>3 &nbsp;&nbsp;&nbsp; (84-116 GHz)</label>
+				</li>
+				<li>
+					<label for="6"><%= check_box_tag '6' %>6 &nbsp;&nbsp;&nbsp; (211-275 GHz)</label>
+				</li>
+				<li>
+					<label for="7"><%= check_box_tag '7' %>7 &nbsp;&nbsp;&nbsp; (275-373 GHz)</label>
+				</li>
+				<li>
+					<label for="9"><%= check_box_tag '9' %>9 &nbsp;&nbsp;&nbsp; (602-720 GHz)</label>
+				</li>
+			</ul>
+		</div>										
+  	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Band</strong> 
+			<p>ALMA receiver band.</p><br>
+			<strong>Description</strong> 
+			<p>ALMA receiver band.</p><br>
+		</div>
+	</div>  
+</div>
