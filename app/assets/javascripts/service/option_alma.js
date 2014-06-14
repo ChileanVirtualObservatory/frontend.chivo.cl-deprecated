@@ -392,23 +392,72 @@ $(document).ready(function () {
 			return false;
 		}
 		else {
-			
+			tr_amount = $("#query_list_table").find("tr").size();
+			id = 0;
+			if (tr_amount == 1){
+				id = tr_amount
+			}
+			else {
+				id = parseInt($("#query_list_table").find("input[type=checkbox]").last().attr('value')) + 1;	
+			}
 			$tr = 	$("<tr>" +
-						"<td>" + $source_name_sesame.val() + "</td>" +
-						"<td>" + $ra_dec.val() + "</td>" +
-						"<td>" + $search_radius.val() + "</td>"+
-						"<td></td>" +							
+						"<td class='selected_td'><input name='checkbox_"+id+"' type='checkbox' value='"+ id +"'></td>" + 
+						"<td class='sesame_td'><input name='source_name_sesame_"+id+ "' type='text' class='form-control' value='" + $source_name_sesame.val() + "' style='border:0px;background-color:white;height:20px'/></td>" +
+						"<td class='ra_dec_td'><input name='ra_dec_"+id+ "' type='text' class='form-control' value='" + $ra_dec.val() + "' style='border:0px;background-color:white;height:20px'/></td>" +
+						"<td class='search_td'><input name='search_radius_"+id+ "' type='text' class='form-control' value='" + $search_radius.val() + "'style='border:0px;background-color:white;height:20px'/></td>" +
+						"<td class='resource_td'></td>" + 
+						"<td class='action_td'></td>" +					
 					"</tr>");
-			var del = $('<button/>',
+			
+			var $div_multiselect_resource = $('<div/>',{
+					class: "multiselect-resource",
+					mouseenter: function (event) {
+						$(this).find("ul").clearQueue().finish().delay(delayTime).slideDown("fast");
+					}, 
+					mouseleave: function (event) {
+						$(this).find("ul").clearQueue().finish().delay(delayTime).slideUp("fast");
+					}
+				});
+			$button_multiselect = $('<button type="button" id="multi_select_resource_button" style="height:20px:width:200px;" class="form-control">' +            
+										'<i class="fa fa-angle-down"></i>' +  
+									'</button>' + 
+									'<div>' +					    				
+										'<ul>' +
+											'<li>' +
+												'<label for="stoke_i"><input id="dachs" name="dachs" type="checkbox">Dachs</label>' +
+											'</li>' +
+										'</ul>' +
+									'</div>');
+			$div_multiselect_resource.append($button_multiselect);
+			var multi_select = $('<select/>',{
+					id: 'multi_select_resource'+id,
+					class: 'form-control',
+					style: 'display:none;',
+					multiple: 'multiple',
+					name: 'resource_'+id+'[]'
+				});
+			var option_default = $('<option/>',{
+				value:'dachs',
+				text: 'Dachs',
+				selected: 'selected'
+			});
+			multi_select.append(option_default);
+			var delete_button = $('<a/>',
 			    {
 			        class: 'btn btn-danger btn-xs',
-			        text: 'Delete',
+			        style: 'height:20px',
+			        text: '',
 			        click: function () {
 			        	$(this).closest("tr").remove();
 			         }
 			    });
-			$tr.find("td").last().append(del)
-			$("#query_list").find("tbody").append($tr);
+			
+			var trash_icon = $('<i/>',{class: 'fa fa-trash-o fa-fw '});
+			delete_button.prepend(trash_icon)
+			$tr.find("td").last().append(delete_button);
+			$tr.find("td").last().prev().append(multi_select);
+			$tr.find("td").last().prev().append($div_multiselect_resource);
+			$("#query_list_table").find("tbody").append($tr);
 			$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
 			$actions_state.addClass("alert-success");
 			$actions_state.text(" ");
@@ -420,6 +469,27 @@ $(document).ready(function () {
 
 			$source_name_sesame.val("");
 			$source_name_sesame.closest(".container-input").slideUp();
+		}
+	});
+
+	$("#query_list_table").find("tr").on({
+		mouseenter: function (event) {
+			$(this).find(".multiselect-resource").children("div").children("ul").slideDown()
+			//$button = $multiselectDiv.children("button");
+			//$ul = $multiselectDiv.children("div").children("ul");
+			/* if nothing is has been selected then slide down the multiselect container and his child button */
+			/*if ($button.children("span").length == 0){					
+				$multiselectDiv
+					.clearQueue().finish()
+					.slideDown("fast");
+				$button
+					.clearQueue().finish().delay(delayTime)
+					.slideDown("fast");
+			}*/
+			/* slide down the options of the multiselect */
+			//$ul
+			//	.clearQueue().finish().delay(delayTime)
+			//	.slideDown("fast");
 		}
 	});
 
