@@ -1,0 +1,39 @@
+
+<h2>Time</h2>                        
+<div class="group">
+	<%= label_tag :observation_date, 'Observation time', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :observation_date, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Observation date</strong> 
+			<p>Field integration start timestamp.</p><br>
+			<strong>Description</strong> 
+			<p>Start time of the first integration on the field.</p><br>
+			<strong>Example</strong> 
+			<p>&gt;01-01-2011</p>   
+			<p>&lt;31-12-2011</p>     
+			<p>01-01-2011 .. 01-02-2011</p>
+		</div>
+	</div>  
+</div>
+<div class="group">
+	<%= label_tag :integration_time, 'Integration time', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :integration_time, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Integration time</strong> 
+			<p>Total field integration time.</p><br>
+			<strong>Description</strong> 
+			<p>Aggregated integration time for the field in the ASDM.</p><br>
+			<strong>Example</strong> 
+			<p>&gt;12.5</p>     
+			<p>&lt;30</p>     
+			<p>30 .. 60</p>      
+			<p>!(1 .. 300)</p>
+		</div>
+	</div>  
+</div>								  	
