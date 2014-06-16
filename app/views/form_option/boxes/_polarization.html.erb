@@ -1,0 +1,39 @@
+<h2>Polarisation</h2>                        
+<div class="group">
+	<%= label_tag :polarisation_type, 'Polarisation type', class: 'control-label' %>
+	<%= select_tag :polarisation_type, options_for_select([
+		["Stokes I", "stoke_i"],
+		["Single", "single"],
+		["Dual", "dual"],
+		["Full", "full"]]), 
+		class: 'form-control', multiple: true %>
+	<div class="multiselect-polarisation-type">
+    	<button type="button" id="polarisation_type_button" name="polarisation_type_button" class="form-control">           
+			<%= fa_icon 'angle-down' %>   
+		</button>
+		<div>					    				
+			<ul>
+				<li>
+					<label for="stoke_i"><%= check_box_tag 'stoke_i' %>Stoke I</label>
+				</li>
+				<li>
+					<label for="single"><%= check_box_tag 'single' %>Single</label>
+				</li>
+				<li>
+					<label for="dual"><%= check_box_tag 'dual' %>Dual</label>
+				</li>
+				<li>
+					<label for="full"><%= check_box_tag 'full' %>Full</label>
+				</li>
+			</ul>
+		</div>										
+  	</div>
+  	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Polarisation type</strong> 
+			<p>Polarisation products.</p><br>
+			<strong>Description</strong> 
+			<p>Polarisation products provided.</p><br>
+		</div>
+	</div>  
+</div>
