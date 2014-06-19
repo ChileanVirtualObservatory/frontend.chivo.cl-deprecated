@@ -1,4 +1,4 @@
-//= require sarissa
-//= require tablednd
-//= require dragtable
-//= require voview_pkg
+//= require services/sarissa
+//= require services/tablednd
+//= require services/dragtable
+//= require services/voview_pkg
