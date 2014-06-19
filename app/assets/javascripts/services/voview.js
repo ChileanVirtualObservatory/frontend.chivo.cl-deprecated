@@ -1,4 +1,4 @@
-//= require services/voview/sarissa
-//= require services/voview/tablednd
-//= require services/voview/dragtable
-//= require services/voview/voview_pkg
+//= require services/vo_view/sarissa
+//= require services/vo_view/tablednd
+//= require services/vo_view/dragtable
+//= require services/vo_view/voview_pkg
