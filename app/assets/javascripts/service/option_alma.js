@@ -418,13 +418,13 @@ $(document).ready(function () {
 						$(this).find("ul").clearQueue().finish().delay(delayTime).slideUp("fast");
 					}
 				});
-			$button_multiselect = $('<button type="button" id="multi_select_resource_button" style="height:20px:width:200px;" class="form-control">' +            
+			$button_multiselect = $('<button type="button" id="multi_select_resource_button" style="height:20px;" class="form-control">' +            
 										'<i class="fa fa-angle-down"></i>' +  
 									'</button>' + 
 									'<div>' +					    				
 										'<ul>' +
 											'<li>' +
-												'<label for="stoke_i"><input id="dachs" name="dachs" type="checkbox">Dachs</label>' +
+												'<label for="dachs'+id+'"><input id="dachs'+id+'" name="dachs'+id+'" type="checkbox">Dachs</label>' +
 											'</li>' +
 										'</ul>' +
 									'</div>');
