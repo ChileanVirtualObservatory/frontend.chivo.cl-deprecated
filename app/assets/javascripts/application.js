@@ -21,5 +21,5 @@
 //= require jquery.flexslider-min
 //= require modernizr
 //= require jquery.cslider
-//= require voview
+//= require services/voview
 
