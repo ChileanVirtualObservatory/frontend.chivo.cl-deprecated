@@ -23,6 +23,18 @@ function showToolTipLeftSide() {
     	$popBox.clearQueue().finish().delay(delayTime).show();
 	}
 }
+
+function validateFormat(textval,regexp) {
+	
+    if (regexp.test(textval)) {
+    	return true;
+
+  
+	} 
+	else{
+		return false;
+	}
+}
 $(document).ready(function () {	
 	/* hide all the form controls by default */
 	$(".tab-v2").css('position', 'absolute').css("width", 1019); /* sol to resizing form */
@@ -30,6 +42,7 @@ $(document).ready(function () {
 	$("table#table_query").find(".container-input").find(".form-control").show();
 	$(".container-input").hide();
 	$("#search_radius").val('0:10:00'); /* #search_radio contron form w text by default */
+	$("#search_radius").closest(".container-input").slideDown();
 	//$("table#table_query").find("#flag").children().first().css("border", "none").addClass("icon-color-blue");
 	$("table#table_query").find("#flag").children().first().css("border", "none");
 	$("table#table_query").find("#flag").click(function (event) {
@@ -105,7 +118,9 @@ $(document).ready(function () {
 					var position = $this.find(".control-label").position();
 			    	$popBox.css('left', $this.find(".control-label").innerWidth() + position.left- 5 ).css('top', position.top -  $this.find(".control-label").innerHeight());
 			    	$popBox.clearQueue().finish().delay(delayTime).show();
-				}				
+				}
+				$this.find(".container-input").clearQueue().finish()
+					.delay(delayTime).slideDown("fast", showToolTipRightSide);				
 			}
 			else {
 				/* slide down the form control */
@@ -143,7 +158,7 @@ $(document).ready(function () {
 				//nothing to do
 			}
 			/* this form controls are always show. Just hide tooltip is required but is activated at the end of this func */
-			else if (id == 'release_status' || id == 'result_view' || id == 'search_radius'){
+			else if (id == 'release_status' || id == 'result_view'){
 				/* hide tooltip will be activated at the end of this func */
 			}
 			else {
@@ -603,6 +618,90 @@ $(document).ready(function () {
  	windowResize();
  	$(window).resize(windowResize);
  	*/
+
+ 	/**/
+	var typewatch = (function(){
+ 		var timer = 0;
+  		return function(callback, ms){
+    	clearTimeout(timer);
+    	timer = setTimeout(callback, ms);
+  		};  
+	})();
+	/**/
+	function validateQueryFormat(target,re)
+	{
+		target.closest(".container-input").removeClass('has-error');
+		if(!re.test(target.val()) && target.val().length != 0)
+ 		{
+ 		target.closest(".container-input").addClass('has-error');
+ 		}
+	} 
+
+	/**/
+ 	$("#ra_dec").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^((\+|-)?([0-9]+)(((:[0-5][0-9]:[0-5][0-9]((.([0-9]+))?))|(.([0-9]+)))?)) ((\+|-)?([0-9]+)(((:[0-5][0-9]:[0-5][0-9]((.([0-9]+))?))|(.([0-9]+)))?))$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+ 	
+ 	$("#search_radius").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^([0-9]+)(((.([0-9]+))|(:[0-5][0-9]:[0-5][0-9]((.([0-9]+))?)))?)$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+ 		
+ 	$("#water_vapour").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^((((!)?null))|(((<|>)?)(( )*)([0-9]+)((.([0-9]+))?)))(((( )*)\|(( )*)((((null))|(((<|>)?)(( )*)([0-9]+)((.([0-9]+))?)))))*)$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+ 	
+ 	$("#frecuency").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\)))(((( )*)\|(( )*)(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\))))*)$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+
+ 	$("#bandwidth").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\)))(((( )*)\|(( )*)(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\))))*)$/);
+ 			validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+
+ 	$("#spectral_resolution").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\)))(((( )*)\|(( )*)(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\))))*)$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+
+ 	$("#observation_date").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^((<|>)(((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|((((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))) .. (((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+
+ 	$("#integration_time").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\)))(((( )*)\|(( )*)(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\))))*)$/);
+ 			validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+
 });
 	
 		

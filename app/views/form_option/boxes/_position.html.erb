@@ -71,7 +71,9 @@
 </div>
 <div class="group" >
 	<%= label_tag :search_radius, 'Search radius', class: 'control-label' %>
-	<%= text_field_tag :search_radius, nil, class: 'form-control' %>
+	<div class="container-input">
+		<%= text_field_tag :search_radius, nil, class: 'form-control' %>
+	</div>
 	<div class="container-tooltip" >
 		<div class="alert-info">
 			<strong>Search radius</strong> 
