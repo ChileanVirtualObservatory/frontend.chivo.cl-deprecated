@@ -1,4 +1,4 @@
-<%= javascript_include_tag "form_options/option_alma" %>
+<%= javascript_include_tag "services/all_searches" %>
 
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
@@ -22,13 +22,13 @@
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active" id="query_form" >
-				<%= render 'query/all_in_one/query_form' %>
+				<%= render 'query/type_alma/query_form' %>
       		</div>
       		<div class="tab-pane" id="query_list">
-        		<%= render 'query/all_in_one/query_list' %>
+        		<%= render 'query/type_alma/query_list' %>
       		</div>   
       		<div class="tab-pane" id="result_table">
-      			<%= render 'query/all_in_one/result_table' %>
+      			<%= render 'query/type_alma/result_table' %>
       		</div>
         </div>
 	</div>
