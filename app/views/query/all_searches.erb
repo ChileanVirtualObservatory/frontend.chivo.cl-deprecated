@@ -1,0 +1,38 @@
+<%= javascript_include_tag "form_options/option_alma" %>
+
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-40">
+ 	<div class="container">
+    	<h1 class="pull-left">Search</h1>
+    	<ul class="pull-right breadcrumb">
+      		<li><%= link_to 'Home', root_path %></li>
+      		<li>Services</li>
+      		<li class="active">All Searches</li>
+    	</ul>
+  	</div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<div class="container"> <!--== Content Part ==-->										
+	<div class="tab-v2 col-sm-12" style="margin-left:50px;">                
+		<ul class="nav nav-tabs">         
+			<li class="active" ><a href="#query_form" data-toggle="tab">Query Form</a></li>
+			<li><a href="#query_list" data-toggle="tab" >Query List</a></li>       
+			<li><a href="#result_table" data-toggle="tab">Result Table</a></li>               
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="query_form" >
+				<%= render 'query/all_in_one/query_form' %>
+      		</div>
+      		<div class="tab-pane" id="query_list">
+        		<%= render 'query/all_in_one/query_list' %>
+      		</div>   
+      		<div class="tab-pane" id="result_table">
+      			<%= render 'query/all_in_one/result_table' %>
+      		</div>
+        </div>
+	</div>
+</div> <!--== End Content Part ==-->
+<!--=== Form ===-->
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
