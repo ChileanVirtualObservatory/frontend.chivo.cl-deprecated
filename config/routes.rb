@@ -10,6 +10,7 @@ Web::Application.routes.draw do
   match 'query/spectralsearch' => 'query#spectralsearch', via: [:get, :post]
   match 'query/tablesearch' => 'query#tablesearch', via: [:get, :post]
   match 'query/advancesearch' => 'query#advancesearch', via: [:get, :post]
+  match 'query/all_searches' => 'query#all_searches', via: [:get, :post]
 
   match 'form_option/option1' => 'form_option#option1', via: [:get]
   match 'form_option/option2' => 'form_option#option2', via: [:get]

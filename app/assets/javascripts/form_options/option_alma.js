@@ -23,6 +23,18 @@ function showToolTipLeftSide() {
     	$popBox.clearQueue().finish().delay(delayTime).show();
 	}
 }
+
+function validateFormat(textval,regexp) {
+	
+    if (regexp.test(textval)) {
+    	return true;
+
+  
+	} 
+	else{
+		return false;
+	}
+}
 $(document).ready(function () {	
 	/* hide all the form controls by default */
 	$(".tab-v2").css('position', 'absolute').css("width", 1019); /* sol to resizing form */
@@ -30,6 +42,7 @@ $(document).ready(function () {
 	$("table#table_query").find(".container-input").find(".form-control").show();
 	$(".container-input").hide();
 	$("#search_radius").val('0:10:00'); /* #search_radio contron form w text by default */
+	$("#search_radius").closest(".container-input").slideDown();
 	//$("table#table_query").find("#flag").children().first().css("border", "none").addClass("icon-color-blue");
 	$("table#table_query").find("#flag").children().first().css("border", "none");
 	$("table#table_query").find("#flag").click(function (event) {
@@ -105,7 +118,9 @@ $(document).ready(function () {
 					var position = $this.find(".control-label").position();
 			    	$popBox.css('left', $this.find(".control-label").innerWidth() + position.left- 5 ).css('top', position.top -  $this.find(".control-label").innerHeight());
 			    	$popBox.clearQueue().finish().delay(delayTime).show();
-				}				
+				}
+				$this.find(".container-input").clearQueue().finish()
+					.delay(delayTime).slideDown("fast", showToolTipRightSide);				
 			}
 			else {
 				/* slide down the form control */
@@ -143,7 +158,7 @@ $(document).ready(function () {
 				//nothing to do
 			}
 			/* this form controls are always show. Just hide tooltip is required but is activated at the end of this func */
-			else if (id == 'release_status' || id == 'result_view' || id == 'search_radius'){
+			else if (id == 'release_status' || id == 'result_view'){
 				/* hide tooltip will be activated at the end of this func */
 			}
 			else {
@@ -364,16 +379,16 @@ $(document).ready(function () {
 			$this.find("#plus_position").clearQueue().finish().hide();
 		}
 	});
-
+ 	
 	$("#plus_position").on("click", function (event) {
 		$actions_state = $("#actions_states");		
 
-		$position = $(this).closest("#position")
+		$position = $(this).closest("#position");
 		$ra_dec = $position.find("#ra_dec");
 		$search_radius = $position.find("#search_radius");
 		$source_name_sesame = $position.find("#source_name_sesame");
 
-		if ( !$ra_dec.val()){
+		if ( !$ra_dec.val() ) {
 			$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
 			$actions_state.addClass("alert-danger");
 			$actions_state.text(" ");
@@ -382,7 +397,7 @@ $(document).ready(function () {
 			$actions_state.append(" cordinates not added to the query list by empty RA Dec field ");
 			return false;
 		}
-		else if (!$search_radius.val()){
+		else if ( !$search_radius.val() ){
 			$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
 			$actions_state.addClass("alert-danger");
 			$actions_state.text(" ");
@@ -395,7 +410,7 @@ $(document).ready(function () {
 			tr_amount = $("#query_list_table").find("tr").size();
 			id = 0;
 			if (tr_amount == 1){
-				id = tr_amount
+				id = tr_amount;
 			}
 			else {
 				id = parseInt($("#query_list_table").find("input[type=checkbox]").last().attr('value')) + 1;	
@@ -418,13 +433,13 @@ $(document).ready(function () {
 						$(this).find("ul").clearQueue().finish().delay(delayTime).slideUp("fast");
 					}
 				});
-			$button_multiselect = $('<button type="button" id="multi_select_resource_button" style="height:20px:width:200px;" class="form-control">' +            
+			$button_multiselect = $('<button type="button" id="multi_select_resource_button" style="height:20px;" class="form-control">' +            
 										'<i class="fa fa-angle-down"></i>' +  
 									'</button>' + 
 									'<div>' +					    				
 										'<ul>' +
 											'<li>' +
-												'<label for="stoke_i"><input id="dachs" name="dachs" type="checkbox">Dachs</label>' +
+												'<label for="dachs'+id+'"><input id="dachs'+id+'" name="dachs'+id+'" type="checkbox">Dachs</label>' +
 											'</li>' +
 										'</ul>' +
 									'</div>');
@@ -453,7 +468,7 @@ $(document).ready(function () {
 			    });
 			
 			var trash_icon = $('<i/>',{class: 'fa fa-trash-o fa-fw '});
-			delete_button.prepend(trash_icon)
+			delete_button.prepend(trash_icon);
 			$tr.find("td").last().append(delete_button);
 			$tr.find("td").last().prev().append(multi_select);
 			$tr.find("td").last().prev().append($div_multiselect_resource);
@@ -472,137 +487,90 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#query_list_table").find("tr").on({
-		mouseenter: function (event) {
-			$(this).find(".multiselect-resource").children("div").children("ul").slideDown()
-			//$button = $multiselectDiv.children("button");
-			//$ul = $multiselectDiv.children("div").children("ul");
-			/* if nothing is has been selected then slide down the multiselect container and his child button */
-			/*if ($button.children("span").length == 0){					
-				$multiselectDiv
-					.clearQueue().finish()
-					.slideDown("fast");
-				$button
-					.clearQueue().finish().delay(delayTime)
-					.slideDown("fast");
-			}*/
-			/* slide down the options of the multiselect */
-			//$ul
-			//	.clearQueue().finish().delay(delayTime)
-			//	.slideDown("fast");
-		}
-	});
 
- 	/*
-	function windowResize () {
-		$table = $("table#table_query");
-		width = $table.outerWidth(); // 686
-		height = $table.outerHeight();
-		var trAmount = $table.children("tbody").children("tr").length;
-		if (width <= 686 && trAmount == 2){
-			$tbody = $table.children("tbody");
+ 	/**/
+	var typewatch = (function(){
+ 		var timer = 0;
+  		return function(callback, ms){
+    	clearTimeout(timer);
+    	timer = setTimeout(callback, ms);
+  		};  
+	})();
+	/**/
+	function validateQueryFormat(target,re)
+	{
+		target.closest(".container-input").removeClass('has-error');
+		if(!re.test(target.val()) && target.val().length != 0)
+ 		{
+ 		target.closest(".container-input").addClass('has-error');
+ 		}
+	} 
 
-			$td1 = $tbody.children("tr").first().children("td").eq(2);
-			$td2 = $tbody.children("tr").first().children("td").eq(3);
+	/**/
+ 	$("#ra_dec").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^((\+|-)?([0-9]+)(((:[0-5][0-9]:[0-5][0-9]((.([0-9]+))?))|(.([0-9]+)))?)) ((\+|-)?([0-9]+)(((:[0-5][0-9]:[0-5][0-9]((.([0-9]+))?))|(.([0-9]+)))?))$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+ 	
+ 	$("#search_radius").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^([0-9]+)(((.([0-9]+))|(:[0-5][0-9]:[0-5][0-9]((.([0-9]+))?)))?)$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+ 		
+ 	$("#water_vapour").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^((((!)?null))|(((<|>)?)(( )*)([0-9]+)((.([0-9]+))?)))(((( )*)\|(( )*)((((null))|(((<|>)?)(( )*)([0-9]+)((.([0-9]+))?)))))*)$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
+ 	
+ 	$("#frecuency").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\)))(((( )*)\|(( )*)(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\))))*)$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
 
-			$td3 = $tbody.children("tr").last().children("td").eq(2);
-			$td4 = $tbody.children("tr").last().children("td").eq(3);
+ 	$("#bandwidth").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\)))(((( )*)\|(( )*)(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\))))*)$/);
+ 			validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
 
-			$tbody.append("<tr></tr>");
-			$tr3 = $tbody.find("tr").last();
+ 	$("#spectral_resolution").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\)))(((( )*)\|(( )*)(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\))))*)$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
 
-			$td1.prependTo($tr3);
-			$td2.prependTo($tr3);
+ 	$("#observation_date").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^((<|>)(((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))|((((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))) .. (((0[1-9]|[12]\d|3[01])-(0[13578]|1[02])-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)-(0[13456789]|1[012])-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])-02-((19|[2-9]\d)\d{2}))|(29-02-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))))$/);
+ 		validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
 
-			$tbody.append("<tr></tr>");
-			$tr4 = $tbody.find("tr").last();
+ 	$("#integration_time").on("keyup",function (event) {
+ 		$this = $(this);
+ 		typewatch(function () {
+ 		var re=	new RegExp(/^(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\)))(((( )*)\|(( )*)(((!?)((<|>)?)([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|((!?)\((((([0-9]+)((.([0-9]+))?))|(([0-9]+)((.([0-9]+))?) .. ([0-9]+)((.([0-9]+))?))|))\))))*)$/);
+ 			validateQueryFormat($this,re);
+ 	}, 1000);
+ 	});
 
-			$td3.prependTo($tr4);
-			$td4.prependTo($tr4);
-		}
-		else if (width <= 686 && width > 490 && trAmount == 8){
-			$tbody = $table.children("tbody");
-
-			$tr1 = $tbody.find("tr").eq(0);
-			$tr2 = $tbody.find("tr").eq(1);
-
-			$tr3 = $tbody.find("tr").eq(2);
-			$tr4 = $tbody.find("tr").eq(3);
-
-			$tr5 = $tbody.find("tr").eq(4);
-			$tr6 = $tbody.find("tr").eq(5);
-
-			$tr7 = $tbody.find("tr").eq(6);
-			$tr8 = $tbody.find("tr").eq(7);
-
-			$td8 = $tr8.children("td").eq(0);
-			$td7 = $tr7.children("td").eq(0);
-			$td6 = $tr6.children("td").eq(0);
-			$td5 = $tr5.children("td").eq(0);
-
-			$td8.appendTo($tr4);
-			$td7.appendTo($tr3);
-
-			$td6.appendTo($tr2);
-			$td5.appendTo($tr1);
-
-			$tr5.remove();
-			$tr6.remove();
-
-			$tr7.remove();
-			$tr8.remove();
-			
-		}
-		else if (width >= 906 && trAmount == 4){
-			$tbody = $table.children("tbody");
-
-			$td1 = $tbody.children("tr").eq(3).children("td").eq(0);
-			$td2 = $tbody.children("tr").eq(3).children("td").eq(1);
-
-			$td3 = $tbody.children("tr").eq(2).children("td").eq(0);
-			$td4 = $tbody.children("tr").eq(2).children("td").eq(1);
-
-			$tr1 = $tbody.find("tr").eq(0);
-			$tr2 = $tbody.find("tr").eq(1);
-
-			$td2.appendTo($tr2);
-			$td1.appendTo($tr2);
-
-			$td4.appendTo($tr1);
-			$td3.appendTo($tr1);
-
-			$tbody.children("tr").eq(3).remove();
-			$tbody.children("tr").eq(2).remove();
-		}
-		else if (width < 490 && trAmount == 4 ){
-			$tbody = $table.children("tbody");
-
-			$td1 = $tbody.children("tr").eq(0).children("td").eq(1);
-			$td2 = $tbody.children("tr").eq(1).children("td").eq(1);
-
-			$td3 = $tbody.children("tr").eq(2).children("td").eq(1);
-			$td4 = $tbody.children("tr").eq(3).children("td").eq(1);
-
-			$tbody.append("<tr></tr>");
-			$tr5 = $tbody.find("tr").last();
-			$td1.prependTo($tr5);
-
-			$tbody.append("<tr></tr>");
-			$tr6 = $tbody.find("tr").last();
-			$td2.prependTo($tr6);
-
-			$tbody.append("<tr></tr>");
-			$tr7 = $tbody.find("tr").last();
-			$td3.prependTo($tr7);
-
-			$tbody.append("<tr></tr>");
-			$tr8 = $tbody.find("tr").last();
-			$td4.prependTo($tr8);
-		}			
-	}
- 	windowResize();
- 	$(window).resize(windowResize);
- 	*/
 });
 	
 		

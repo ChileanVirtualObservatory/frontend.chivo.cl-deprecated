@@ -1,4 +1,4 @@
-<%= javascript_include_tag "form_options/option_alma" %>
+<%= javascript_include_tag "services/all_searches" %>
 
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
@@ -6,8 +6,8 @@
     	<h1 class="pull-left">Search</h1>
     	<ul class="pull-right breadcrumb">
       		<li><%= link_to 'Home', root_path %></li>
-      		<li>Forms Options</li>
-      		<li class="active">Alma</li>
+      		<li>Services</li>
+      		<li class="active">All Searches</li>
     	</ul>
   	</div><!--/container-->
 </div><!--/breadcrumbs-->
@@ -22,16 +22,16 @@
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active" id="query_form" >
-				<%= render 'query_form' %>
+				<%= render 'query/type_alma/query_form' %>
       		</div>
       		<div class="tab-pane" id="query_list">
-          		<%= render 'query_list' %>
+        		<%= render 'query/type_alma/query_list' %>
       		</div>   
       		<div class="tab-pane" id="result_table">
-      			<%= render 'result_table' %>
+      			<%= render 'query/type_alma/result_table' %>
       		</div>
-    	</div>
-  	</div>
+        </div>
+	</div>
 </div> <!--== End Content Part ==-->
 <!--=== Form ===-->
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

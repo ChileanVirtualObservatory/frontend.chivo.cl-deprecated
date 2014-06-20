@@ -1,0 +1,31 @@
+<h2>Options</h2>                        
+<div class="group">
+	<%= label_tag :result_view, 'Results view', class: 'control-label' %> <br>					    		
+    <%= radio_button_tag 'result_view', 'raw_data', true %><%= label_tag :result_view_raw_data, 'raw data', class: ""%>                              
+    <%= radio_button_tag 'result_view', 'project' %><%= label_tag :result_view_project, 'project', class: "" %>
+    <div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Results View</strong> 
+			<p>Alter the format of the results displayed.</p><br>
+			<strong>Description</strong> 
+			<p>Select a project-oriented view of the search results, 
+				or a more detailed view of the execution blocks.</p><br>
+		</div>
+	</div>  
+</div>
+<br>
+<div class="group">
+	<%= label_tag :release_status, 'Release status', class: 'control-label' %>
+	<br>
+	<%= radio_button_tag 'release_status', 'public', true %><%= label_tag :release_status_public, 'public data', class: ""%> 
+	<%= radio_button_tag 'release_status', 'all' %><%= label_tag :release_status_all, 'all data', class: ""%>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Filter data</strong> 
+			<p>Filter only Public data or show all of it.</p><br>
+			<strong>Description</strong> 
+			<p>Filter down only the Public data, or attempt 
+				to download proprietary data by selecting 'No filter'.</p>
+		</div>
+	</div>  
+</div>

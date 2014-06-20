@@ -1,14 +1,15 @@
 // CSS Global Compulsory
 @import "bootstrap";
-@import "style";
+@import "unify/style";
 @import "headers/header1";
-@import "responsive";
+@import "unify/responsive";
 // CSS Implementing Plugins
 @import "font-awesome";
 @import "flexslider";
 @import "parallax-slider";
-@import "blue";
+@import "unify/blue";
 @import "headers/header1-blue";
 @import "query";
 @import "form_option";
 @import "home";
+@import "voview";

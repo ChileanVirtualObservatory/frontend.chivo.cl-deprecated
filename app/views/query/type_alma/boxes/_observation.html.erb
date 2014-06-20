@@ -1,0 +1,66 @@
+<h2>Observation</h2>                        
+<div class="group">
+	<%= label_tag :water_vapour, 'Water vapour', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :water_vapour, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Water vapour</strong> 
+			<p>Estimated precipitable water vapour (in mm).</p><br>
+			<strong>Description</strong> 
+			<p>Estimated precipitable water vapour from the XML_CALWVR_ENTITIES table.</p><br>
+			<strong>Example</strong> 
+			<p>!null</p>         
+			<p>&lt;0.5|null</p>   
+			<p>&lt; 0.49 | &gt;55.5</p>
+		</div>
+	</div>  
+</div>
+<div class="group">
+	<%= label_tag :scan_intent, 'Scan intent', class: 'control-label' %>
+	<%= select_tag :scan_intent, options_for_select([
+		["Observe target", "observe_target"],
+		["Amplitude", "amplitude"],
+		["Bandpass", "bandpass"],
+		["Phase", "phase"],
+		["Pointing", "pointing"]
+		]), 
+		class: 'form-control', multiple: true %>
+	<div class="multiselect-scan-intent">
+    	<button type="button" id="scan_intent_button" name="scan_intent_button" class="form-control">           
+			<%= fa_icon 'angle-down' %>   
+		</button>
+		<div>					    				
+			<ul>   	
+				<li class="dropdown-header" style="text-align:center">Science</li>
+				<hr style="backgroun-color:#e5e5e5;margin-top:0px;margin-bottom:5px;"></hr>
+				<li>
+					<label for="observe_target"><%= check_box_tag 'observe_target' %>Observe target</label>
+				</li>		
+				<li class="dropdown-header" style="text-align:center">Standar Calibration</li>
+				<hr style="backgroun-color:#e5e5e5;margin-top:0px; margin-bottom:5px;"></hr>
+				<li>
+					<label for="amplitude"><%= check_box_tag 'amplitude' %>Amplitude</label>
+				</li>
+				<li>
+					<label for="bandpass"><%= check_box_tag 'bandpass' %>Bandpass</label>
+				</li>
+				<li>
+					<label for="phase"><%= check_box_tag 'phase' %>Phase</label>
+				</li>
+				<li>
+					<label for="pointing"><%= check_box_tag 'pointing' %>Pointing</label>
+				</li>
+			</ul>
+		</div>									
+  	</div>
+  	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Scan intent</strong> 
+			<p>Scan intent of searched fields.</p><br>
+			<strong>Description</strong> 
+			<p>Scan intent list for the observed field.</p><br>
+		</div>
+	</div>  						
+</div>					
