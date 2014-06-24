@@ -371,7 +371,9 @@ i.icon-color-green {
 i.icon-color-yellow {
    color: #f1c40f;
    background: none;
-   border: solid 1px #f1c40f;
+
+   /* Commented for color of info panel service */
+   /* border: solid 1px #f1c40f; */
 }
 i.icon-color-orange {
    color: #e67e22;

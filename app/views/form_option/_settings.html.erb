@@ -1,0 +1,78 @@
+<div class="row margin-bottom-30">
+	<div id="settings" >
+	    <div class="col-md-3">
+	        <div class="headline"><h2>Control Labels</h2></div>
+	        <ul class="list-unstyled">
+	            <li>
+	            	<label>color:</label>
+		    		<% [ 'red, green and yellow', 'just red'].each do |cl| %>
+		    			<br><%= radio_button_tag 'cl', cl %>
+		    			<%= cl %>
+		    		<% end %>
+		    	</li>
+		    	<li>
+		    		<br>
+	            	<label>select type:</label>
+		    		<% [ 'default type', 'personalized type'].each do |select| %>
+		    			<br><%= radio_button_tag 'select', select %>
+		    			<%= select %>
+		    		<% end %>
+		    	</li>
+		    	<li>
+		    		<br>
+	            	<label>catalogs type:</label>
+		    		<% [ 'input group type', 'multiselect type', 'default type'].each do |m_select| %>
+		    			<br><%= radio_button_tag 'catalogs', m_select %>
+		    			<%= m_select %>
+		    		<% end %>
+		    	</li>
+
+	        </ul>
+	    </div>                    
+	    <div class="col-md-3">
+	        <div class="headline"><h2>PopBox</h2></div>
+	        <ul class="list-unstyled">
+	            <li>
+	            	<label>is shown as:</label>
+		    		<% [ 'static', 'dinamic'].each do |pb| %>
+		    			<br><%= radio_button_tag 'pb', pb %>
+		    			<%= pb %>
+		    		<% end %>
+		    	</li>
+		    	<li>
+		    		<br>
+	            	<label for="pb">color:</label>
+		    		<% ['dependent', 'default'].each do |color| %>
+		    			<br><%= radio_button_tag 'pb_color', color %>
+		    			<%= color %>
+		    		<% end %>
+		    	</li>
+	        </ul>
+	    </div> 
+		<div class="col-md-3">
+	        <div class="headline"><h2>Panel </h2></div>
+	        <ul class="list-unstyled">
+	            <li>
+	            	<label>display:</label>
+	            	<br><%= check_box_tag 'display_panel', 0, false %> off
+	            </li>
+	            <li>
+	            	<br>
+	            	<label>size:</label>
+	            	<% [ 'minimun', 'medium', 'large'].each do |panel| %>
+		    			<br><%= radio_button_tag 'panel', panel %>
+		    			<%= panel %>
+		    		<% end %>
+	            </li>
+	            <li>
+	            	<br>
+	            	<label>color:</label>
+	            	<% ['default1', 'default2', 'info', 'blue', 'green', 'sea', 'orange', 'red'].each do |color| %>
+		    			<br><%= radio_button_tag 'panel_color', color %>
+		    			<%= color %>
+		    		<% end %>
+	            </li>
+	        </ul>
+	    </div>                        
+	</div><!-- /settings -->
+</div>

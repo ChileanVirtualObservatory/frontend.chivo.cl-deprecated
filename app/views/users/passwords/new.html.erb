@@ -1,0 +1,38 @@
+<%= stylesheet_link_tag  "users/login", media: "all" %>
+<!--=== Breadcrumbs ===-->
+<div class="breadcrumbs margin-bottom-40">
+    <div class="container">
+        <h1 class="pull-left">Password</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Pages</a></li>
+            <li class="active">Forgot</li>
+        </ul>
+    </div><!--/container-->
+</div><!--/breadcrumbs-->
+<!--=== End Breadcrumbs ===-->
+
+<div class="container">		
+	<div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+            <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+            	<div class="reg-page">
+	            	<div class="reg-header">            
+	                    <h2>Forgot your password?</h2>
+	                </div>                    
+	                <%= devise_error_messages! %>
+	                <div class="input-group margin-bottom-20">
+	                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+	                    <%= f.email_field :email, :autofocus => true,placeholder: "Email", class: 'form-control' %>
+	                </div>
+	                <div class="row">
+	                    <div class="col-md-12">
+	                        <button class="btn-u btn-block" type="submit">Send</button>                        
+	                    </div>
+	                </div>
+	            </div>
+            <% end %>
+        </div>
+    </div><!--/row-->
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

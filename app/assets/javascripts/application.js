@@ -21,7 +21,6 @@
 //= require jquery.cslider
 //= require app
 //= require index
-
 //= require sarissa
 //= require tablednd
 //= require dragtable

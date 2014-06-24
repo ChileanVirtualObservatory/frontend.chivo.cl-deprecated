@@ -37,6 +37,23 @@
             <li><a href="page_faq.html">Help</a></li>  
             <li class="devider"></li>   
             <li><a href="page_login.html">Login</a></li>    -->
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to('Edit registration', edit_user_registration_path) %>
+              </li>
+              <li class="devider"></li> 
+              <li>
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+              </li>
+            <% else %>
+              <li>
+                <%= link_to('Register', new_user_registration_path)  %>
+              </li>
+              <li class="devider"></li> 
+              <li>
+                <%= link_to('Login', new_user_session_path)  %>  
+              </li>
+            <% end %> 
         </ul>
     </div>      
 </div><!--/top-->
@@ -72,6 +89,19 @@
               <%= fa_icon 'angle-down' %>
             </a>
             <ul class="dropdown-menu">
+<<<<<<< HEAD
+              <li>
+                <%= link_to 'Cone Search', query_conesearch_path %>
+              </li>
+              <li>
+                <%= link_to 'Image Search', query_imagesearch_path %>
+              </li>
+              <li>
+                <%= link_to 'Spectral Search', query_spectralsearch_path %>
+              </li>
+              <li>
+                <%= link_to 'Table Search', query_tablesearch_path %>
+=======
               <li>
                 <%= link_to 'Cone Search', query_conesearch_path %>
               </li>
@@ -86,6 +116,32 @@
               </li>
             </ul>
           </li>
+          <!-- form options -->
+          <li class="dropdown <%= 'active' if controller.controller_name == 'form_option' and controller.action_name == 'index' %>">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+              Forms
+              <%= fa_icon 'angle-down' %>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to 'Option1', form_option_option1_path %>
+              </li>
+              <li>
+                <%= link_to 'Option2', form_option_option2_path %>
+              </li>
+              <li>
+                <%= link_to 'Option3', form_option_option3_path %>
+              </li>
+              <li>
+                <%= link_to 'Alma', form_option_alma_path %>
+              </li>
+              <li>
+                <%= link_to 'Alma2', form_option_alma2_path %>
+>>>>>>> practica
+              </li>
+            </ul>
+          </li>
+          <!-- end form options -->
           <li class="dropdown <%= 'active' if controller.controller_name == 'home' and controller.action_name == 'about' %>">
             <%= link_to 'About Us', about_path %>
           </li>

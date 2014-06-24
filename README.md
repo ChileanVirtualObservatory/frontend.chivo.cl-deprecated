@@ -10,3 +10,7 @@
     rails server
 
 then visit `http://localhost:3000`
+
+## APP
+
+to see the branch practice, take a look `http://chivo-practica.herokuapp.com/`

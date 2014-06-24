@@ -1,0 +1,29 @@
+$ra_dec = $("#ra_dec"); /* input id ra_dec */
+$container_input = $("#source_name_sesame").closest(".container-input"); /* container input of source name sesame */
+$button = $container_input.find("#sesame_search"); /* button for resolve sesame */
+$icon = $button.find("i");
+
+<% if @ra_dec == "ERROR" %> /* if the resolve has error make visible*/
+	
+	$container_input.removeClass("has-success has-error");
+	$container_input.addClass("has-error");
+
+	$button.removeClass("btn-u btn-u-default btn btn-danger btn-success");
+	$button.addClass("btn btn-danger");
+<% else %>
+	
+	$ra_dec.val("<%= @ra_dec %>"); /* put ra and dec resolved into input w/ id=ra_dec */
+	$ra_dec.closest(".container-input").slideDown("fast"); /* just for see that */
+
+	$container_input.removeClass("has-success has-error")
+		.addClass("has-success"); /* make visible the ok resolve */
+
+	
+	$button.removeClass("btn-u btn-u-default btn btn-danger btn-success")
+		.addClass("btn btn-success"); /* make visible the ok resolve */
+
+<% end %>
+
+$icon.removeClass("fa fa-spinner fa-spin")
+	.addClass("fa fa-angle-right fa-lg"); /* clean the icon */
+$container_input.find("#source_name_sesame").css('width', "149px");
