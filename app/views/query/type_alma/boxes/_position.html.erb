@@ -1,6 +1,8 @@
 <h2 style="display:inline-block">Position</h2>
-<span id="plus_position" style="display:none; float:right;">
-	<i class="fa fa-plus"></i>
+<span style="display:none; float:right;">
+	<%= button_tag(type: "submit", style: 'background:transparent;border: none !important;', name: "commit", value:"plus_position", id: 'plus_position') do %>
+	    <i class="fa fa-plus"></i>
+	<% end %>
 </span>                       
 <div class="group">
 	<%= label_tag :source_name_sesame, 'Source name (Sesame)', class: 'control-label' %>
