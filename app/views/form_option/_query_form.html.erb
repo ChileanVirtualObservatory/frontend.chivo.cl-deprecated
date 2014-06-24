@@ -1,0 +1,63 @@
+<%= form_tag "/form_option/alma", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'almaSearch' do %>
+
+<div id="actions_states" class="alert fade in alert-info" style="margin-bottom:0px">
+    <strong>Heads up! </strong> This will show the states of actions
+</div>
+<table id="table_query" class="" >
+	<thead>
+		<tr>
+			<th>	
+				<%= submit_tag 'Process', class: 'btn btn-default ', style: "display:inline-block" %>
+				<%= button_tag 'Reset', type: 'reset', class: 'btn btn-default ', style: "display:inline-block" %>	
+			</th>
+			<th>
+			</th>
+			<th></th>
+			<th>
+				<span id="flag" class="fa-stack fa-lg" style="float:right">
+				  <i class="fa fa-circle fa-stack-2x"></i>
+				  <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+				</span>
+
+				<span id="info_states" class="fa-stack fa-lg" style="float:right">
+				  <i class="fa fa-circle fa-stack-2x"></i>
+				  <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+				</span>
+			</th>		
+			</tr>	
+	</thead>
+	<tbody>
+		<tr>
+			<td id="position" class="tag-box tag-box-v6 col-sm-3" >
+				<%= render 'form_option/boxes/position' %>
+			</td>
+			<td class="tag-box tag-box-v6 col-sm-3">
+				<%= render 'form_option/boxes/energy' %>
+			</td>
+			<td class="tag-box tag-box-v6 col-sm-3">
+				<%= render 'form_option/boxes/time' %>								  	
+			</td>
+			<td class="tag-box tag-box-v6 col-sm-3">
+				<%= render 'form_option/boxes/polarization' %>								  	
+			</td>
+		</tr>
+		<tr>
+			<td class="tag-box tag-box-v6 col-sm-3" >
+				<%= render 'form_option/boxes/observation' %>				  	
+			</td>
+			<td class="tag-box tag-box-v6 col-sm-3" >
+				<%= render 'form_option/boxes/project' %>
+			</td>
+			<td class="tag-box tag-box-v6 col-sm-3">
+				<div >                        
+					<h4></h4>                        
+					<p></p>						    	                   
+				</div>
+			</td>
+			<td class="tag-box tag-box-v6 col-sm-3" >
+				<%= render 'form_option/boxes/options' %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<% end %> <!--=== End Form ===-->

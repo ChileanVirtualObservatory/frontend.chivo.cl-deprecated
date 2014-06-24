@@ -1,0 +1,96 @@
+<h2 style="display:inline-block">Position</h2>
+<span style="display:none; float:right;">
+	<%= button_tag(type: "submit", style: 'background:transparent;border: none !important;', name: "commit", value:"plus_position", id: 'plus_position') do %>
+	    <i class="fa fa-plus"></i>
+	<% end %>
+</span>                       
+<div class="group">
+	<%= label_tag :source_name_sesame, 'Source name (Sesame)', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :source_name_sesame, nil, class: 'form-control', style:"width:149px; display:inline-block;" %>
+		<span class="input-group-btn" style="display:inline-block;margin-left:-3px;">
+			<%= button_tag(type: "submit", class: "btn-u btn-u-default", name: "commit", value:"sesame_search", id: 'sesame_search') do %>
+			    <i class="fa fa-angle-right fa-lg"></i>
+			<% end %>
+		</span>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Souce name (Sesame)</strong> 
+			<p>Source name to be resolved with <a href="http://cdsweb.u-strasbg.fr/cgi-bin/Sesame" target="_blank">Sesame</a></p><br>
+			<strong>Description</strong> 
+			<p>We use the external resolver Sesame to obtain
+					coordinates for the source. Sesame queries the Simbad,
+					NED and VizieR services.</p><br>
+			<strong>Example</strong> 
+			<p>M87</p>
+			<p>NGC3375</p>
+		</div>
+	</div>  
+</div>
+<div class="group">
+	<%= label_tag :source_name_alma, 'Source name (ALMA)', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :source_name_alma, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Souce name (ALMA)</strong> 
+			<p>ALMA source name.</p><br>
+			<strong>Description</strong> 
+			<p>Name of the source as registered in the ASDM. 
+				Partial matches through wildcards (?, *), and 
+				boolean OR expressions ("|"), can be used.</p><br>
+			<strong>Example</strong> 
+			<p>GRB021004</p>
+			<p>"R Scl"</p>
+		</div>
+	</div>  
+</div>
+<div class="group">
+	<%= label_tag :ra_dec, 'RA Dec', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :ra_dec, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>RA Dec</strong> 
+			<p>Right Ascension and Declination</p><br>
+			<strong>Description</strong> 
+			<p>Right Ascension (RA) and Declination, separated 
+				by whitespace, either in decimal degrees, or in 
+				Hours:Minutes:Seconds for RA, +Degrees:Minutes:Seconds 
+				for Declination.</p><br>
+			<strong>Unit</strong> 
+			<p>Hours:Minutes:Seconds and Degrees:Minutes:Seconds</p><br>	
+			<strong>Example</strong> 
+			<p>04:18:21.27 +38:01:35.7</p>
+			<p>064.5886550 +38.0266111</p>
+			<p>04:18:21.27 +38.0266111</p>
+			<p>064.5886550 +38:01:35.7</p>
+		</div>
+	</div>  
+</div>
+<div class="group" >
+	<%= label_tag :search_radius, 'Search radius', class: 'control-label' %>
+	<div class="container-input">
+		<%= text_field_tag :search_radius, nil, class: 'form-control' %>
+	</div>
+	<div class="container-tooltip" >
+		<div class="alert-info">
+			<strong>Search radius</strong> 
+			<p>Search radius of the cone centered around RA/Dec.</p><br>
+			<strong>Description</strong> 
+			<p>Search radius, in sexagesimal or in decimal degrees, of 
+				the cone centered around RA/Dec.</p><br>
+			<strong>Example</strong> 
+			<p>0:10:00</p>
+			<p>0.166667</p>
+			<p>1:00:00</p>
+			<p>1.0</p>
+			<p>0:00:30</p>
+			<p>0.008333</p>
+		</div>
+	</div>  
+</div>
+		

@@ -25,6 +25,7 @@
         <p>The Chilean Virtual Observatory (CHIVO) is a VO developed in Chile and it is one of many VO projects currently underway in the world. It was born out of the need to archive data that require large storage capacities and the need to develop new tools for the analyzing large volumes of data and better algorithms for intelligent processing of astronomical data, this due to the volumes of large scale data that will generate the astronomical observatories in Chile, mainly the ALMA project that will generate over 1TB of data per day, and in this form be to able to store the data in the local territory to optimize the observation time of the chilean astronomers. Chivo is an initiative of the five most prestigious universities in the country, supported by the private institutions ALMA and REUNA. In addition of the use of the VO by scientists of astronomy area, the VO will be useful too for the students of schools, especially of schools of rural areas.
 </p>
       </div>
+    <%= link_to image_tag("ivoa_logoc.png", :class => "color-img ivoa"),"http://www.ivoa.net/about/member-contacts.html", :target => "_blank" %>
     </div>
   </div>
 </div><!--/row-->
@@ -35,35 +36,51 @@
   <!-- Recent Works -->
   <div class="headline"><h2>Recent News</h2></div>
   <div class="row">
+    <!-- New 3 -->
     <div class="col-md-4 col-sm-6">
       <div class="thumbnails thumbnail-style thumbnail-kenburn">
         <div class="thumbnail-img">
           <div class="overflow-hidden">
-            <%= image_tag "news_2.jpg", class: 'img-responsive' %>
+            <%= image_tag "news/ivoa_newsletter_012_may_2014.jpg", class: 'img-responsive' %>          
           </div>
-          <a class="btn-more hover-effect" href="http://almaobservatory.org/en/press-room/announcements-events/658-chilean-astroinformatics-platform-joins-international-virtual-observatory">read more +</a>     
+          <%= link_to "read more +", ivoa_newsletter_012_may_2014_path, class: "btn-more hover-effect" %>        
         </div>
         <div class="caption">
-          <h3><a class="hover-effect" href="http://almaobservatory.org/en/press-room/announcements-events/658-chilean-astroinformatics-platform-joins-international-virtual-observatory">Chilean <!--astroinformatics platform--> joins International Virtual Observatory</a></h3>
-          <p>The project designed to manage and analyze the almost 250 terabytes of data that the Atacama Millimeter/submillimeter Array (ALMA) will generate each year has joined the International Virtual Observatory Alliance, becoming a key initiative in Chile's contribution to astroinformatics around the world...</p>
+          <h3><%= link_to "IVOA Newsletter 012 - May 2014", ivoa_newsletter_012_may_2014_path %></h3>
+          <p>The May 2014 issue of the IVOA Newsletter is now available. This biannual newsletter for astronomers is intended to highlight new capabilities of VO tools and technologies for doing astronomy research. It also lists recent papers and upcoming events. </p>
         </div>
       </div>
     </div>
-
+    <!-- New 2 -->
     <div class="col-md-4 col-sm-6">
       <div class="thumbnails thumbnail-style thumbnail-kenburn">
         <div class="thumbnail-img">
           <div class="overflow-hidden">
-            <%= image_tag "news_1.jpg", class: 'img-responsive' %>
+            <%= image_tag "news/chilean_development_of_astronomical_computing_for_alma.jpg", class: 'img-responsive' %>
           </div>
-          <a class="btn-more hover-effect" href="http://www.almaobservatory.org/en/press-room/announcements-events/542-virtual-observatories-chilean-development-of-astronomical-computing-for-alma">read more +</a>     
+          <%= link_to "read more +", chilean_development_of_astronomical_computing_for_alma_path, class: "btn-more hover-effect" %>    
         </div>
         <div class="caption">
-          <h3><a class="hover-effect" href="http://www.almaobservatory.org/en/press-room/announcements-events/542-virtual-observatories-chilean-development-of-astronomical-computing-for-alma">Chilean Development of Astronomical Computing for ALMA</a></h3>
+          <h3><%= link_to "Chilean Development of Astronomical Computing for ALMA", chilean_development_of_astronomical_computing_for_alma_path %></h3>
           <p>Once the Atacama Large Millimiter/submillimeter Array (ALMA) is functioning at full capacity, it will generate more than 750 GB of data each day (on the order of 250 TB/year). Chilean astronomers will need to be able to connect at a high data transmission speed...</p>
         </div>
       </div>
     </div>
+    <!-- New 3 -->
+    <div class="col-md-4 col-sm-6">
+      <div class="thumbnails thumbnail-style thumbnail-kenburn">
+        <div class="thumbnail-img">
+          <div class="overflow-hidden">
+            <%= image_tag "news/chilean_joins_international_virtual_observatory.jpg", class: 'img-responsive' %>
+          </div>
+          <%= link_to "read more +", chilean_joins_international_virtual_observatory_path, class: "btn-more hover-effect" %>   
+        </div>
+        <div class="caption">
+          <h3><%= link_to "Chilean joins International Virtual Observatory", chilean_joins_international_virtual_observatory_path %></h3>
+          <p>The project designed to manage and analyze the almost 250 terabytes of data that the Atacama Millimeter/submillimeter Array (ALMA) will generate each year has joined the International Virtual Observatory Alliance, becoming a key initiative in Chile's contribution to astroinformatics around the world...</p>
+        </div>
+      </div>
+    </div> 
   </div><!--/row-->
   <!-- End Recent Works -->
 

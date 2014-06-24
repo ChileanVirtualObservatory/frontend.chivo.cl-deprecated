@@ -1,5 +1,5 @@
-<%= javascript_include_tag "service/option" %>
-<%= javascript_include_tag "service/size_panel" %>
+<%= javascript_include_tag "form_options/option" %>
+<%= javascript_include_tag "form_options/size_panel" %>
 <%= javascript_include_tag "voview" %>
 <%= stylesheet_link_tag  "voview", media: "all" %>
 
@@ -16,7 +16,7 @@
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
-<%= render 'pop_boxes' %>
+<%= render 'form_option/other_options/pop_boxes' %>
 
 <!--=== Content Part ===-->
 <div class="container">   
@@ -31,7 +31,7 @@
             <!--=== Panel ===-->
             <div  class="panel panel-default margin-bottom-40">
 
-                <%= render 'panel_heading' %>
+                <%= render 'form_option/other_options/panel_heading' %>
 
                 <div class="panel-body">
                     
@@ -170,7 +170,7 @@
             </div> <!--=== End Panel ===--> 
         </div>
     </div>
-    <%= render 'settings' %>
+    <%= render 'form_option/other_options/settings' %>
 </div>
 
 <br><br><br><br><br><br><br>

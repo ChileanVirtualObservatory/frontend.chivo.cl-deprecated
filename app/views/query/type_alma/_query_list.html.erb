@@ -1,0 +1,18 @@
+<br>
+<%= form_tag "/form_option/alma", remote: true, class: 'form-horizontal', role: 'form', method: 'get'  do %>
+	<%= submit_tag 'Process Selected', class: 'btn btn-default ', style: "display:inline-block" %>
+	<br>
+	<table id= "query_list_table" class="table">
+		<thead>
+			<tr>
+				<th>Sesame Name</th>
+				<th>Ra Dec</th>
+				<th>Search Radius</th>
+				<th>Resource</th>
+				<th>Action</th>	
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+<% end %>

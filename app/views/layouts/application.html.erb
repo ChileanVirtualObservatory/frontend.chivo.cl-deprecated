@@ -72,8 +72,9 @@
           <span class="icon-bar"></span>
         </button>
         <%= link_to image_tag("logo1-default.png", width: '130px'), root_path, class: 'navbar-brand' %>
+      
       </div>
-
+      <h4 class="chivo-title navbar-header">Chilean Virtual Observatory</h4>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -93,13 +94,16 @@
                 <%= link_to 'Cone Search', query_conesearch_path %>
               </li>
               <li>
-                <%= link_to 'Image Search', query_imagesearch_path %>
+                <%= link_to 'Image Search', '#', style: "cursor:Default; text-decoration:none; color:#D0D0D0;" %>
               </li>
               <li>
-                <%= link_to 'Spectral Search', query_spectralsearch_path %>
+                <%= link_to 'Spectral Search', '#', style: "cursor:Default; text-decoration:none; color:#D0D0D0;" %>
               </li>
               <li>
-                <%= link_to 'Table Search', query_tablesearch_path %>
+                <%= link_to 'Table Search', '#', style: "cursor:Default; text-decoration:none; color:#D0D0D0;"%>
+              </li>
+              <li>
+                <%= link_to 'All Searches', query_all_searches_path %>
               </li>
             </ul>
           </li>
@@ -114,16 +118,16 @@
                 <%= link_to 'Option1', form_option_option1_path %>
               </li>
               <li>
-                <%= link_to 'Option2', form_option_option2_path %>
+                <%= link_to 'Option2', '#', style: "cursor:Default; text-decoration:none; color:#D0D0D0;" %>
               </li>
               <li>
-                <%= link_to 'Option3', form_option_option3_path %>
+                <%= link_to 'Option3', '#', style: "cursor:Default; text-decoration:none; color:#D0D0D0;"%>
               </li>
               <li>
-                <%= link_to 'Alma', form_option_alma_path %>
+                <%= link_to 'Alma', '#', style: "cursor:Default; text-decoration:none; color:#D0D0D0;" %>
               </li>
               <li>
-                <%= link_to 'Alma2', form_option_alma2_path %>
+                <%= link_to 'Alma2', '#', style: "cursor:Default; text-decoration:none; color:#D0D0D0;" %>
               </li>
             </ul>
           </li>
