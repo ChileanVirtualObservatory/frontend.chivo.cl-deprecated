@@ -17,6 +17,7 @@
 //= require plugins/hover-dropdown.min
 //= require plugins/back-to-top
 //= require plugins/index
+//= require plugins/bootstrap-multiselect
 //= require unify/app
 //= require jquery.flexslider-min
 //= require modernizr

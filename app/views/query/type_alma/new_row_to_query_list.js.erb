@@ -18,39 +18,13 @@ $newTR = $("<tr id="+id+">" +
 			"<td class='action_td'></td>" +					
 		"</tr>");
 
-var $div_multiselect_resource = $('<div/>',{
-		class: "multiselect-resource",
-		mouseenter: function (event) {
-			$(this).find("ul").clearQueue().finish().delay(delayTime).slideDown("fast");
-		}, 
-		mouseleave: function (event) {
-			$(this).find("ul").clearQueue().finish().delay(delayTime).slideUp("fast");
-		}
-	});
-$button_multiselect = $('<button type="button" id="multi_select_resource_button" style="height:20px;" class="form-control">' +            
-							'<i class="fa fa-angle-down"></i>' +  
-						'</button>' + 
-						'<div>' +					    				
-							'<ul>' +
-								'<li>' +
-									'<label for="dachs'+id+'"><input id="dachs'+id+'" name="dachs'+id+'" type="checkbox">Dachs</label>' +
-								'</li>' +
-							'</ul>' +
-						'</div>');
-$div_multiselect_resource.append($button_multiselect);
 var multi_select = $('<select/>',{
 		id: 'multi_select_resource'+id,
-		class: 'form-control',
-		style: 'display:none;',
 		multiple: 'multiple',
+		style: 'float:center',
 		name: 'resource_'+id+'[]'
 	});
-var option_default = $('<option/>',{
-	value:'dachs',
-	text: 'Dachs',
-	selected: 'selected'
-});
-multi_select.append(option_default);
+
 var delete_button = $('<a/>',
     {
         class: 'btn btn-danger btn-xs',
@@ -65,8 +39,31 @@ var trash_icon = $('<i/>',{class: 'fa fa-trash-o fa-fw '});
 delete_button.prepend(trash_icon);
 
 $newTR.find("td").last().append(delete_button)
-	.prev().append(multi_select)
-	.append($div_multiselect_resource);
+	.prev().append(multi_select);
+
+
+var data = [
+	{label: "J/ApJ/473/822", value: "http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/473/822&"},
+    {label: "XMM/CFRSID", value: "http://heasarc.gsfc.nasa.gov/cgi-bin/vo/cone/coneGet.pl?table=xmmcfrsoid&"},
+    {label: "J/AJ/136/2050", value: "http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/136/2050&"},
+    {label: "J/AJ/124/601", value: "http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/124/601&"},
+    {label: "J/A+A/504/347", value: "http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/A+A/504/347&"},
+    {label: "J/ApJS/183/214", value: "http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJS/183/214&"},
+    {label: "J/AJ/127/2771", value: "http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/127/2771&"},
+    {label: "J/ApJ/732/101", value: "http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/732/101&"},
+];
+
+multi_select.multiselect({
+	buttonWidth: '400px',
+	buttonClass: 'btn btn-default btn-sm',
+	includeSelectAllOption: true,
+	enableFiltering: true,
+	maxHeight: 150,
+	checkboxName: '',
+	selectedClass: null
+	});
+
+multi_select.multiselect('dataprovider', data);
 
 $queryListTable.find("tbody").append($newTR);
 //update_action_state("alert-success", "Well done!", "cordinates added to the query list");
