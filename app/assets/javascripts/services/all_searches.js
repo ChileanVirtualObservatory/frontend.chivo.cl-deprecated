@@ -9,7 +9,7 @@ var delayTime = 300; /* delay time to slide down all the form controls */
 
 $(document).ready(function () {	
 	/* hide all the form controls by default */
-	$(".tab-v2").css('position', 'absolute').css("width", 1019); /* sol to resizing form */
+	$(".tab-v2").css('position', 'relative').css("width", 1019); /* sol to resizing form */
 	$table_query = $("table#table_query");
 	$groups = $table_query.find(".group");
 
@@ -223,7 +223,6 @@ $(document).ready(function () {
 
 		var data = [
 			{label: "J/ApJ/473/822", value: "J/ApJ/473/822_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/473/822&"},
-		    {label: "XMM/CFRSID", value: "XMM/CFRSID_http://heasarc.gsfc.nasa.gov/cgi-bin/vo/cone/coneGet.pl?table=xmmcfrsoid&"},
 		    {label: "J/AJ/136/2050", value: "J/AJ/136/2050_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/136/2050&"},
 		    {label: "J/AJ/124/601", value: "J/AJ/124/601_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/124/601&"},
 		    {label: "J/A+A/504/347", value: "J/A+A/504/347_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/A+A/504/347&"},
@@ -239,15 +238,27 @@ $(document).ready(function () {
 			enableFiltering: true,
 			maxHeight: 200,
 			checkboxName: '',
-			selectedClass: null
+			filterPlaceholder: 'Search',
+			selectedClass: null,
+			onChange: function(option, checked) {	                    
+                    var selectedOptions = multi_select.find('option:selected');
+						if (selectedOptions.length == 0) {
+			        	multi_select.multiselect('select', option.val());
+			     	}
+	                
+	            }
 			});
 
 		multi_select.multiselect('dataprovider', data);
-
+		multi_select.multiselect('select', "J/ApJ/473/822_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/473/822&");
 		$queryListTable.find("tbody").append($newTR);
 		$ra_dec.val("").closest(".container-input").slideUp();
 		$source_name_sesame.val("").closest(".container-input").slideUp();
 		update_action_state("alert-success", "Well done!", "cordinates added to the query list");
+		
+	});
+	
+	$('#process_position_query_list').on('click', function (event) {
 		
 	});
 
