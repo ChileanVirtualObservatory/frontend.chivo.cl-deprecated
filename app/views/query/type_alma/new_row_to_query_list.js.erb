@@ -1,0 +1,75 @@
+$queryListTable = $("#query_list_table");
+$ra_dec = $("#ra_dec");
+$source_name_sesame = $("#source_name_sesame");
+$search_radius = $("#search_radius");
+tr_amount = $queryListTable.find("tr").size();
+id = 0;
+if (tr_amount == 1){
+	id = tr_amount;
+}
+else {
+	id = parseInt($queryListTable.find("tr").last().attr('id')) + 1;	
+}
+$newTR = $("<tr id="+id+">" +
+			"<td class='sesame_td'>"+$source_name_sesame.val()+"<input name='source_name_sesame_"+id+ "' type='text' class='form-control' value='"+$source_name_sesame.val()+"'style='display:none;'/></td>" +
+			"<td class='ra_dec_td'>"+$ra_dec.val()+"<input name='ra_dec_"+id+"' type='text' class='form-control' value='"+$ra_dec.val()+"'style='display:none;'/></td>" +
+			"<td class='search_td'>"+$search_radius.val()+"<input name='search_radius_"+id+"' type='text' class='form-control' value='"+$search_radius.val()+"' style='display:none;'/></td>" +
+			"<td class='resource_td'></td>" + 
+			"<td class='action_td'></td>" +					
+		"</tr>");
+
+var $div_multiselect_resource = $('<div/>',{
+		class: "multiselect-resource",
+		mouseenter: function (event) {
+			$(this).find("ul").clearQueue().finish().delay(delayTime).slideDown("fast");
+		}, 
+		mouseleave: function (event) {
+			$(this).find("ul").clearQueue().finish().delay(delayTime).slideUp("fast");
+		}
+	});
+$button_multiselect = $('<button type="button" id="multi_select_resource_button" style="height:20px;" class="form-control">' +            
+							'<i class="fa fa-angle-down"></i>' +  
+						'</button>' + 
+						'<div>' +					    				
+							'<ul>' +
+								'<li>' +
+									'<label for="dachs'+id+'"><input id="dachs'+id+'" name="dachs'+id+'" type="checkbox">Dachs</label>' +
+								'</li>' +
+							'</ul>' +
+						'</div>');
+$div_multiselect_resource.append($button_multiselect);
+var multi_select = $('<select/>',{
+		id: 'multi_select_resource'+id,
+		class: 'form-control',
+		style: 'display:none;',
+		multiple: 'multiple',
+		name: 'resource_'+id+'[]'
+	});
+var option_default = $('<option/>',{
+	value:'dachs',
+	text: 'Dachs',
+	selected: 'selected'
+});
+multi_select.append(option_default);
+var delete_button = $('<a/>',
+    {
+        class: 'btn btn-danger btn-xs',
+        style: 'height:20px',
+        text: '',
+        click: function () {
+        	$(this).closest("tr").remove();
+         }
+    });
+
+var trash_icon = $('<i/>',{class: 'fa fa-trash-o fa-fw '});
+delete_button.prepend(trash_icon);
+
+$newTR.find("td").last().append(delete_button)
+	.prev().append(multi_select)
+	.append($div_multiselect_resource);
+
+$queryListTable.find("tbody").append($newTR);
+//update_action_state("alert-success", "Well done!", "cordinates added to the query list");
+
+$ra_dec.val("").closest(".container-input").slideUp();
+$source_name_sesame.val("").closest(".container-input").slideUp();

@@ -124,10 +124,19 @@ class QueryController < ApplicationController
       end
 
       respond_to do |format|
-        format.js { render 'all_in_one/sesame_resolver' }
+        format.js { render 'query/type_alma/sesame_resolver' }
       end
         
     end
+    if params[:commit] == "plus_position"
+      # search for resources
+      #@resources
+      respond_to do |format|
+        format.js { render 'query/type_alma/new_row_to_query_list' }
+      end
+
+    end
+
   end
   
   def advancesearch
