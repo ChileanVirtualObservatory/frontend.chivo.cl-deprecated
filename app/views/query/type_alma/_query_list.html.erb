@@ -1,5 +1,5 @@
 <br>
-<%= form_tag "/query/all_searches", remote: true, class: 'form-horizontal', role: 'form', method: 'get', name: 'searchForm'  do %>
+<%= form_tag "/query/all_searches", remote: true, class: 'form-horizontal', role: 'form', method: 'post', name: 'searchForm'  do %>
 	<%= button_tag(type: "submit", class: "btn btn-default", name: "commit", value:"process_position_query_list", id: 'process_position_query_list', style: "display:inline-block") do %>
 	    Process
 	<% end %>
