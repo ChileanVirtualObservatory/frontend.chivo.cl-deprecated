@@ -124,17 +124,52 @@ class QueryController < ApplicationController
         format.js { render 'query/type_alma/sesame_resolver' }
       end
         
-    end
-    if params[:commit] == "plus_position"
-      # search for resources
-      #@resources
+    elsif params[:commit] == "process_position_query_list"
+      responses_dic = Hash.new
+      
+      params.delete("utf8")
+      params.delete("commit")
+      
+      last_source_name_sesame = String.new
+      last_ra_dec = String.new
+      last_search_radius = String.new
+
+      params.each_with_index {|(key, value), index|
+        case index%4
+        when 0 # => source name sesame          
+          last_source_name_sesame = value
+        when 1 # => ra_dec          
+          last_ra_dec = value
+        when 2 # => search_radius          
+          last_search_radius = value
+        when 3 # => resource          
+          ra = last_ra_dec.split(" ")[0]
+          dec = last_ra_dec.split(" ")[1]
+
+          value.each {|resource|
+            short_name = resource.split("_")[0]
+            access_url = resource.split("_")[1]
+            response = RestClient.get(access_url + "RA=" + ra + "&DEC=" + dec + "&SR=1000")
+            if responses_dic[short_name] == nil 
+              responses_dic[short_name] = [response]
+            else
+              responses_dic[short_name] << response
+            end
+          }
+        end # => end case
+      }
+
+      responses_dic.each {|key, value|
+        responses_dic[key] = gotVotable(value)
+      }
+      @votables = responses_dic
+
       respond_to do |format|
-        format.js { render 'query/type_alma/new_row_to_query_list' }
+        format.js { render 'query/type_alma/result_tab' }
       end
+    end # => end process_position_query_list
 
-    end
-
-  end
+  end # => end action all_searches 
   
   def advancesearch
   end
