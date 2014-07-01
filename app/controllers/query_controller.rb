@@ -1,41 +1,38 @@
 class QueryController < ApplicationController
   
   def conesearch
+    if params[:commit] == "sesame_search"
+      sesame_response = Array.new # => []
 
-    responses = Array.new # => []  
+      sesame = params[:source_name_sesame].split(" ").join("+")
+      sesame_response << RestClient.get("http://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-olfx/NSV?" + sesame)
 
-    if params[:c1]
-      responses << RestClient.get(
-        "http://dachs.lirae.cl:5000/alma/scs", {
-          params: {
-            RA: params[:ra],
-            DEC: params[:dec],
-            SR: params[:sr]
-            }
-      }).html_safe
-    end
+      xml_response = Nokogiri.XML(sesame_response[0])
+      ra = xml_response.xpath("//jradeg").children.text
+      dec = xml_response.xpath("//jdedeg").children.text
 
-    if params[:c2]
-      responses << RestClient.get(
-        "wfaudata.roe.ac.uk/twomass-dsa/DirectCone", {
-          params: {
-            DSACAT: "TWOMASS",
-            DSATAB: "twomass_psc",
-            RA: params[:ra], 
-            DEC: params[:dec], 
-            RADIUS: params[:sr]
-          }
-      }).html_safe
-    end
+      @ra = ra
+      @dec= dec
+      
+      if ra.empty? || dec.empty?
+        @ra = "ERROR"
+        @dec= "ERROR"           
+      end
 
-    @votable =  gotVotable(responses)
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
+      respond_to do |format|
+        format.js { render 'query/simple_cone_search/sesame_resolver'}
+      end
+    end 
     
+    else if params[:commit] == "plus_position"
+      # search for resources
+      #@resources
+      respond_to do |format|
+        format.js { render 'query/simple_cone_search/new_row_to_query_list' }
+      end
+    end
   end
+
   
   def imagesearch
 
