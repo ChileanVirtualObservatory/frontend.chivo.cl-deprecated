@@ -230,8 +230,7 @@ $(document).ready(function () {
 		    {label: "J/AJ/127/2771", value: "J/AJ/127/2771_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/127/2771&"},
 		    {label: "J/ApJ/732/101", value: "J/ApJ/732/101_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/732/101&"},
 		];
-
-		multi_select.multiselect({
+		var config = {
 			buttonWidth: '400px',
 			buttonClass: 'btn btn-default btn-sm',
 			includeSelectAllOption: true,
@@ -247,8 +246,9 @@ $(document).ready(function () {
 			     	}
 	                
 	            }
-			});
+			}
 
+		multi_select.multiselect(config);
 		multi_select.multiselect('dataprovider', data);
 		multi_select.multiselect('select', "J/ApJ/473/822_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/473/822&");
 		$queryListTable.find("tbody").append($newTR);
@@ -259,7 +259,7 @@ $(document).ready(function () {
 	});
 	
 	$('#process_position_query_list').on('click', function (event) {
-		
+		$("#estate_process_query_list").removeClass("fa fa-spinner fa-spin fa-lg").addClass("fa fa-spinner fa-spin fa-lg"); 
 	});
 
 });
