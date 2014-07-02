@@ -5,4 +5,6 @@ class NewsController < ApplicationController
 	end
 	def ivoa_newsletter_012_may_2014		
 	end
+	def spie_astronomical_telescopes_instrumentation_2014
+	end
 end
