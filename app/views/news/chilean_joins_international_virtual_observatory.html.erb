@@ -12,7 +12,7 @@
 <div class="container">		
 	<div class="row blog-page blog-item">
         <!-- Left Sidebar -->
-    	<div class="col-md-offset-3 col-md-7 md-margin-bottom-60">
+    	<div class="col-md-9 md-margin-bottom-60">
             <!--Blog Post-->        
             <div class="blog margin-bottom-40">
                 <div class="headline"><h2>Chilean joins International Virtual Observatory</h2></div>
@@ -51,5 +51,32 @@
             </div>
         </div>
         <!-- End Left Sidebar -->
+        <!-- Right Sidebar -->
+        <div class="col-md-3 magazine-page">    
+            <!-- Posts -->
+            <div class="posts margin-bottom-40">
+                <div class="headline headline-md"><h2>Recent News</h2></div>
+                <dl class="dl-horizontal">
+                    <dt><%= image_tag "news/spie_astronomical_telescopes_instrumentation_2014.jpg", class: "img-responsive"%></dt>
+                    <dd>
+                        <p><%= link_to "SPIE Astronomical Telescopes + Intrumentation 2014", spie_astronomical_telescopes_instrumentation_2014_path %></p> 
+                    </dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt><%= image_tag "news/ivoa_newsletter_012_may_2014.jpg", class: "img-responsive"%></dt>
+                    <dd>
+                        <p><%= link_to "IVOA Newsletter 012 - May 2014", ivoa_newsletter_012_may_2014_path %></p> 
+                    </dd>
+                </dl>
+                <dl class="dl-horizontal">
+                    <dt><%= image_tag "news/chilean_development_of_astronomical_computing_for_alma.jpg", class: "img-responsive"%></dt>
+                    <dd>
+                        <p><%= link_to "Virtual Observatories: Chilean Development of Astronomical Computing for ALMA", chilean_development_of_astronomical_computing_for_alma_path %></p> 
+                    </dd>
+                </dl>
+            </div><!--/posts-->
+            <!-- End Posts -->
+        </div>
+        <!-- End Right Sidebar -->
     </div><!--/row-->        
 </div>
