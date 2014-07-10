@@ -1,95 +1,34 @@
-<%= javascript_include_tag "form_options/option" %>
-<%= javascript_include_tag "form_options/size_panel" %>
-
+<%= javascript_include_tag "services/simple_cone_search" %>
 
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
   <div class="container">
-    <h1 class="pull-left">Simple Cone Search</h1>
-    <ul class="pull-right breadcrumb">
-      <li><%= link_to 'Home', root_path %></li>
-      <li>Services</li>
-      <li class="active">Simple Cone Search</li>
-    </ul>
-  </div><!--/container-->
+      <h1 class="pull-left">Search</h1>
+      <ul class="pull-right breadcrumb">
+          <li><%= link_to 'Home', root_path %></li>
+          <li>Services</li>
+          <li class="active">Cone Search</li>
+      </ul>
+    </div><!--/container-->
 </div><!--/breadcrumbs-->
 <!--=== End Breadcrumbs ===-->
 
-<%= render 'pop_boxes' %>
-
-<!--=== Content Part ===-->
-<div class="container">   
-	<div class="row margin-bottom-30">
-  		<div class="col-md-8 md-margin-bottom-40 col-md-offset-2">
-	  		
-	  		<!--=== Panel ===-->
-	  		<div class="panel panel-default margin-bottom-40">    		
-
-	    		<%= render 'panel_heading' %>
-		  		
-		  		<div class="panel-body">		  			
-		  			<!--=== Form ===-->
-			  		<%= form_tag "/query/conesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get', name: 'searchForm' do %>		
-						<div class="form-group">
-							<%= label_tag :ra, 'RA', class: 'col-sm-4 control-label' %>
-						    <div class="col-sm-5" data-popbox='default'>
-						    	<%= text_field_tag :ra, nil, class: 'form-control' %>
-						    </div>
-						</div>
-						<div class="form-group">
-						  	<%= label_tag :dec, 'DEC', class: 'col-sm-4 control-label' %>
-						    <div class="col-sm-5" data-popbox='default'>
-						    	<%= text_field_tag :dec, nil, class: 'form-control' %>
-						    </div>
-						</div>
-						<div class="form-group">
-						  	<%= label_tag :sr, 'Radius (SR)', class: 'col-sm-4 control-label' %>
-						    <div class="col-sm-5" data-popbox='default'>
-						    	<%= text_field_tag :sr, nil, class: 'form-control' %>
-						    </div>
-						</div>
-						<div class="form-group">
-						  	<%= label_tag :verbose, 'Verbosity', class: 'col-sm-4 control-label' %>
-						    <div class="col-sm-5" data-popbox='default'>
-						    	<%= text_field_tag :verbose, nil, class: 'form-control' %>
-						    </div>
-						</div>
-						<div class="form-group">
-						  	<%= label_tag :catalogs, 'Catalogs', class: 'col-sm-4 control-label' %>
-						  	<div id='check_cats' class="col-sm-5" data-popbox='default'>
-							  	<div class= "input-group">
-							  		<span class="input-group-addon">
-				            			<%= check_box_tag :c1, 1, true %>
-				            		</span>
-							  		<%= label_tag :c1, 'dachs', class: "form-control"%>
-							  	</div>
-							  	<div class="margin-bottom-10"></div>	
-							  	<div class= "input-group">
-							  		<span class="input-group-addon">
-				            			<%= check_box_tag :c2 %>
-				            		</span>
-							  		<%= label_tag :c2, 'twomass-dsa', class: "form-control" %>
-							  	</div>
-						  	</div>		  	
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-4 col-sm-5">
-			          			<%= submit_tag 'Process', class: 'btn  btn-default btn-block'  %>  <!-- style: "background-color: #036"-->
-						    </div>
-						</div>
-					<% end %> <!--=== End Form ===-->						
-				</div> <!--/panel-body-->
-			</div> <!--=== End Panel ===-->
-		</div>
-  	</div>
-  	<button id='panel_medium' style="display: none;"></button>
-  	<div class="row margin-bottom-30">
-  		<div class="col-md-12 md-margin-bottom-40">
-  			<div class="voviewTab">  				
-			</div>
-  		</div>
-  	</div>
-</div> 
-<!--=== End Content Part ===-->
-
-<br><br><br><br><br><br><br>
+<div class="container"> <!--== Content Part ==-->                   
+  <div class="tab-v2 col-sm-12" style="margin-left:50px;">                
+    <ul class="nav nav-tabs">         
+      <li class="active" ><a href="#query_form" data-toggle="tab">Query Form</a></li>     
+      <li><a href="#result_table" data-toggle="tab">Result Table</a></li>               
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="query_form" >
+        <%= render 'query/simple_cone_search/query_form' %>
+      </div>
+      <div class="tab-pane" id="result_table">
+        <%= render 'query/simple_cone_search/result_table' %>
+      </div>
+    </div>
+  </div>
+</div> <!--== End Content Part ==-->
+<!--=== Form ===-->
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
