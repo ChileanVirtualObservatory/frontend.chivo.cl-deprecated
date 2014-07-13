@@ -1,4 +1,6 @@
 class NewsController < ApplicationController
+	def all_news
+	end
 	def chilean_joins_international_virtual_observatory
 	end
 	def chilean_development_of_astronomical_computing_for_alma
