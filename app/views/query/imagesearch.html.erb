@@ -47,13 +47,60 @@
                   <%= text_field_tag :size, nil, class: 'form-control' %>
               </div>
             </div>
-          
+            
+            <!--=== Optionals ##needs to hide somehow##change css to potional (not red)## ===-->
+
+            <div class="form-group">
+              <%= label_tag :intersect, 'Intersect', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                <%= select_tag :data_type, options_for_select([ "", "COVERS", "ENCLOSED", "CENTER", "OVERLAPS" ], ""), class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= label_tag :naxis, 'N Axis', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                <%= select_tag :data_type, options_for_select([ "", "pixels"], ""), class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= label_tag :cframe, 'C Frame', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                <%= select_tag :data_type, options_for_select([ "", "ICRS", "FK5", "FK4", "ECL", "GAL", "SGAL" ], ""), class: 'form-control' %>
+              </div>
+            </div>
+
+             <div class="form-group">
+              <%= label_tag :rotang, 'Rotang', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                  <%= text_field_tag :size, nil, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= label_tag :proj, 'Proj', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                <%= select_tag :data_type, options_for_select([ "", "TAN", "SIN", "ARC" ], ""), class: 'form-control' %>
+              </div>
+            </div>
+
             <div class="form-group">
               <%= label_tag :data_type, 'Data Type', class: 'col-sm-4 control-label' %>
               <div class="col-sm-5" data-popbox='default'>
                 <%= select_tag :data_type, options_for_select([ "FITS", "VOTable", "JPG" ], "FITS"), class: 'form-control' %>
               </div>
             </div>
+
+            <div class="form-group">
+              <%= label_tag :verb, 'Verbosity', class: 'col-sm-4 control-label' %>
+              <div class="col-sm-5" data-popbox='default'>
+                <%= select_tag :data_type, options_for_select([ "", "1", "2", "3"], ""), class: 'form-control' %>
+              </div>
+            </div>
+
+            <!--=== End Optionals ===-->
+
             <div class="form-group">
               <%= label_tag :catalogs, 'Catalogs', class: 'col-sm-4 control-label' %>
               <div id='check_cats' class="col-sm-5" data-popbox='default'>

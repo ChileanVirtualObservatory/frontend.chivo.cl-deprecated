@@ -1,41 +1,75 @@
 class QueryController < ApplicationController
   
   def conesearch
+    if params[:commit] == "sesame_search"
+      sesame_response = Array.new # => []
 
-    responses = Array.new # => []  
+      sesame = params[:source_name_sesame].split(" ").join("+")
+      sesame_response << RestClient.get("http://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-olfx/NSV?" + sesame)
 
-    if params[:c1]
-      responses << RestClient.get(
-        "http://dachs.lirae.cl:5000/alma/scs", {
-          params: {
-            RA: params[:ra],
-            DEC: params[:dec],
-            SR: params[:sr]
-            }
-      }).html_safe
-    end
+      xml_response = Nokogiri.XML(sesame_response[0])
+      ra = xml_response.xpath("//jradeg").children.text
+      dec = xml_response.xpath("//jdedeg").children.text
 
-    if params[:c2]
-      responses << RestClient.get(
-        "wfaudata.roe.ac.uk/twomass-dsa/DirectCone", {
-          params: {
-            DSACAT: "TWOMASS",
-            DSATAB: "twomass_psc",
-            RA: params[:ra], 
-            DEC: params[:dec], 
-            RADIUS: params[:sr]
+      @ra = ra
+      @dec= dec
+      
+      if ra.empty? || dec.empty?
+        @ra = "ERROR"
+        @dec= "ERROR"           
+      end
+
+      respond_to do |format|
+        format.js { render 'query/simple_cone_search/sesame_resolver'}
+      end
+
+    elsif params[:commit] == "process_position_query_list"
+      responses_dic = Hash.new
+      
+      params.delete("utf8")
+      params.delete("commit")
+      
+      last_source_name_sesame = String.new
+      last_ra = String.new
+      last_dec = String.new
+      last_search_radius = String.new
+
+      params.each_with_index {|(key, value), index|
+        case index%5
+        when 0 # => source name sesame          
+          last_source_name_sesame = value
+        when 1 # => ra          
+          last_ra = value
+        when 2 # => dec          
+          last_dec = value        
+        when 3 # => search_radius          
+          last_search_radius = value
+        when 4 # => resource          
+          
+          value.each {|resource|
+            short_name = resource.split("_")[0]
+            access_url = resource.split("_")[1]
+            response = RestClient.get(access_url + "RA=" + last_ra + "&DEC=" + last_dec + "&SR=1000")
+            if responses_dic[short_name] == nil 
+              responses_dic[short_name] = [response]
+            else
+              responses_dic[short_name] << response
+            end
           }
-      }).html_safe
-    end
+        end # => end case
+      }
 
-    @votable =  gotVotable(responses)
+      responses_dic.each {|key, value|
+        responses_dic[key] = gotVotable(value)
+      }
+      @votables = responses_dic
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
-    
+      respond_to do |format|
+        format.js { render 'query/simple_cone_search/result_tab' }
+      end
+    end # => end process_position_query_list
   end
+
   
   def imagesearch
 
