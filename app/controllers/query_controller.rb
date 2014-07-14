@@ -70,39 +70,61 @@ class QueryController < ApplicationController
     end # => end process_position_query_list
   end
 
-  
+
   def imagesearch
-
-    responses = Array.new # => []
-
-    if params[:c1]
-      responses << RestClient.get(
-        "http://dachs.lirae.cl:5000/alma/sia", {
-          params: { 
-            POS: "#{params[:ra]},#{params[:dec]}",
-            SIZE: params[:size]
-          }
-        }).html_safe
-    end
-
-    if params[:c2]
-      responses << RestClient.get(
-        "http://irsa.ipac.caltech.edu/ibe/sia/wise/prelim/p3am_cdd", {
-          params: { 
-            POS: "#{params[:ra]},#{params[:dec]}",
-            SIZE: params[:size]
-          }
-        }).html_safe
-    end
     
-    @votable =  gotVotable(responses)
+    responses_dic = Hash.new
+      
+    if params[:commit] == "Process"
+      
+      params.delete("utf8")
+      params.delete("commit")
+      params.delete("controller")
+      params.delete("action")
+      params.delete("query")
+
+      if params[:ra].to_f() < 0 || params[:ra].to_f() > 360
+        @ra = "ERROR: Out of range"
+      end
+      if params[:dec].to_f() < -90 || params[:dec].to_f() > 90
+        @dec = "ERROR: Out of range"
+      end
+      if params[:size].to_f() < 0 || params[:size].to_f() > 8.5
+        @size = "ERROR: Out of range"
+      end
+   
+      if params[:c1] and nil
+        responses << RestClient.get(
+          "http://dachs.lirae.cl:5000/alma/sia", {
+            params: { 
+              POS: "#{params[:ra]},#{params[:dec]}",
+              SIZE: params[:size]
+            }
+          }).html_safe
+      end
+
+      if params[:c2] and nil
+        responses << RestClient.get(
+          "http://irsa.ipac.caltech.edu/ibe/sia/wise/prelim/p3am_cdd", {
+            params: { 
+              POS: "#{params[:ra]},#{params[:dec]}",
+              SIZE: params[:size]
+            }
+          }).html_safe
+      end
+      
+
+    end
+
+    @votable =  gotVotable(responses_dic)
+    @params = params  
 
     respond_to do |format|
       format.html
-      format.js
+      format.js { render 'query/simple_image_search/results_panel' }
     end
-    
   end
+
 
   def spectralsearch
 

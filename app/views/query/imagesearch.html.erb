@@ -48,54 +48,56 @@
               </div>
             </div>
             
-            <!--=== Optionals ##needs to hide somehow##change css to potional (not red)## ===-->
+            <!--=== Optionals ##needs to hide somehow##change css to otional (not red)===-->
 
             <div class="form-group">
               <%= label_tag :intersect, 'Intersect', class: 'col-sm-4 control-label' %>
               <div class="col-sm-5" data-popbox='default'>
-                <%= select_tag :data_type, options_for_select([ "", "COVERS", "ENCLOSED", "CENTER", "OVERLAPS" ], ""), class: 'form-control' %>
+                <%= select_tag :intersect, options_for_select([ "", "COVERS", "ENCLOSED", "CENTER", "OVERLAPS" ], ""), class: 'form-control' %>
               </div>
             </div>
 
             <div class="form-group">
               <%= label_tag :naxis, 'N Axis', class: 'col-sm-4 control-label' %>
               <div class="col-sm-5" data-popbox='default'>
-                <%= select_tag :data_type, options_for_select([ "", "pixels"], ""), class: 'form-control' %>
+                <%= number_field_tag :naxis, nil, class: 'form-control'%>
               </div>
             </div>
 
             <div class="form-group">
               <%= label_tag :cframe, 'C Frame', class: 'col-sm-4 control-label' %>
               <div class="col-sm-5" data-popbox='default'>
-                <%= select_tag :data_type, options_for_select([ "", "ICRS", "FK5", "FK4", "ECL", "GAL", "SGAL" ], ""), class: 'form-control' %>
+                <%= select_tag :cframe, options_for_select([ "", "ICRS", "FK5", "FK4", "ECL", "GAL", "SGAL" ], ""), class: 'form-control' %>
               </div>
             </div>
 
              <div class="form-group">
               <%= label_tag :rotang, 'Rotang', class: 'col-sm-4 control-label' %>
               <div class="col-sm-5" data-popbox='default'>
-                  <%= text_field_tag :size, nil, class: 'form-control' %>
+                  <%= number_field_tag :naxis, nil, class: 'form-control'%>
               </div>
             </div>
 
             <div class="form-group">
               <%= label_tag :proj, 'Proj', class: 'col-sm-4 control-label' %>
               <div class="col-sm-5" data-popbox='default'>
-                <%= select_tag :data_type, options_for_select([ "", "TAN", "SIN", "ARC" ], ""), class: 'form-control' %>
+                <%= select_tag :proj, options_for_select([ "", "TAN", "SIN", "ARC" ], ""), class: 'form-control' %>
               </div>
-            </div>
+            </div>  
 
+            <!--=== Not available yet 
             <div class="form-group">
               <%= label_tag :data_type, 'Data Type', class: 'col-sm-4 control-label' %>
               <div class="col-sm-5" data-popbox='default'>
                 <%= select_tag :data_type, options_for_select([ "FITS", "VOTable", "JPG" ], "FITS"), class: 'form-control' %>
               </div>
             </div>
+            ===-->
 
             <div class="form-group">
               <%= label_tag :verb, 'Verbosity', class: 'col-sm-4 control-label' %>
               <div class="col-sm-5" data-popbox='default'>
-                <%= select_tag :data_type, options_for_select([ "", "1", "2", "3"], ""), class: 'form-control' %>
+                <%= select_tag :verb, options_for_select([ "", "1", "2", "3"], ""), class: 'form-control' %>
               </div>
             </div>
 
@@ -127,6 +129,16 @@
           <% end %> <!--=== End Form ===-->   
         </div> <!--/panel-body-->
       </div> <!--=== End Panel ===-->
+
+       <!--=== Results-Panel ##Should be hidden before submit##add clear button## ===-->
+      <div class="panel panel-default margin-bottom-40">
+        
+        <%= render 'results_panel_heading' %>
+
+        <div id="results-panel-body" class="panel-body">                    
+          hola
+        </div> <!--/results-panel-body-->
+      </div> <!--=== End Results-Panel ===-->
 
     </div>
   </div>  
