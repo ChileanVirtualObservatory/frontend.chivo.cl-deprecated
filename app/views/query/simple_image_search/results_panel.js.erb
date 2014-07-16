@@ -4,6 +4,18 @@
 
 $("#results-panel-body").empty();
 
-<% @params.each_with_index do |(key, value), index| %>
-	$("#results-panel-body").append("<%= key %> : <%= value %> <br>");
-<% end %>
+var has_error = "";
+
+<% @errors.each do | id | %>
+	$("#<%=id%>").parent().addClass("has-error");
+	has_error = has_error + "<br>ERROR: <%=id%>";
+<% end %> 
+
+if (!has_error) {
+	<% @params.each_with_index do |(key, value), index| %>
+		$("#results-panel-body").append("<%= key %> : <%= value %> <br>");
+	<% end %>
+}
+else {
+	$("#results-panel-body").append(has_error);
+}
