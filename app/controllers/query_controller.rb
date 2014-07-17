@@ -74,6 +74,7 @@ class QueryController < ApplicationController
   def imagesearch
     
     responses_dic = Hash.new
+    @errors = []
       
     if params[:commit] == "Process"
       
@@ -83,14 +84,14 @@ class QueryController < ApplicationController
       params.delete("action")
       params.delete("query")
 
-      if params[:ra].to_f() < 0 || params[:ra].to_f() > 360
-        @ra = "ERROR: Out of range"
+      if params[:ra].match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil || params[:ra].to_f() < 0 || params[:ra].to_f() > 360
+        @errors << "ra"
       end
-      if params[:dec].to_f() < -90 || params[:dec].to_f() > 90
-        @dec = "ERROR: Out of range"
+      if params[:dec].match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil || params[:dec].to_f() < -90 || params[:dec].to_f() > 90
+        @errors << "dec"
       end
-      if params[:size].to_f() < 0 || params[:size].to_f() > 8.5
-        @size = "ERROR: Out of range"
+      if params[:size].match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil || params[:size].to_f() < 0 || params[:size].to_f() > 8.5
+        @errors << "size"
       end
    
       if params[:c1] and nil
