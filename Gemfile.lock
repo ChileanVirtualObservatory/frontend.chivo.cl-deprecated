@@ -163,6 +163,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-migrate-rails
   jquery-rails
+  json
   nokogiri
   parallax-slider!
   pg
