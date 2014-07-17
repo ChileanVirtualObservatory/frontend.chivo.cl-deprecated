@@ -171,91 +171,15 @@ $(document).ready(function () {
 	$plus_position.on('click', function (event) {
 		if (!$ra_dec.val()) {
 			update_action_state("alert-danger","Oh snap!", "cordinates not added to the query list by empty RA Dec field");
-			//event.preventDefault(); /* cancel submit */
+			event.preventDefault(); /* cancel submit */
 			return false;
 		}
 		else if (!$search_radius.val()){
 			update_action_state("alert-danger","Oh snap!", "cordinates not added to the query list by empty Search Radius field");
-			//event.preventDefault(); /* cancel submit */
+			event.preventDefault(); /* cancel submit */
 			return false;
 		}
-		/* if all is ok */
-
-		tr_amount = $queryListTable.find("tr").size();
-		id = 0;
-		if (tr_amount == 1){
-			id = tr_amount;
-		}
-		else {
-			id = parseInt($queryListTable.find("tr").last().attr('id')) + 1;	
-		}
-		$newTR = $("<tr id="+id+">" +
-					"<td>"+$source_name_sesame.val()+"<input name='source_name_sesame_"+id+ "' type='text' class='form-control' value='"+$source_name_sesame.val()+"'style='display:none;'/></td>" +
-					"<td>"+$ra_dec.val()+"<input name='ra_dec_"+id+"' type='text' class='form-control' value='"+$ra_dec.val()+"'style='display:none;'/></td>" +
-					"<td>"+$search_radius.val()+"<input name='search_radius_"+id+"' type='text' class='form-control' value='"+$search_radius.val()+"' style='display:none;'/></td>" +
-					"<td></td>" + 
-					"<td></td>" +					
-				"</tr>");
-
-		var multi_select = $('<select/>',{
-				id: 'multi_select_resource'+id,
-				multiple: 'multiple',
-				style: 'float:center',
-				name: 'resource_'+id+'[]'
-			});
-
-		var delete_button = $('<a/>',
-		    {
-		        class: 'btn btn-danger btn-xs',
-		        style: 'height:20px',
-		        text: '',
-		        click: function () {
-		        	$(this).closest("tr").remove();
-		         }
-		    });
-
-		var trash_icon = $('<i/>',{class: 'fa fa-trash-o fa-fw '});
-		delete_button.prepend(trash_icon);
-
-		$newTR.find("td").last().append(delete_button)
-			.prev().append(multi_select);
-
-
-		var data = [
-			{label: "J/ApJ/473/822", value: "J/ApJ/473/822_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/473/822&"},
-		    {label: "J/AJ/136/2050", value: "J/AJ/136/2050_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/136/2050&"},
-		    {label: "J/AJ/124/601", value: "J/AJ/124/601_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/124/601&"},
-		    {label: "J/A+A/504/347", value: "J/A+A/504/347_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/A+A/504/347&"},
-		    {label: "J/ApJS/183/214", value: "J/ApJS/183/214_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJS/183/214&"},
-		    {label: "J/AJ/127/2771", value: "J/AJ/127/2771_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/AJ/127/2771&"},
-		    {label: "J/ApJ/732/101", value: "J/ApJ/732/101_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/732/101&"},
-		];
-		var config = {
-			buttonWidth: '400px',
-			buttonClass: 'btn btn-default btn-sm',
-			includeSelectAllOption: true,
-			enableFiltering: true,
-			maxHeight: 200,
-			checkboxName: '',
-			filterPlaceholder: 'Search',
-			selectedClass: null,
-			onChange: function(option, checked) {	                    
-                    var selectedOptions = multi_select.find('option:selected');
-						if (selectedOptions.length == 0) {
-			        	multi_select.multiselect('select', option.val());
-			     	}
-	                
-	            }
-			}
-
-		multi_select.multiselect(config);
-		multi_select.multiselect('dataprovider', data);
-		multi_select.multiselect('select', "J/ApJ/473/822_http://vizier.u-strasbg.fr/viz-bin/votable/-A?-source=J/ApJ/473/822&");
-		$queryListTable.find("tbody").append($newTR);
-		$ra_dec.val("").closest(".container-input").slideUp();
-		$source_name_sesame.val("").closest(".container-input").slideUp();
-		update_action_state("alert-success", "Well done!", "cordinates added to the query list");
-		
+		/* if all is ok */		
 	});
 	
 	$('#process_position_query_list').on('click', function (event) {

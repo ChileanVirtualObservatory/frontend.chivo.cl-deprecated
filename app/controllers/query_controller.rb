@@ -182,7 +182,21 @@ class QueryController < ApplicationController
       respond_to do |format|
         format.js { render 'query/type_alma/sesame_resolver' }
       end
-        
+    elsif params[:commit] == "plus_position_query_list"
+      resources = RestClient.get("http://dachs.lirae.cl/external/scs")
+      resources_json = JSON.parse(resources)
+      @datas = Array.new
+
+      resources_json.each do |resource|
+        hash = Hash.new
+        hash["label"] = resource["shortname"]
+        hash["value"] = resource["shortname"] + "_" + resource["accessurl"]
+        @datas << hash
+      end 
+      respond_to do |format|
+        format.js { render 'query/type_alma/plus_position' }      
+      end
+
     elsif params[:commit] == "process_position_query_list"
       responses_dic = Hash.new
       
