@@ -50,6 +50,9 @@ gem  'nokogiri'
 # Devise is a flexible authentication solution for Rails based on Warden
 gem 'devise'
 
+# JSON to parse all resources of DACHS
+gem 'json'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
