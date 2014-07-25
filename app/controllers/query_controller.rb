@@ -73,7 +73,6 @@ class QueryController < ApplicationController
 
   def imagesearch
     
-    responses_dic = Hash.new
     @errors = []
       
     if params[:commit] == "Process"
@@ -93,31 +92,37 @@ class QueryController < ApplicationController
       if params[:size].match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil || params[:size].to_f() < 0 || params[:size].to_f() > 8.5
         @errors << "size"
       end
-   
-      if params[:c1] and nil
-        responses << RestClient.get(
-          "http://dachs.lirae.cl:5000/alma/sia", {
-            params: { 
-              POS: "#{params[:ra]},#{params[:dec]}",
-              SIZE: params[:size]
-            }
-          }).html_safe
+
+      final_url = ""
+      if params[:c1]
+        base_url = 'http://dachs.lirae.cl/alma/sia?'
+        final_url = base_url + "POS=#{params[:ra]},#{params[:dec]}"
+        params.each do |key, value|
+          if value != "" && key != 'c1' && key != 'c2' && key != 'ra' && key != 'dec'
+            final_url += "&#{key.upcase}=#{value}"
+          end
+        end 
+
+        params[:c1] = RestClient.get(final_url)
       end
 
-      if params[:c2] and nil
-        responses << RestClient.get(
-          "http://irsa.ipac.caltech.edu/ibe/sia/wise/prelim/p3am_cdd", {
-            params: { 
-              POS: "#{params[:ra]},#{params[:dec]}",
-              SIZE: params[:size]
-            }
-          }).html_safe
+      if params[:c2]
+        base_url = 'http://irsa.ipac.caltech.edu/ibe/sia/wise/prelim/p3am_cdd?'
+        final_url = base_url + "POS=#{params[:ra]},#{params[:dec]}"
+        params.each do |key, value|
+          if value != "" && key != 'c1' && key != 'c2' && key != 'ra' && key != 'dec'
+            final_url += "&#{key.upcase}=#{value}"
+          end
+        end 
+
+        #doesn't work, don't know why :C
+        #params[:c2] = RestClient.get(final_url)
       end
+
+      @url = final_url
       
-
     end
 
-    @votable =  gotVotable(responses_dic)
     @params = params  
 
     respond_to do |format|

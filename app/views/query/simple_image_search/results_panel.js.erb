@@ -2,20 +2,24 @@
 // $('#resource_list').find('li').remove();
 // $('#resource_content').children('div').remove();
 
-$("#results-panel-body").empty();
-
+$("#results-panel-body").empty(); //=> clear the results panel
+$(".has-error").removeClass("has-error"); //=> remove all error marks from form (remove red frame)
 var has_error = "";
 
 <% @errors.each do | id | %>
-	$("#<%=id%>").parent().addClass("has-error");
+	$("#<%=id%>").parent().addClass("has-error"); //=> add error mark to form
 	has_error = has_error + "<br>ERROR: <%=id%>";
 <% end %> 
 
 if (!has_error) {
 	<% @params.each_with_index do |(key, value), index| %>
-		$("#results-panel-body").append("<%= key %> : <%= value %> <br>");
+		<% if value != "" %>
+			$("#results-panel-body").append("<%= key %> : <%= value %> <br>"); //=> print every non blank parameter submited 
+		<% end %>
 	<% end %>
+	$("#results-panel-body").append("<%= @url %> <br>");
+
 }
 else {
-	$("#results-panel-body").append(has_error);
+	$("#results-panel-body").append(has_error); //=> if theres an error, it's printed
 }
