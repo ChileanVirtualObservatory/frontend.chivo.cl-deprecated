@@ -75,8 +75,10 @@ class QueryController < ApplicationController
     
     @errors = []
       
-    if params[:commit] == "Process"
-      
+    if params[:commit] == "Add Query"
+
+      query_url = ""
+
       params.delete("utf8")
       params.delete("commit")
       params.delete("controller")
@@ -93,41 +95,42 @@ class QueryController < ApplicationController
         @errors << "size"
       end
 
-      final_url = ""
-      if params[:c1]
-        base_url = 'http://dachs.lirae.cl/alma/sia?'
-        final_url = base_url + "POS=#{params[:ra]},#{params[:dec]}"
+      if @errors == []
+
+        unless Rails.cache.read("sia_sources")
+
+          raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
+          sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
+          sources_name = raw_sources.scan(/shortname": "(.*?)"/)
+
+          sources = Hash[sources_name.zip sources_url]
+
+          Rails.cache.write("sia_sources", sources)
+          
+        end # end unless cache
+
+        query_url = "POS=#{params[:ra]},#{params[:dec]}"
         params.each do |key, value|
-          if value != "" && key != 'c1' && key != 'c2' && key != 'ra' && key != 'dec'
-            final_url += "&#{key.upcase}=#{value}"
+          if value == ""
+            params.delete(key)
+          else key != 'ra' && key != 'dec'
+            query_url += "&#{key.upcase}=#{value}"
           end
         end 
 
-        params[:c1] = RestClient.get(final_url)
+      end # end if @errors
+
+      @url = query_url
+      @params = params  
+
+      respond_to do |format|
+        format.js { render 'query/simple_image_search/add_query' }
       end
 
-      if params[:c2]
-        base_url = 'http://irsa.ipac.caltech.edu/ibe/sia/wise/prelim/p3am_cdd?'
-        final_url = base_url + "POS=#{params[:ra]},#{params[:dec]}"
-        params.each do |key, value|
-          if value != "" && key != 'c1' && key != 'c2' && key != 'ra' && key != 'dec'
-            final_url += "&#{key.upcase}=#{value}"
-          end
-        end 
-
-        #doesn't work, don't know why :C
-        #params[:c2] = RestClient.get(final_url)
+    else
+      respond_to do |format|
+        format.html
       end
-
-      @url = final_url
-      
-    end
-
-    @params = params  
-
-    respond_to do |format|
-      format.html
-      format.js { render 'query/simple_image_search/results_panel' }
     end
   end
 
