@@ -109,24 +109,67 @@ class QueryController < ApplicationController
           
         end # end unless cache
 
-        query_url = "POS=#{params[:ra]},#{params[:dec]}"
+        url_params = "POS=#{params[:ra]},#{params[:dec]}"
         params.each do |key, value|
           if value == ""
             params.delete(key)
           else key != 'ra' && key != 'dec'
-            query_url += "&#{key.upcase}=#{value}"
+            url_params += "&#{key.upcase}=#{value}"
           end
         end 
 
       end # end if @errors
 
-      @url = query_url
+      @url_params = url_params
       @params = params  
 
       respond_to do |format|
         format.js { render 'query/simple_image_search/add_query' }
       end
 
+    # end Add Query
+    elsif params[:commit] == "Process"
+
+      params.delete("utf8")
+      params.delete("commit")
+      params.delete("action")
+
+      responses_dic = Hash.new
+
+      url_params = ""
+      query_source_url = ""
+      query_source_name = ""
+
+      params.each_with_index {|(key, value), index|
+
+        if index%2 == 0
+          url_params = value
+          next
+        end
+
+        value.each do | source | 
+          query_source_name = source.split("*@*")[0]
+          query_source_url = source.split("*@*")[1]
+          response = RestClient.get(query_source_url+url_params)
+          if responses_dic[query_source_name] == nil 
+            responses_dic[query_source_name] = [response]
+          else
+            responses_dic[query_source_name] << response
+          end
+        end
+      }
+
+      responses_dic.each do |key, value|
+        responses_dic[key] = gotVotable(value)
+      end
+
+      @results = responses_dic
+
+      respond_to do |format|
+        format.js { render 'query/simple_image_search/results_panel' }
+      end
+
+    # end Process
     else
       respond_to do |format|
         format.html

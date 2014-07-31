@@ -18,29 +18,25 @@
 
 <!--=== Content Part ===-->
 <div class="container">   
-  <div class="row margin-bottom-30">
-    <div class="col-md-8 md-margin-bottom-40 col-md-offset-2">
-      
-      <div class="panel panel-default margin-bottom-40">
+  <div class="tab-v2 col-sm-12" style="margin-left:50px;">                
+    <ul class="nav nav-tabs">         
+      <li class="active" ><a href="#query_form" data-toggle="tab">Query Form</a></li>
+      <li><a href="#query_list" data-toggle="tab" >Query List</a></li>       
+      <li><a href="#query_result" data-toggle="tab">Query Results</a></li>               
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane" id="query_form">
         <%= render 'query/simple_image_search/query_form' %>
       </div>
 
-      <div class="panel panel-default margin-bottom-40">
+      <div class="tab-pane" id="query_list">
         <%= render 'query/simple_image_search/query_list' %>
       </div> 
 
-      <div class="panel panel-default margin-bottom-40">
+      <div class="tab-pane" id="query_result">
         <%= render 'query/simple_image_search/query_result' %>
-      </div> 
-
-    </div>
-  </div>  
-  <button id='panel_medium' style="display: none;"></button>
-  <div class="row margin-bottom-30">
-      <div class="col-md-12 md-margin-bottom-40">
-          <div class="voviewTab">
-          </div>
       </div>
+    </div>
   </div>
 </div>
 <!--=== End Content Part ===-->

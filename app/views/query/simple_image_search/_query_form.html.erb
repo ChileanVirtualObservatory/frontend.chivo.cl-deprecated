@@ -2,7 +2,7 @@
  
  <div class="panel-body" id="query-form-panel-body">                    
   <!--=== Form ===-->
-  <%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm' do %>
+  <%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm', id: 'queryForm' do %>
     <div class="form-group">
       <%= label_tag :ra, 'RA', class: 'col-sm-4 control-label' %>
       <div class="col-sm-5" data-popbox='default'>
