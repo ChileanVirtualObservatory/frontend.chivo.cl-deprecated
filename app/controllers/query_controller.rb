@@ -97,7 +97,13 @@ class QueryController < ApplicationController
 
       if @errors == []
 
-        unless Rails.cache.read("sia_sources")
+        cacheTime = Rails.cache.read("sia_sources_time") 
+        tooOld = true
+        if cacheTime != nil
+          tooOld = Time.now < (cacheTime + 7200)
+        end
+
+        if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
 
           raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
           sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
@@ -106,6 +112,7 @@ class QueryController < ApplicationController
           sources = Hash[sources_name.zip sources_url]
 
           Rails.cache.write("sia_sources", sources)
+          Rails.cache.write("sia_sources_time", Time.now)
           
         end # end unless cache
 

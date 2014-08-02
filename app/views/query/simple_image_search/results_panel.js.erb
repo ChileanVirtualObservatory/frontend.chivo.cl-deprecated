@@ -1,14 +1,14 @@
-
+$('#resource_list').find('li').remove();
+$('#resource_content').children('div').remove();
 <% @results.each_with_index do |(key, value), index| %>
 	
-	<% p key %>
-	<% p value %>
-	
-	$("#testr").append($('<div class="resource_<%= index %>"></div>'));
+	$("#result_table").append($('<div class="resource_<%= index %>"></div>'));
 
 	myVoview =  new voview({input: {form: "searchForm"}, widgetID: "resource_<%= index %>"});
 	myVoview.renderObject.enableRowSelection();
-	myVoview.gotVotable($.parseXML("<%= escape_javascript(value) %>"));
+	myVoview.gotVotable($.parseXML("<%= escape_javascript(value) %>"));//-> it isn't working
+	// value is there, but printing it anywhere in tht html will not work (but in ruby console does)
+	<% p value %>
 	
 	$resource = $('.resource_<%= index %>');
 
@@ -16,7 +16,7 @@
 	$a = $('<a href="#test<%= index %>" data-toggle="tab"><%= key %></a>');
 	$li.append($a);
 
-	$tab = $('<div class="tab-pane" id="test<%= index %>"></div>');
+	$tab = $('<div class="tab-pane" id="test<%= index %>"><%= key %></div>');
 	$tab.append($resource);
 
 	$('#resource_list').append($li);
