@@ -1,4 +1,8 @@
 class NewsController < ApplicationController
+	def undergraduate_thesis
+	end
+	def workshop_august_2014
+	end
 	def all_news
 	end
 	def chilean_joins_international_virtual_observatory
