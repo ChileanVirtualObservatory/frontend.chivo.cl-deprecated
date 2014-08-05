@@ -22,56 +22,80 @@
       </div>
     </div>
     
-    <!--=== Optionals ##needs to hide somehow ===-->
+    <!--=== Optionals ===-->
+      
+      
+    <div id="optional" style="display:none;">
 
-    <div class="form-group">
-      <%= label_tag :intersect, 'Intersect', class: 'col-sm-4 control-label' %>
-      <div class="col-sm-5" data-popbox='default'>
-        <%= select_tag :intersect, options_for_select([ "", "COVERS", "ENCLOSED", "CENTER", "OVERLAPS" ], ""), class: 'form-control' %>
+      <hr>
+      <div class="form-group">
+        <%= label_tag :intersect, 'Intersect', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :intersect, options_for_select([ "", "COVERS", "ENCLOSED", "CENTER", "OVERLAPS" ], ""), class: 'form-control' %>
+        </div>
       </div>
+
+      <div class="form-group">
+        <%= label_tag :naxis, 'N Axis', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= number_field_tag :naxis, nil, class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :cframe, 'C Frame', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :cframe, options_for_select([ "", "ICRS", "FK5", "FK4", "ECL", "GAL", "SGAL" ], ""), class: 'form-control' %>
+        </div>
+      </div>
+
+       <div class="form-group">
+        <%= label_tag :rotang, 'Rotang', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+            <%= number_field_tag :rotang, nil, class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :proj, 'Proj', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :proj, options_for_select([ "", "TAN", "SIN", "ARC" ], ""), class: 'form-control' %>
+        </div>
+      </div>  
+
+      <div class="form-group">
+        <%= label_tag :data_type, 'Data Type', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :data_type, options_for_select([ "", "FITS", "VOTable", "JPG" ], ""), class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :verb, 'Verbosity', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :verb, options_for_select([ "", "1", "2", "3"], ""), class: 'form-control' %>
+        </div>
+      </div>
+
     </div>
 
-    <div class="form-group">
-      <%= label_tag :naxis, 'N Axis', class: 'col-sm-4 control-label' %>
-      <div class="col-sm-5" data-popbox='default'>
-        <%= number_field_tag :naxis, nil, class: 'form-control'%>
-      </div>
-    </div>
+    <script type="text/javascript">
+      function hideShow(content) {
+       var element=document.getElementById(content);
+         if(element.style.display == 'block') {
+            element.style.display = 'none';
+         } else {
+            element.style.display = 'block';
+         }
+      }
+    </script>
 
-    <div class="form-group">
-      <%= label_tag :cframe, 'C Frame', class: 'col-sm-4 control-label' %>
-      <div class="col-sm-5" data-popbox='default'>
-        <%= select_tag :cframe, options_for_select([ "", "ICRS", "FK5", "FK4", "ECL", "GAL", "SGAL" ], ""), class: 'form-control' %>
-      </div>
+    <div class="text-center" style="margin-left:65px">
+      <a href="javascript:void(0);" onclick="hideShow('optional')">Optional parameters   
+        <i class="fa fa-sort"></i>
+      </a>
     </div>
-
-     <div class="form-group">
-      <%= label_tag :rotang, 'Rotang', class: 'col-sm-4 control-label' %>
-      <div class="col-sm-5" data-popbox='default'>
-          <%= number_field_tag :rotang, nil, class: 'form-control'%>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= label_tag :proj, 'Proj', class: 'col-sm-4 control-label' %>
-      <div class="col-sm-5" data-popbox='default'>
-        <%= select_tag :proj, options_for_select([ "", "TAN", "SIN", "ARC" ], ""), class: 'form-control' %>
-      </div>
-    </div>  
-
-    <div class="form-group">
-      <%= label_tag :data_type, 'Data Type', class: 'col-sm-4 control-label' %>
-      <div class="col-sm-5" data-popbox='default'>
-        <%= select_tag :data_type, options_for_select([ "", "FITS", "VOTable", "JPG" ], ""), class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= label_tag :verb, 'Verbosity', class: 'col-sm-4 control-label' %>
-      <div class="col-sm-5" data-popbox='default'>
-        <%= select_tag :verb, options_for_select([ "", "1", "2", "3"], ""), class: 'form-control' %>
-      </div>
-    </div>
+    <BR>
 
     <!--=== End Optionals ===-->
 
