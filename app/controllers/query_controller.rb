@@ -48,8 +48,9 @@ class QueryController < ApplicationController
           
           value.each {|resource|
             short_name = resource.split("_")[0]
-            access_url = resource.split("_")[1]
-            response = RestClient.get(access_url + "RA=" + last_ra + "&DEC=" + last_dec + "&SR=1000")
+            access_url = resource.split("_")[1]    
+            sr = last_search_radius.split(":")[0].to_f + last_search_radius.split(":")[1].to_f/60 + last_search_radius.split(":")[2].to_f/3600
+            response = RestClient.get(access_url + "RA=" + last_ra + "&DEC=" + last_dec + "&SR=" + sr.to_s)
             if responses_dic[short_name] == nil 
               responses_dic[short_name] = [response]
             else
