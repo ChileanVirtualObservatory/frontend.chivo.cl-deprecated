@@ -3,7 +3,6 @@ $('#resource_list').find('li').remove();
 $('#resource_content').children('div').remove();
 <% @votables.each_with_index do |(key, value), index| %>
 
-
 	$("#result_table").append($('<div class="resource_<%= index %>"></div>'));
 
 	myVoview =  new voview({input: {form: "searchForm"}, widgetID: "resource_<%= index %>"});

@@ -124,7 +124,7 @@ class QueryController < ApplicationController
           else key != 'ra' && key != 'dec'
             url_params += "&#{key.upcase}=#{value}"
           end
-        end 
+        end
 
       end # end if @errors
 
@@ -171,7 +171,7 @@ class QueryController < ApplicationController
         responses_dic[key] = gotVotable(value)
       end
 
-      @results = responses_dic
+      @votables = responses_dic
 
       respond_to do |format|
         format.js { render 'query/simple_image_search/results_panel' }
