@@ -13,6 +13,23 @@
 <div class="container"> 
   <!-- Recent Works -->
   <div class="row">
+    <!-- new 5 -->
+    <div class="col-md-4 col-sm-6">
+      <div class="thumbnails thumbnail-style thumbnail-kenburn">
+        <div class="thumbnail-img">
+          <div class="overflow-hidden">
+            <%= image_tag "news/workshop_august_2014_1.jpg", class: 'img-responsive' %>
+          </div>
+          <%= link_to "read more +", workshop_august_2014_path, class: "btn-more hover-effect" %>   
+        </div>
+        <div class="caption">
+          <h3><%= link_to "Workshop 2014 Avances y desafíos del proyecto FONDEF D11I1060", workshop_august_2014_path %></h3>
+          <div align="justify">
+            <p>El Observatorio Virtual Chileno (ChiVO) es uno de los proyectos actualmente en curso en el mundo que busca contener los datos astronómicos en sistema transparente, permitiendo que la información esté a disposición de todos los investigadores, independiente de su...</p>
+          </div>
+        </div>
+      </div>
+    </div> 
     <!-- new 4 -->
     <div class="col-md-4 col-sm-6">
       <div class="thumbnails thumbnail-style thumbnail-kenburn">
@@ -55,6 +72,8 @@
         </div>
       </div>
     </div>
+    </div><!--/row-->
+    <div class="row"> 
     <!-- New 2 -->
     <div class="col-md-4 col-sm-6">
       <div class="thumbnails thumbnail-style thumbnail-kenburn">
@@ -97,7 +116,6 @@
         </div>
       </div>
     </div> 
-
   </div><!--/row-->
   <!-- End Recent Works -->
 </div>

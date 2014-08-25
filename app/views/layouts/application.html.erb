@@ -132,6 +132,22 @@
             </ul>
           </li>
           <!-- end form options -->
+          <!-- form resources -->
+          <li class="dropdown <%= 'active' if controller.controller_name == 'news' and controller.action_name == 'index' %>">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+              Resources
+              <%= fa_icon 'angle-down' %>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to 'All News', all_news_path %>
+              </li>
+              <li>
+                <%= link_to 'Undergraduate Thesis', undergraduate_thesis_path %>
+              </li>
+            </ul>
+          </li>
+          <!-- end form resources -->
           <li class="dropdown <%= 'active' if controller.controller_name == 'home' and controller.action_name == 'about' %>">
             <%= link_to 'About Us', about_path %>
           </li>

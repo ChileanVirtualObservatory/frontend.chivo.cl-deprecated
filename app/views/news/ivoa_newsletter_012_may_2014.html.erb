@@ -41,11 +41,17 @@
             <!--End Blog Post-->
         </div>
         <!-- End Left Sidebar -->
-         <!-- Right Sidebar -->
+        <!-- Right Sidebar -->
         <div class="col-md-3 magazine-page">    
             <!-- Posts -->
             <div class="posts margin-bottom-40">
                 <div class="headline headline-md"><h2>Recent News</h2></div>
+                <dl class="dl-horizontal">
+                    <dt><%= image_tag "news/workshop_august_2014.jpg", class: "img-responsive"%></dt>
+                    <dd>
+                        <p><%= link_to "Workshop 2014 Avances y desafíos del proyecto FONDEF D11I1060", workshop_august_2014_path %></p> 
+                    </dd>
+                </dl>
                 <dl class="dl-horizontal">
                     <dt><%= image_tag "news/spie_astronomical_telescopes_instrumentation_2014.jpg", class: "img-responsive"%></dt>
                     <dd>
