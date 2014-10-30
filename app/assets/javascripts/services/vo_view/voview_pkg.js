@@ -152,6 +152,7 @@ voview.prototype.makeColumnFilterKey = function(filteKeyParams) {
         meColumnFilterKey.column = _column;
         meColumnFilterKey.expression = _expression;
         meColumnFilterKey.isCharType = _isCharType;
+        // meColumnFilterKey.isCharType = false;
 
         this.equals = function(otherKey) {
             return otherKey.column === meColumnFilterKey.column && otherKey.expression === meColumnFilterKey.expression && otherKey.isCharType === meColumnFilterKey.isCharType;
@@ -1402,6 +1403,7 @@ voview.prototype.makeRenderer = function(rendererParams) {
                 if (el.tagName === "INPUT" && el.type === "text" && !el.className.match("defaultComment")) {
                     var constraint = el.value;
                     if (constraint) {
+                        alert(constraint);
                         // field number is in trailing digits
                         var i = parseInt(el.name.replace(/.*[^0-9]/, ""), 10);
 
@@ -1439,7 +1441,7 @@ voview.prototype.makeRenderer = function(rendererParams) {
             filterObject.clearColumnFilters();
             filterObject.setColumnFilters({ filterKeys: keys });
             meRenderer.newPage(1);
-//            meRenderer.render();
+            // meRenderer.render();
         };
 
         /**
