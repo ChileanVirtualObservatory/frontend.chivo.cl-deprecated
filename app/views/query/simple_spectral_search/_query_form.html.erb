@@ -1,8 +1,26 @@
   <%= render 'panel_heading' %>
- 
+  <div id="actions_states" class="alert fade in alert-info" style="margin-bottom:0px">
+  <strong>Heads up! </strong> This will show the states of actions
+</div>
  <div class="panel-body" id="query-form-panel-body">                    
   <!--=== Form ===-->
   <%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm', id: 'queryForm' do %>
+    
+    <!-- SESAME -->
+    <div class="form-group">
+      <%= label_tag :source_name_sesame, 'Source name (Sesame)', class: 'col-sm-4 control-label' %>
+      <div class="col-sm-5" data-popbox='ra'>
+        <%= text_field_tag :source_name_sesame, nil, class: 'form-control' %>
+      </div>
+      <span class="input-group-btn" style="display:inline-block;margin-left:-3px;">
+        <%= button_tag(type: "submit", class: "btn-u btn-u-default", name: "commit", value:"sesame_search", id: 'sesame_search') do %>
+            <i class="fa fa-angle-right fa-lg"></i>
+        <% end %>
+      </span>
+    </div>
+
+
+
     <div class="form-group">
       <%= label_tag :ra, 'Right Ascension', class: 'col-sm-4 control-label' %>
       <div class="col-sm-5" data-popbox='ra'>
