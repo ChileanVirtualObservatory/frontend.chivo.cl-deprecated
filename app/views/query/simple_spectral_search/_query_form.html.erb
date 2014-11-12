@@ -4,27 +4,39 @@
   <!--=== Form ===-->
   <%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm', id: 'queryForm' do %>
     <div class="form-group">
-      <%= label_tag :ra, 'RA', class: 'col-sm-4 control-label' %>
+      <%= label_tag :ra, 'Right Ascension', class: 'col-sm-4 control-label' %>
       <div class="col-sm-5" data-popbox='ra'>
         <%= text_field_tag :ra, nil, class: 'form-control' %>
       </div>
     </div>
     <div class="form-group">
-      <%= label_tag :dec, 'DEC', class: 'col-sm-4 control-label' %>
+      <%= label_tag :dec, 'Declination', class: 'col-sm-4 control-label' %>
       <div class="col-sm-5"  data-popbox='dec'>
           <%= text_field_tag :dec, nil, class: 'form-control' %>
       </div>
     </div>
     <div class="form-group">
-      <%= label_tag :size, 'Angular Size', class: 'col-sm-4 control-label' %>
+      <%= label_tag :size, 'Size', class: 'col-sm-4 control-label' %>
       <div class="col-sm-5" data-popbox='ang_size'>
           <%= text_field_tag :size, nil, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag :band, 'Band', class: 'col-sm-4 control-label' %>
+      <div class="col-sm-5" data-popbox='band'>
+          <%= text_field_tag :band, nil, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag :time, 'Time', class: 'col-sm-4 control-label' %>
+      <div class="col-sm-5" data-popbox='ang_time'>
+          <%= text_field_tag :time, nil, class: 'form-control' %>
       </div>
     </div>
     
     <!--=== Optionals ===-->
       
-      
+<!--       
     <div id="optional" style="display:none;">
 
       <hr>
@@ -96,8 +108,8 @@
       </a>
     </div>
     <BR>
-
-    <!--=== End Optionals ===-->
+-->
+    <!--=== End Optionals ===--> 
 
     <div class="form-group">
       <div class="col-sm-offset-4 col-sm-5">
