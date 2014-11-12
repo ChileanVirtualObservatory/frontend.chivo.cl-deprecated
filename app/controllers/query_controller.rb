@@ -101,14 +101,14 @@ class QueryController < ApplicationController
         cacheTime = Rails.cache.read("sia_sources_time") 
         tooOld = true
         if cacheTime != nil
-          tooOld = Time.now < (cacheTime + 7200)
+          tooOld = Time.now < (cacheTime + 1800)
         end
 
         if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
 
           raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
           sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
-          sources_name = raw_sources.scan(/shortname": "(.*?)"/)
+          sources_name = raw_sources.scan(/title": "(.*?)"/)
 
           sources = Hash[sources_name.zip sources_url]
 
@@ -188,35 +188,115 @@ class QueryController < ApplicationController
 
   def spectralsearch
 
-    responses = Array.new # => []
+    @errors = []
+      
+    if params[:commit] == "Add Query"
 
-    if params[:c1]
-      responses << RestClient.get(
-        "http://dachs.lirae.cl:5000/alma/ssa", {
-          params: { 
-            POS: "#{params[:ra]},#{params[:dec]}",
-            SIZE: params[:size]
-          }
-        }).html_safe
+      query_url = ""
+
+      params.delete("utf8")
+      params.delete("commit")
+      params.delete("controller")
+      params.delete("action")
+      params.delete("query")
+
+      if params[:ra].match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil || params[:ra].to_f() < 0 || params[:ra].to_f() > 360
+        @errors << "ra"
+      end
+      if params[:dec].match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil || params[:dec].to_f() < -90 || params[:dec].to_f() > 90
+        @errors << "dec"
+      end
+      if params[:size].match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil || params[:size].to_f() < 0 || params[:size].to_f() > 8.5
+        @errors << "size"
+      end
+
+      if @errors == []
+
+        cacheTime = Rails.cache.read("ssa_sources_time") 
+        tooOld = true
+        if cacheTime != nil
+          tooOld = Time.now < (cacheTime + 1800)
+        end
+
+        if Rails.cache.read("ssa_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
+
+          raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/ssa')
+          sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
+          sources_name = raw_sources.scan(/title": "(.*?)"/)
+
+          sources = Hash[sources_name.zip sources_url]
+
+          Rails.cache.write("ssa_sources", sources)
+          Rails.cache.write("ssa_sources_time", Time.now)
+          
+        end # end unless cache
+
+        url_params = "POS=#{params[:ra]},#{params[:dec]}&SIZE=#{params[:size]}&BAND=#{params[:band]}&TIME=#{params[:time]}&FORMAT=#{params[:format]}"
+        params.each do |key, value|
+          if value == ""
+            params.delete(key)
+          elsif key != 'ra' && key != 'dec' && key != 'size' && key != 'band' && key != 'time' && key != 'format'
+            url_params += "&#{key.upcase}=#{value}"
+          end
+        end
+
+      end # end if @errors
+
+      @url_params = url_params
+      @params = params  
+
+      respond_to do |format|
+        format.js { render 'query/spectral_search/add_query' }
+      end
+
+    # end Add Query
+    elsif params[:commit] == "Process"
+
+      params.delete("utf8")
+      params.delete("commit")
+      params.delete("action")
+
+      responses_dic = Hash.new
+
+      url_params = ""
+      query_source_url = ""
+      query_source_name = ""
+
+      params.each_with_index {|(key, value), index|
+
+        if index%2 == 0
+          url_params = value
+          next
+        end
+
+        value.each do | source | 
+          query_source_name = source.split("*@*")[0]
+          query_source_url = source.split("*@*")[1]
+          response = RestClient.get(query_source_url+url_params)
+          if responses_dic[query_source_name] == nil 
+            responses_dic[query_source_name] = [response]
+          else
+            responses_dic[query_source_name] << response
+          end
+        end
+      }
+
+      responses_dic.each do |key, value|
+        responses_dic[key] = gotVotable(value)
+      end
+
+      @votables = responses_dic
+
+      respond_to do |format|
+        format.js { render 'query/spectral_search/results_panel' }
+      end
+
+    # end Process
+    else
+      respond_to do |format|
+        format.html
+      end
     end
-
-    if params[:c2]
-      responses << RestClient.get(
-        "http://wfaudata.roe.ac.uk/6dF-ssap", {
-          params: { 
-            POS: "#{params[:ra]},#{params[:dec]}",
-            SIZE: params[:size]
-          }
-        }).html_safe
-    end
-
-    @votable =  gotVotable(responses)
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-    
   end
   
   def tablesearch
