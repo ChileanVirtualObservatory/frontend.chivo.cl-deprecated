@@ -1,14 +1,13 @@
 <%= javascript_include_tag "form_options/option" %>
 <%= javascript_include_tag "form_options/size_panel" %>
-
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
   <div class="container">
-    <h1 class="pull-left">Simple Spectral Search</h1>
+    <h1 class="pull-left">Simple Image Search</h1>
     <ul class="pull-right breadcrumb">
       <li><%= link_to 'Home', root_path %></li>
       <li>Services</li>
-      <li class="active">Simple Spectral Search</li>
+      <li class="active">Simple Image Search</li>
     </ul>
   </div><!--/container-->
 </div><!--/breadcrumbs-->
@@ -18,83 +17,27 @@
 
 <!--=== Content Part ===-->
 <div class="container">   
- 	<div class="row margin-bottom-30">
-  		<div class="col-md-8 md-margin-bottom-40 col-md-offset-2">
-			
-			<!--=== Panel ===-->
-	  		<div class="panel panel-default margin-bottom-40">
-	    		
-	    		<%= render 'panel_heading' %>
+  <div class="tab-v2 col-sm-12" style="margin-left:50px;">                
+    <ul class="nav nav-tabs">         
+      <li class="active" ><a href="#query_form" data-toggle="tab">Query Form</a></li>
+      <li><a href="#query_list" data-toggle="tab" >Query List</a></li>       
+      <li><a href="#query_result" data-toggle="tab">Query Results</a></li>               
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="query_form">
+        <%= render 'query/simple_spectral_search/query_form' %>
+      </div>
 
-	  			<div class="panel-body">		  			
-		  			<!--=== Form ===-->
-			  		<%= form_tag "/query/spectralsearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm' do %>
-					  	<div class="form-group">
-					  		<%= label_tag :ra, 'RA', class: 'col-sm-4 control-label' %>
-					    	<div class="col-sm-5" data-popbox='default'>
-					    		<%= text_field_tag :ra, nil, class: 'form-control' %>
-					    	</div>
-					  	</div>
-						<div class="form-group">
-					  		<%= label_tag :dec, 'DEC', class: 'col-sm-4 control-label' %>
-					    	<div class="col-sm-5" data-popbox='default'>
-				    			<%= text_field_tag :dec, nil, class: 'form-control' %>
-					   		</div>
-					  	</div>
-						<div class="form-group">
-					  		<%= label_tag :diameter, 'Diameter', class: 'col-sm-4 control-label' %>
-					   		<div class="col-sm-5" data-popbox='default'>
-					    		<%= text_field_tag :diameter, nil, class: 'form-control' %>
-					    	</div>
-					  	</div>
-					  
-					  	<div class="form-group">
-					  		<%= label_tag :data_type, 'Format', class: 'col-sm-4 control-label' %>
-					    	<div  class="col-sm-5" data-popbox='default'>
-					    		<%= select_tag :data_type, options_for_select([
-									["FITS","image/fits"],
-									["VOTable","image/votable"], 
-									["JPG","image/jpg"], 
-									["All","ALL"], 
-									["Metadata","METADATA"]]), 
-									class: 'form-control' %>
-					    	</div>
-				    	</div>
-				    	<div class="form-group">
-						  	<%= label_tag :catalogs, 'Catalogs', class: 'col-sm-4 control-label' %>
-						  	<div id='check_cats' class="col-sm-5" data-popbox='default'>
-							  	<div class= "input-group">
-							  		<span class="input-group-addon">
-				            			<%= check_box_tag :c1, 1, true %>
-				            		</span>
-							  		<%= label_tag :c1, 'dachs', class: "form-control" %>
-							  	</div>
-							  	<div class="margin-bottom-10"></div>	
-							  	<div class= "input-group">
-							  		<span class="input-group-addon">
-				            			<%= check_box_tag :c2, 0, false %>
-				            		</span>
-							  		<%= label_tag :c2, 'twomass-dsa', class: "form-control" %>
-							  	</div>
-						  	</div>		  	
-						</div>
-					  	<div class="form-group">
-					    	<div class="col-sm-offset-4 col-sm-5">
-								<%= submit_tag 'Process', class: 'btn btn-default btn-block' %>
-					    	</div>
-					  	</div>
-					<% end %> <!--=== End Form ===-->	
-				</div> <!--/panel-body-->
-			</div> <!--=== End Panel ===-->
-		</div>
-  	</div>
-  	<button id='panel_medium' style="display: none;"></button>
-  	<div class="row margin-bottom-30">
-  		<div class="col-md-12 md-margin-bottom-40">
-  			<div class="voviewTab"></div>
-  		</div>
-  	</div>
+      <div class="tab-pane" id="query_list">
+        <%= render 'query/simple_spectral_search/query_list' %>
+      </div> 
+
+      <div class="tab-pane" id="query_result">
+        <%= render 'query/simple_spectral_search/query_result' %>
+      </div>
+    </div>
+  </div>
 </div>
 <!--=== End Content Part ===-->
 
-<br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

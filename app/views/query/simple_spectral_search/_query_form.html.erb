@@ -1,0 +1,108 @@
+  <%= render 'panel_heading' %>
+ 
+ <div class="panel-body" id="query-form-panel-body">                    
+  <!--=== Form ===-->
+  <%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm', id: 'queryForm' do %>
+    <div class="form-group">
+      <%= label_tag :ra, 'RA', class: 'col-sm-4 control-label' %>
+      <div class="col-sm-5" data-popbox='ra'>
+        <%= text_field_tag :ra, nil, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag :dec, 'DEC', class: 'col-sm-4 control-label' %>
+      <div class="col-sm-5"  data-popbox='dec'>
+          <%= text_field_tag :dec, nil, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag :size, 'Angular Size', class: 'col-sm-4 control-label' %>
+      <div class="col-sm-5" data-popbox='ang_size'>
+          <%= text_field_tag :size, nil, class: 'form-control' %>
+      </div>
+    </div>
+    
+    <!--=== Optionals ===-->
+      
+      
+    <div id="optional" style="display:none;">
+
+      <hr>
+      <div class="form-group">
+        <%= label_tag :intersect, 'Intersect', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :intersect, options_for_select([ "", "COVERS", "ENCLOSED", "CENTER", "OVERLAPS" ], ""), class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :naxis, 'N Axis', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= number_field_tag :naxis, nil, class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :cframe, 'C Frame', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :cframe, options_for_select([ "", "ICRS", "FK5", "FK4", "ECL", "GAL", "SGAL" ], ""), class: 'form-control' %>
+        </div>
+      </div>
+
+       <div class="form-group">
+        <%= label_tag :rotang, 'Rotang', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+            <%= number_field_tag :rotang, nil, class: 'form-control'%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :proj, 'Proj', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :proj, options_for_select([ "", "TAN", "SIN", "ARC" ], ""), class: 'form-control' %>
+        </div>
+      </div>  
+
+      <div class="form-group">
+        <%= label_tag :data_type, 'Data Type', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :data_type, options_for_select([ "", "FITS", "VOTable", "JPG" ], ""), class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :verb, 'Verbosity', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-5" data-popbox='default'>
+          <%= select_tag :verb, options_for_select([ "", "1", "2", "3"], ""), class: 'form-control' %>
+        </div>
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+      function hideShow(content) {
+       var element=document.getElementById(content);
+         if(element.style.display == 'block') {
+            element.style.display = 'none';
+         } else {
+            element.style.display = 'block';
+         }
+      }
+    </script>
+
+    <div class="text-center" style="margin-left:65px">
+      <a href="javascript:void(0);" onclick="hideShow('optional')">Optional parameters   
+        <i class="fa fa-sort"></i>
+      </a>
+    </div>
+    <BR>
+
+    <!--=== End Optionals ===-->
+
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-5">
+          <%= submit_tag 'Add Query', class: 'btn btn-default btn-block' %>
+      </div>
+    </div>
+  <% end %> <!--=== End Form ===-->   
+</div>

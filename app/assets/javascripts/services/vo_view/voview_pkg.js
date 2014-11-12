@@ -1403,7 +1403,6 @@ voview.prototype.makeRenderer = function(rendererParams) {
                 if (el.tagName === "INPUT" && el.type === "text" && !el.className.match("defaultComment")) {
                     var constraint = el.value;
                     if (constraint) {
-                        alert(constraint);
                         // field number is in trailing digits
                         var i = parseInt(el.name.replace(/.*[^0-9]/, ""), 10);
 
@@ -1437,6 +1436,8 @@ voview.prototype.makeRenderer = function(rendererParams) {
             if (filterText !== "") {
                 filterText = filterText + "|";
             }
+
+            alert(filterText);
 
             filterObject.clearColumnFilters();
             filterObject.setColumnFilters({ filterKeys: keys });
