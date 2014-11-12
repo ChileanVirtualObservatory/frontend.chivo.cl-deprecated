@@ -116,8 +116,8 @@ $(document).ready(function () {
  		$this.find("i").removeClass("fa fa-angle-right fa-lg").addClass("fa fa-spinner fa-spin"); 
  	});
 	
-	$position = $table_query.find("#position");
-	$plus_position = $position.find("#plus_position");
+	//$position = $table_query.find("#position");
+	$plus_position = $(document).find("#plus_position");
 	$plus_position.parent().clearQueue().finish()
 					.delay(delayTime).show("slow");
 	/*
