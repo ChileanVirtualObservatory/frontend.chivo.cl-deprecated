@@ -1,8 +1,68 @@
-<%= form_tag "/query/conesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'almaSearch' do %>
-
+<%= render 'panel_heading' %>
 <div id="actions_states" class="alert fade in alert-info" style="margin-bottom:0px">
-    <strong>Heads up! </strong> This will show the states of actions
+	<strong>Heads up! </strong> This will show the states of actions
 </div>
+<div class="panel-body" id="query-form-panel-body">                    
+	<!--=== Form ===-->
+	<%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm', id: 'queryForm' do %>
+	
+	<!-- SESAME -->
+	<div class="form-group">
+		<%= label_tag :source_name_sesame, 'Source name (Sesame)', class: 'col-sm-4 control-label' %>
+		<div class="col-sm-5" data-popbox='source_name_sesame'>
+			<%= text_field_tag :source_name_sesame, nil, class: 'form-control' %>
+		</div>
+		<span class="input-group-btn" style="display:inline-block;margin-left:-3px;">
+			<%= button_tag(type: "submit", class: "btn-u btn-u-default", name: "commit", value:"sesame_search", id: 'sesame_search') do %>
+			    <i class="fa fa-angle-right fa-lg"></i>
+			<% end %>
+		</span>
+	</div>
+
+	<!-- ALMA -->
+
+	<div class="form-group">
+		<%= label_tag :source_name_alma, 'Source name (ALMA)', class: 'col-sm-4 control-label' %>
+		<div class="col-sm-5" data-popbox='ra'>
+			<%= text_field_tag :source_name_alma, nil, class: 'form-control' %>
+		</div>
+	</div>
+
+	<!-- RA -->
+	<div class="form-group">
+		<%= label_tag :ra, 'RA', class: 'col-sm-4 control-label' %>
+		<div class="col-sm-5" data-popbox='ra'>
+			<%= text_field_tag :ra, nil, class: 'form-control' %>
+		</div>
+	</div>
+
+	<!-- DEC -->
+	<div class="form-group">
+		<%= label_tag :dec, 'DEC', class: 'col-sm-4 control-label' %>
+		<div class="col-sm-5"  data-popbox='dec'>
+				<%= text_field_tag :dec, nil, class: 'form-control' %>
+		</div>
+	</div>
+
+	<!-- ANG -->
+	<div class="form-group">
+		<%= label_tag :search_radius, 'Search Radius', class: 'col-sm-4 control-label' %>
+		<div class="col-sm-5" data-popbox='ang_size'>
+				<%= text_field_tag :search_radius, nil, class: 'form-control' %>
+		</div>
+	</div>
+	<% end %>
+</div>
+
+
+
+
+<%# MULTILINE COMMENT IMPROVISADO, REMOVER %>
+<% if false %>
+
+
+
+<%= form_tag "/query/conesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'almaSearch' do %>
 <table id="table_query" class="" >
 	<thead>
 		<tr>
@@ -28,32 +88,13 @@
 	<tbody>
 		<tr>
 			<td id="position" class="panel-default margin-bottom-40" style="left:390px">
-				<%= render 'query/simple_cone_search/position' %>
+				<%#= render 'query/simple_cone_search/position' %>
 			</td>
 		</tr>
 	</tbody>
 </table>
 <% end %>
 <br>
-<%= form_tag "/query/conesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'post', name: 'searchForm'  do %>
-	<%= button_tag(type: "submit", class: "btn btn-default", name: "commit", value:"process_position_query_list", id: 'process_position_query_list', style: "display:inline-block") do %>
-	    Process
-	<% end %>
-	<i id="estate_process_query_list" class="" style="display:inline-block; margin-left:10px;"></i>
-	<br>
-	<table id= "query_list_table" class="table">
-		<thead>
-			<tr>
-				<th>Sesame Name</th>
-				<th>Right Ascension</th>
-				<th>Declination</th>
-				<th>Search Radius</th>
-				<th>Resource</th>
-				<th>Action</th>	
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
+<%# FIN MULTILINE COMMENT IMPROVISADO, REMOVER %>
 <% end %>
  <!--=== End Form ===-->

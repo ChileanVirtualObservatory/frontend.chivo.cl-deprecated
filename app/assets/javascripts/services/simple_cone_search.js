@@ -7,6 +7,7 @@ var delayTime = 300; /* delay time to slide down all the form controls */
 
 $(document).ready(function () {	
 	
+	/*
 	function showToolTipRightSide() {			
 	if (isTooLtipaCtivated){
 		var $this = $(this).closest(".group");
@@ -16,22 +17,24 @@ $(document).ready(function () {
     	$popBox.clearQueue().finish().delay(delayTime).show();
 	}
 	}
-	$table_query = $("table#table_query");
-	$groups = $table_query.find(".group");
+	*/
+	$table_query = $(".panel-body");
+	$groups = $table_query.find(".form-group");
 
-	$container_input = $groups.find(".container-input");	
+	$container_input = $groups.find("col-sm-5");	
 
 		
 	/* control form #search_radius with text by default */
 	$search_radius = $groups.find("#search_radius");
-	$search_radius.val('0:10:00').closest(".container-input");
+	$search_radius.val('0:10:00').closest("col-sm-5");
 
-
+	/*
 	$table_query.find("#flag").click(function (event) {
 		(isTooLtipaCtivated) ? isTooLtipaCtivated = false: isTooLtipaCtivated = true;
 		var $divColor = $(this).children().first();
 		(isTooLtipaCtivated) ? $divColor.addClass("icon-color-blue"): $divColor.removeClass("icon-color-blue");
 	}).children().first().css("border", "none");
+	*/
 
 	$actions_state = $("#actions_states");
 	$table_query.find("#info_states").click(function (event) {
@@ -94,6 +97,9 @@ $(document).ready(function () {
  			event.preventDefault(); /* cancel submit */
  			return false;
  		}
+ 		//Not used yet!
+
+ 		/*
  		var isAdded = false;
  		$queryListTable.find("td").each(function (event) {
  			if($(this).text() == $source_name_sesame.val()){
@@ -102,18 +108,19 @@ $(document).ready(function () {
  		});
  		if (isAdded){
  			update_action_state("alert-danger","Oh snap!", "the sesame name source is added");
-			event.preventDefault(); /* cancel submit */
+			event.preventDefault(); //Don't submit
  			return false;
  		}
- 		/* change the icon */
+ 		*/
+ 		//Let the button spin!
  		$this.find("i").removeClass("fa fa-angle-right fa-lg").addClass("fa fa-spinner fa-spin"); 
- 		$source_name_sesame.css('width', "144px");
  	});
 	
 	$position = $table_query.find("#position");
 	$plus_position = $position.find("#plus_position");
 	$plus_position.parent().clearQueue().finish()
 					.delay(delayTime).show("slow");
+	/*
  	$groups.on({
 		mouseenter: function (event) {
 			$this = $(this);
@@ -126,6 +133,7 @@ $(document).ready(function () {
 			}	    
 		}
 	});
+*/
  	
 	$plus_position.on('click', function (event) {
 		if (!$ra.val()) {

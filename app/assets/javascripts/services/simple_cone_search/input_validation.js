@@ -13,7 +13,7 @@ $(document).ready(function () {
 		target.closest(".container-input").removeClass('has-error');
 		if(!re.test(target.val()) && target.val().length != 0)
  		{
- 		target.closest(".container-input").addClass('has-error');
+ 			target.closest(".container-input").addClass('has-error');
  		}
 	} 
  	$("#ra").on("keyup",function (event) {

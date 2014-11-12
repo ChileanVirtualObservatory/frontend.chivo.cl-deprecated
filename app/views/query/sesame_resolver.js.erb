@@ -1,7 +1,9 @@
-$ra = $("#ra"); /* input id ra_dec */
-$dec= $("#dec");
-$container_input = $("#source_name_sesame").closest(".container-input"); /* container input of source name sesame */
-$button = $container_input.find("#sesame_search"); /* button for resolve sesame */
+$table_query = $(".panel-body");
+$groups = $table_query.find(".form-group");
+$ra = $groups.find("#ra");
+$dec=$groups.find("#dec");
+$container_input = $("#source_name_sesame").closest(".col-sm-5"); /* container input of source name sesame */
+$button = $groups.find("#sesame_search");
 $icon = $button.find("i");
 $actions_state = $("#actions_states");
 
@@ -16,7 +18,6 @@ $actions_state = $("#actions_states");
 	$ra.val("");
 	$dec.val("");
 <% else %>
-	
 	$ra.val("<%= @ra %>"); /* put ra and dec resolved into input w/ id=ra_dec */
 	$ra.closest(".container-input").slideDown("slow"); /* just for see that */
 	$dec.val("<%= @dec %>"); /* put ra and dec resolved into input w/ id=ra_dec */
@@ -26,10 +27,8 @@ $actions_state = $("#actions_states");
 	$actions_state.text(" ");
 	$actions_state.append("<strong></strong>");
 	$actions_state.find("strong").text("Well done!");
-	$actions_state.append(" the sesame source name has been resolved");
+	$actions_state.append(" The sesame source name has been resolved");
 	
 <% end %>
 
-$icon.removeClass("fa fa-spinner fa-spin")
-	.addClass("fa fa-angle-right fa-lg"); /* clean the icon */
-$container_input.find("#source_name_sesame").css('width', "149px");
+$icon.removeClass("fa fa-spinner fa-spin").addClass("fa fa-angle-right fa-lg"); /* clean the icon */
