@@ -70,7 +70,7 @@ if (!has_error) {
 	multi_select.multiselect(config);
 
 	var data = new Array();
-	<% sources = Rails.cache.read("sia_sources") %>
+	<% sources = Rails.cache.read("ssa_sources") %>
 	<% sources.each do | key, value | %>
 		var hash = { 
 	    	label: "<%= key[0] %>",

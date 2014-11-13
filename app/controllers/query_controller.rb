@@ -289,7 +289,7 @@ class QueryController < ApplicationController
 			@params = params  
 
 			respond_to do |format|
-				format.js { render 'query/spectral_search/add_query' }
+				format.js { render 'query/simple_spectral_search/add_query' }
 			end
 
 		# end Add Query
@@ -331,7 +331,7 @@ class QueryController < ApplicationController
 			@votables = responses_dic
 
 			respond_to do |format|
-				format.js { render 'query/spectral_search/results_panel' }
+				format.js { render 'query/simple_spectral_search/results_panel' }
 			end
 
 		# end Process
