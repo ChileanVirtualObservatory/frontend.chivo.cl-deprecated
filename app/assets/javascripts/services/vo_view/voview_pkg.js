@@ -151,8 +151,8 @@ voview.prototype.makeColumnFilterKey = function(filteKeyParams) {
         var meColumnFilterKey = this;
         meColumnFilterKey.column = _column;
         meColumnFilterKey.expression = _expression;
-        meColumnFilterKey.isCharType = _isCharType;
-        // meColumnFilterKey.isCharType = false;
+        // meColumnFilterKey.isCharType = _isCharType;
+        meColumnFilterKey.isCharType = true;
 
         this.equals = function(otherKey) {
             return otherKey.column === meColumnFilterKey.column && otherKey.expression === meColumnFilterKey.expression && otherKey.isCharType === meColumnFilterKey.isCharType;
@@ -1436,8 +1436,6 @@ voview.prototype.makeRenderer = function(rendererParams) {
             if (filterText !== "") {
                 filterText = filterText + "|";
             }
-
-            alert(filterText);
 
             filterObject.clearColumnFilters();
             filterObject.setColumnFilters({ filterKeys: keys });
