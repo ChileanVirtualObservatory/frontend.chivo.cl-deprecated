@@ -2,11 +2,6 @@
 <div id="actions_states" class="alert fade in alert-info" style="margin-bottom:0px">
 	<strong>Heads up! </strong> This will show the states of actions
 </div>
-<span style="display:none; float:right;">
-	<%= button_tag(type: "submit", style: 'background:transparent;border: none !important;', name: "commit", value:"plus_position", id: 'plus_position') do %>
-	    <i class="fa fa-plus"></i>
-	<% end %>
-</span> 
 <div class="panel-body" id="query-form-panel-body">                    
 	<!--=== Form ===-->
 	<%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm', id: 'queryForm' do %>
@@ -56,13 +51,18 @@
 				<%= text_field_tag :search_radius, nil, class: 'form-control' %>
 		</div>
 	</div>
+
+	<div class="form-group">
+		<%= label_tag :submit, '', class: 'col-sm-4 control-label' %>
+		<div class="col-sm-5" data-popbox='submit'>
+		<%= button_tag(type: "submit", name: "commit", class: 'form-control btn btn-default btn-block', value:"plus_position", id: 'plus_position') do %>
+			Add Query
+		<% end %>
+		</div>
+	</div>
+
 	<% end %>
 
-<!-- 	<div class="form-group">
-		<div class="col-sm-offset-4 col-sm-5">
-				<%= submit_tag 'Add Query', class: 'btn btn-default btn-block' %>
-		</div>
-	</div> -->
 </div>
 
 <!--=== End Form ===-->   
