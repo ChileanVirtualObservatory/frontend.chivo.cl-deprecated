@@ -1,4 +1,5 @@
 class QueryController < ApplicationController
+	respond_to :html, :json, :js
 	
 	def conesearch
 		if params[:commit] == "sesame_search"
@@ -76,7 +77,44 @@ class QueryController < ApplicationController
 		
 		@errors = []
 		if params[:commit] == "Add File to Query"
-			p params
+
+	    cacheTime = Rails.cache.read("sia_sources_time") 
+			tooOld = true
+			if cacheTime != nil
+				tooOld = Time.now < (cacheTime + 1800)
+			end
+
+			if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
+
+				raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
+				sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
+				sources_name = raw_sources.scan(/title": "(.*?)"/)
+
+				sources = Hash[sources_name.zip sources_url]
+
+				Rails.cache.write("sia_sources", sources)
+				Rails.cache.write("sia_sources_time", Time.now)
+				
+			end # end unless cache
+
+			file_data = params[:file]
+			if file_data.respond_to?(:read)
+			  csv_text = file_data.read
+			elsif file_data.respond_to?(:path)
+			  csv_text = File.read(file_data.path)
+			else
+			  logger.error "Bad file_data: #{file.class.name}: #{file.inspect}"
+			end
+			rowarraydisp = CSV.parse(csv_text.gsub(";",","), :headers=> false)
+			url_params = []
+			nparams = []
+			rowarraydisp.each do |row|
+		  	nparams << {ra: row[0], dec: row[1], size: row[2]}
+				url_params << "POS=#{row[0]},#{row[1]}&SIZE#{row[2]}"
+		  end
+
+		  @url_params = url_params
+		  @params = nparams
 
 			respond_to do |format|
 				format.js { render 'query/simple_image_search/add_file' }

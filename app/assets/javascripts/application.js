@@ -23,3 +23,4 @@
 //= require modernizr
 //= require jquery.cslider
 //= require services/voview
+//= require jquery.remotipart
