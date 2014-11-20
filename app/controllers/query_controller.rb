@@ -75,7 +75,14 @@ class QueryController < ApplicationController
 	def imagesearch
 		
 		@errors = []
-		if params[:commit] == "sesame_search"
+		if params[:commit] == "Add File to Query"
+			p params
+
+			respond_to do |format|
+				format.js { render 'query/simple_image_search/add_file' }
+			end
+
+		elsif params[:commit] == "sesame_search"
 			sesame_response = Array.new # => []
 
 			sesame = params[:source_name_sesame].split(" ").join("+")
