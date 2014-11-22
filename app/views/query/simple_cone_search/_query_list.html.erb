@@ -1,25 +1,25 @@
 <%= render 'panel_heading' %>
 <div id="list-panel-body" class="panel-body">                    
-<!--=== Form ===-->
-<%= form_tag "/query/conesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'post', name: 'searchForm'  do %>
-	<%= button_tag(type: "submit", class: "btn btn-default", name: "commit", value:"process_position_query_list", id: 'process_position_query_list', style: "display:inline-block") do %>
-		Process
+	
+	<!--=== Form ===-->
+  <%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm' do %>
+		<i id="estate_process_query_list" class="" style="display:inline-block; margin-left:10px;"></i>
+		<table id="query_list_table" class="table">
+			<thead>
+				<tr>
+					<th>Position</th>
+					<th>Angular Size</th>
+					<th>Sources</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody  id="query_list_table_tbody">
+			</tbody>
+		</table>
+		<div class="form-group">
+      <div class="col-sm-offset-4 col-sm-5">
+        <%= submit_tag 'Process', class: 'btn btn-default btn-block' %>
+      </div>
+    </div>
 	<% end %>
-	<i id="estate_process_query_list" class="" style="display:inline-block; margin-left:10px;"></i>
-	<br>
-	<table id= "query_list_table" class="table">
-		<thead>
-			<tr>
-				<th>Sesame Name</th>
-				<th>Right Ascension</th>
-				<th>Declination</th>
-				<th>Search Radius</th>
-				<th>Resource</th>
-				<th>Action</th>	
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-<% end %>
 </div>
