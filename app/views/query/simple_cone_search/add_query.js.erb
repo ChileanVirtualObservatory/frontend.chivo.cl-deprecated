@@ -13,7 +13,7 @@ parameters = "Submitted data:";
   parameters = parameters + "<br> <%=key.upcase%>:  <%=value%>";
 <% end %> 
 
-$newTR = $("<tr id="+id+'> <input type="hidden" name="url_params_'+id+'" value="<%=@url_params%>"> <td><%=@params[:ra]%>,<%=@params[:dec]%></td><td><%=@params[:sr]%></td><td></td><td></td><td>'+parameters+"</td></tr>");
+$newTR = $("<tr id="+id+'> <input type="hidden" name="url_params_'+id+'" value="<%=@url_params%>"><td><%=@params[:ra]%>,<%=@params[:dec]%></td><td><%=@params[:size]%></td><td></td><td></td><td>'+parameters+"</td></tr>");
 
 
 var multi_select = $('<select/>',{
