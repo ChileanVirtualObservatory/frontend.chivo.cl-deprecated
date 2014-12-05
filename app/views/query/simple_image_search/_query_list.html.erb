@@ -1,6 +1,11 @@
 <%= render 'panel_heading' %>
-<div id="list-panel-body" class="panel-body">                    
-	
+<div id="list-panel-body" class="panel-body"> 
+
+	<!--=== Messages ===-->
+	<div id="actions_states" class="alert fade in alert-info" style="margin-bottom:0px">
+		<strong>Heads up! </strong> This will show the states of actions
+	</div>
+
 	<!--=== Form ===-->
   <%= form_tag "/query/imagesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm' do %>
 		<i id="estate_process_query_list" class="" style="display:inline-block; margin-left:10px;"></i>

@@ -1,3 +1,10 @@
 myVoview =  new voview({input: {form: "searchForm"}, widgetID: "voviewTab"});
 myVoview.renderObject.enableRowSelection();
 myVoview.gotVotable($.parseXML("<%= escape_javascript(@votable) %>"));
+
+$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+	$actions_state.addClass("alert-success");
+	$actions_state.text(" ");
+	$actions_state.append("<strong></strong>");
+	$actions_state.find("strong").text("Well done!");
+	$actions_state.append(" the query has been added");

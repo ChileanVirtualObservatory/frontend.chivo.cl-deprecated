@@ -1,6 +1,9 @@
 $("#estate_process_query_list").removeClass("fa fa-spinner fa-spin fa-lg");
 $('#resource_list').find('li').remove();
 $('#resource_content').children('div').remove();
+
+
+
 <% @votables.each_with_index do |(key, value), index| %>
 
 	$("#query_result").append($('<div class="resource_<%= index %>"></div>'));
@@ -20,5 +23,6 @@ $('#resource_content').children('div').remove();
 
 	$('#resource_list').append($li);
 	$('#resource_content').append($tab);
+
 
 <% end %>

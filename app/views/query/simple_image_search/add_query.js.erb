@@ -77,6 +77,7 @@ if (!has_error) {
 	    	value: "<%= key[0] %>*@*<%= value[0] %>"
 		};
 		data.push(hash);
+	
 	<% end %>
 
 
@@ -87,6 +88,14 @@ if (!has_error) {
 	$( ".form-control" ).each(function() {
 	  $( this ).val( "" );
 	});
+	$actions_state.removeClass(" alert-warning alert-success alert-danger alert-info");
+	$actions_state.addClass("alert-success");
+	$actions_state.text(" ");
+	$actions_state.append("<strong></strong>");
+	$actions_state.find("strong").text("Well done!");
+	$actions_state.append(" the query has been added");
+
+
 }
 else {
 	$("#query-form-panel-body").append(has_error); //=> if theres an error, it's printed
