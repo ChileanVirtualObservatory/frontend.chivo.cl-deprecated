@@ -46,4 +46,19 @@
       </div>
     </div>
   <% end %> <!--=== End Form ===-->   
+
+  <%= form_tag "/query/conesearch", multipart: true, remote: true, class: 'form-horizontal', id: 'csvForm', authenticity_token: true do %>
+  <div class="form-group">
+    <%= label_tag :file, 'Import CSV File', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-5" data-popbox='csv'>
+    <%= file_field_tag :file, :accept => "text/csv", class: 'form-control'%>
+    </div>
+  </div>
+  <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-5">
+          <%= submit_tag 'Add File to Query', class: 'btn btn-default btn-block' %>
+      </div>
+    </div>
+  <% end %> <!--=== End CSV Form ===-->   
+
 </div>

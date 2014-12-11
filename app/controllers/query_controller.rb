@@ -166,6 +166,51 @@ class QueryController < ApplicationController
       end
 
     # end Process
+
+    elsif params[:commit] == "Add File to Query"
+
+	    cacheTime = Rails.cache.read("sia_sources_time") 
+			tooOld = true
+			if cacheTime != nil
+				tooOld = Time.now < (cacheTime + 1800)
+			end
+
+			if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
+
+				raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
+				sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
+				sources_name = raw_sources.scan(/title": "(.*?)"/)
+
+				sources = Hash[sources_name.zip sources_url]
+
+				Rails.cache.write("sia_sources", sources)
+				Rails.cache.write("sia_sources_time", Time.now)
+				
+			end # end unless cache
+
+			file_data = params[:file]
+			if file_data.respond_to?(:read)
+			  csv_text = file_data.read
+			elsif file_data.respond_to?(:path)
+			  csv_text = File.read(file_data.path)
+			else
+			  logger.error "Bad file_data: #{file.class.name}: #{file.inspect}"
+			end
+			rowarraydisp = CSV.parse(csv_text.gsub(";",","), :headers=> false)
+			url_params = []
+			nparams = []
+			rowarraydisp.each do |row|
+		  	nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3]}
+				url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
+		  end
+
+		  @url_params = url_params
+		  @params = nparams
+
+			respond_to do |format|
+				format.js { render 'query/simple_spectral_search/add_file' }
+			end
+
     else
       respond_to do |format|
         format.html
@@ -209,8 +254,8 @@ class QueryController < ApplicationController
 			url_params = []
 			nparams = []
 			rowarraydisp.each do |row|
-		  	nparams << {ra: row[0], dec: row[1], size: row[2]}
-				url_params << "POS=#{row[0]},#{row[1]}&SIZE#{row[2]}"
+		  	nparams << {source_name_sesame: row[0],ra: row[1], dec: row[2], size: row[3]}
+				url_params << "SESAME_NAME#{row[0]}&{POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
 		  end
 
 		  @url_params = url_params
@@ -251,7 +296,7 @@ class QueryController < ApplicationController
 			params.delete("controller")
 			params.delete("action")
 			params.delete("query")
-      params.delete("source_name_sesame")
+      		params.delete("source_name_sesame")
 
 			if @errors == []
 
@@ -378,7 +423,7 @@ class QueryController < ApplicationController
 			params.delete("controller")
 			params.delete("action")
 			params.delete("query")
-      params.delete("source_name_sesame")
+     		 params.delete("source_name_sesame")
 
 			if @errors == []
 
@@ -462,6 +507,51 @@ class QueryController < ApplicationController
 			end
 
 		# end Process
+		
+		elsif params[:commit] == "Add File to Query"
+
+	    cacheTime = Rails.cache.read("sia_sources_time") 
+			tooOld = true
+			if cacheTime != nil
+				tooOld = Time.now < (cacheTime + 1800)
+			end
+
+			if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
+
+				raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
+				sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
+				sources_name = raw_sources.scan(/title": "(.*?)"/)
+
+				sources = Hash[sources_name.zip sources_url]
+
+				Rails.cache.write("sia_sources", sources)
+				Rails.cache.write("sia_sources_time", Time.now)
+				
+			end # end unless cache
+
+			file_data = params[:file]
+			if file_data.respond_to?(:read)
+			  csv_text = file_data.read
+			elsif file_data.respond_to?(:path)
+			  csv_text = File.read(file_data.path)
+			else
+			  logger.error "Bad file_data: #{file.class.name}: #{file.inspect}"
+			end
+			rowarraydisp = CSV.parse(csv_text.gsub(";",","), :headers=> false)
+			url_params = []
+			nparams = []
+			rowarraydisp.each do |row|
+		  	nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3], band: row[4], time: row[5]}
+				url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}&BAND#{row[4]}&TIME#{row[5]}"
+		  end
+
+		  @url_params = url_params
+		  @params = nparams
+
+			respond_to do |format|
+				format.js { render 'query/simple_spectral_search/add_file' }
+			end
+
 		else
 			respond_to do |format|
 				format.html
