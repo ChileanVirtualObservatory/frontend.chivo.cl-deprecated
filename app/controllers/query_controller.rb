@@ -110,9 +110,6 @@ class QueryController < ApplicationController
       sources_url = raw_sources.scan(/"accessurl": "(.*?)"/)
       sources_name = raw_sources.scan(/"title": "(.*?)"/)
 
-      p sources_url.length
-      p sources_name
-
       @scs_sources = Hash[sources_name.zip sources_url]
 
       url_params = "RA=#{params[:ra]}&DEC=#{params[:dec]}&SR=#{params[:sr]}"

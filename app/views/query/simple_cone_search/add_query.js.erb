@@ -61,17 +61,13 @@ multi_select.multiselect(config);
 
 var data = new Array();
 <% sources = @scs_sources %>
-<% i = 1 %>
 <% sources.each do | key, value | %>
   var hash = { 
-      label: "<%= key[0] %>",
+      label: "<%= key[0].gsub(/[^0-9a-z ]/i, '') %>",
       value: "<%= key[0] %>*@*<%= value[0] %>"
   };
-  $("#data").append("<%= key[0] %><br>");
   data.push(hash);
-  <% (i+=1) %>
 <% end %>
-<% p i %>
 
 
 multi_select.multiselect('dataprovider', data);
