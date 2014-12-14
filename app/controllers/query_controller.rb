@@ -197,12 +197,18 @@ class QueryController < ApplicationController
 			url_params = []
 			nparams = []
 			rowarraydisp.each do |row|
-		  	nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3]}
-				url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
-		  end
+			
+				if /[a-zA-Z]/.match(row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]) )
+				
+		  			nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3]}
+					url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
+		
+				end
 
-		  @url_params = url_params
-		  @params = nparams
+		  	end
+
+		  	@url_params = url_params
+		  	@params = nparams
 
 			respond_to do |format|
 				format.js { render 'query/simple_spectral_search/add_file' }
@@ -251,9 +257,47 @@ class QueryController < ApplicationController
 			url_params = []
 			nparams = []
 			rowarraydisp.each do |row|
-		  	nparams << {source_name_sesame: row[0],ra: row[1], dec: row[2], size: row[3]}
-				url_params << "SESAME_NAME#{row[0]}&{POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
-		  end
+				if /[a-zA-Z]/.match(row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]) )
+					
+		  			nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3]}
+					url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
+				end
+				if /[0-9]/.match(row[4]) 
+				
+		  			nparams[-1]["intersec"] = row[4]
+					url_params[0] += "&INTERSECT#{row[4]}"
+				end
+				if /[0-9]/.match(row[5]) 
+				
+		  			nparams[-1]["naxis"] = row[5]
+					url_params[0] += "&N-AXIS#{row[5]}"
+				end
+				if /[0-9]/.match(row[6]) 
+				
+		  			nparams[-1]["cframe"] = row[6]
+					url_params[0] += "&C-FRAME#{row[6]}"
+				end
+				if /[0-9]/.match(row[7]) 
+				
+		  			nparams[-1]["rotang"] = row[7]
+					url_params[0] += "&ROTANG#{row[7]}"
+				end
+				if /[0-9]/.match(row[8]) 
+				
+		  			nparams[-1]["proj"] = row[8]
+					url_params[0] += "&PROJ#{row[8]}"
+				end
+				if /[0-9]/.match(row[9]) 
+				
+		  			nparams[-1]["data_type"] = row[9]
+					url_params[0] += "&DATA-TYPE#{row[9]}"
+				end
+				if /[0-9]/.match(row[10]) 
+				
+		  			nparams[-1]["verb"] = row[10]
+					url_params[0] += "&VERBOSITY#{row[10]}"
+				end
+		  	end
 
 		  @url_params = url_params
 		  @params = nparams
@@ -538,9 +582,13 @@ class QueryController < ApplicationController
 			url_params = []
 			nparams = []
 			rowarraydisp.each do |row|
-		  	nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3], band: row[4], time: row[5]}
-				url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}&BAND#{row[4]}&TIME#{row[5]}"
-		  end
+		  		
+				if /[a-zA-Z]/.match(row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]) && /[0-9]/.match(row[4]) && /[0-9]/.match(row[5]))
+				
+		  			nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3], band: row[4], time: row[5]}
+					url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}&BAND#{row[4]}&TIME#{row[5]}"
+				end
+		  	end
 
 		  @url_params = url_params
 		  @params = nparams
