@@ -71,6 +71,12 @@ class QueryController < ApplicationController
 	# 		end
 	# 	end # => end process_position_query_list
 	# end
+
+	#Small helper for float check
+	def is_number?(string)
+    	true if Float(string) rescue false
+  	end
+
 	def conesearch
     
     if params[:commit] == "sesame_search"
@@ -193,6 +199,13 @@ class QueryController < ApplicationController
 			else
 			  logger.error "Bad file_data: #{file.class.name}: #{file.inspect}"
 			end
+
+			#Check file format!
+			if File.extname("example.pdf") != ".csv"
+				print("Bad file")
+				return
+			end
+
 			rowarraydisp = CSV.parse(csv_text.gsub(";",","), :headers=> false)
 			url_params = []
 			nparams = []

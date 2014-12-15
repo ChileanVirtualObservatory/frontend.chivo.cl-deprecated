@@ -1,0 +1,43 @@
+$(document).ready(function () {
+
+	//Reseteamos el color de todo
+	$('#sesame_input').on('click', function (event) {
+		$table_query = $(".panel-body");
+		$groups = $table_query.find(".form-group");
+		$ra = $groups.find("#ra");
+		$ra.parent().removeClass("has-error");
+		$dec = $groups.find("#dec");
+		$dec.parent().removeClass("has-error");
+		$sr = $groups.find("#sr");
+		$sr.parent().removeClass("has-error");
+
+
+		//Ahora verificamos los inputs
+		var value = $ra.val()
+		if(!($.isNumeric(value) && value > 0 &&  value < 1000))
+		{
+			$ra.parent().addClass("has-error");
+			event.preventDefault();
+			return false;
+		}
+
+		var value = $dec.val()
+		if(!($.isNumeric(value) && value > 0 &&  value < 1000))
+		{
+			$dec.parent().addClass("has-error");
+			event.preventDefault();
+			return false;
+		}
+
+		var value = $sr.val()
+		if(!($.isNumeric(value) && value > 0 &&  value < 1000))
+		{
+			$sr.parent().addClass("has-error");
+			event.preventDefault();
+			return false;
+		}
+		return true;
+	})
+
+//Testing something
+})

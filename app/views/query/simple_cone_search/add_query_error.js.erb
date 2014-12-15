@@ -1,0 +1,16 @@
+<% if params[:ra] == "ERROR" %>
+$table_query = $(".panel-body");
+$groups = $table_query.find(".form-group");
+$ra = $groups.find("#ra");
+$ra.parent().addClass("has-error");
+<% end %>
+
+<% if params[:dec] == "ERROR" %>
+$dec = $groups.find("#dec");
+$dec.parent().addClass("has-error");
+<% end %>
+
+<% if params[:sr] == "ERROR" %>
+$sr = $groups.find("#sr");
+$sr.parent().addClass("has-error");
+<% end %>

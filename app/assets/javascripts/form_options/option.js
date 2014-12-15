@@ -270,7 +270,7 @@ function popDisable (argument) {
 
 $(document).ready(function () {
 
-
+	validationState = true
 	//listtener to toggle settings
 	$('#form_settings').click( function (event){
 		$('#settings').slideToggle();
@@ -447,7 +447,7 @@ $(document).ready(function () {
 	
 
 	//show and hide the pop box for #ra, #dec, #diameter text labels and #format select, form controls
-	$('#ra, #dec, #diameter, #format_type1, #data_type, #sr, #size, #verbose').map(function (event){
+	$('#ra, #source_name_sesame, #file, #dec, #diameter, #format_type1, #data_type, #sr, #size, #verbose').map(function (event){
 		$(this).parent().on({
 			mouseenter: popEnable,
 			mouseleave: popDisable, 
@@ -546,6 +546,4 @@ $(document).ready(function () {
 	$('#panel_color_red').on('click', {panel: 'panel panel-red margin-bottom-40', button: 'btn-u btn-u-red btn-block'}, changeColor);
 
 	$('#panel_color_default1').click();
-
-
 });
