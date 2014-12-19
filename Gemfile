@@ -10,7 +10,7 @@ gem 'sqlite3', group: :development
 gem 'pry-rails', group: :development
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
   gem 'rails_12factor'
 end
 

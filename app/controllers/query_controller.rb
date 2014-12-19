@@ -201,7 +201,7 @@ class QueryController < ApplicationController
 			end
 
 			#Check file format!
-			if File.extname("example.pdf") != ".csv"
+			if File.extname("example.csv") != ".csv"
 				print("Bad file")
 				return
 			end
@@ -215,7 +215,30 @@ class QueryController < ApplicationController
 				
 		  			nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3]}
 					url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
-		
+				
+				elsif (/\s/.match(row[0])|| ""==row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]) )
+
+					nparams << { ra: row[1], dec: row[2], size: row[3]}
+					url_params << "POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
+
+				elsif /[0-9]/.match(row[0]) && /[0-9]/.match(row[1]) && /[0-9]/.match(row[2])
+
+					nparams << {ra: row[0], dec: row[1], size: row[2]}
+					url_params << "POS=#{row[0]},#{row[1]}&SIZE#{row[2]}"
+
+				elsif /[a-zA-Z]/.match(row[0])
+					
+					sesame_response = Array.new # => []
+
+					sesame = row[0].split(" ").join("+")
+					sesame_response << RestClient.get("http://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-olfx/NSV?" + sesame)
+
+					xml_response = Nokogiri.XML(sesame_response[0])
+					ra = xml_response.xpath("//jradeg").children.text
+					dec = xml_response.xpath("//jdedeg").children.text
+
+					nparams << {source_name_sesame: row[0], ra: ra, dec: dec}
+					url_params << "SESAME_NAME#{row[0]}&POS=#{ra},#{dec}"
 				end
 
 		  	end
@@ -269,47 +292,149 @@ class QueryController < ApplicationController
 			rowarraydisp = CSV.parse(csv_text.gsub(";",","), :headers=> false)
 			url_params = []
 			nparams = []
+
+			if File.extname("example.csv") != ".csv"
+				print("Bad file")
+				return
+			end
+
 			rowarraydisp.each do |row|
 				if /[a-zA-Z]/.match(row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]) )
 					
 		  			nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3]}
 					url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
-				end
-				if /[0-9]/.match(row[4]) 
+
+					if /[0-9]/.match(row[4]) 
 				
 		  			nparams[-1]["intersec"] = row[4]
 					url_params[0] += "&INTERSECT#{row[4]}"
-				end
-				if /[0-9]/.match(row[5]) 
+					end
+					if /[0-9]/.match(row[5]) 
+					
+			  			nparams[-1]["naxis"] = row[5]
+						url_params[0] += "&N-AXIS#{row[5]}"
+					end
+					if /[0-9]/.match(row[6]) 
+					
+			  			nparams[-1]["cframe"] = row[6]
+						url_params[0] += "&C-FRAME#{row[6]}"
+					end
+					if /[0-9]/.match(row[7]) 
+					
+			  			nparams[-1]["rotang"] = row[7]
+						url_params[0] += "&ROTANG#{row[7]}"
+					end
+					if /[0-9]/.match(row[8]) 
+					
+			  			nparams[-1]["proj"] = row[8]
+						url_params[0] += "&PROJ#{row[8]}"
+					end
+					if /[0-9]/.match(row[9]) 
+					
+			  			nparams[-1]["data_type"] = row[9]
+						url_params[0] += "&DATA-TYPE#{row[9]}"
+					end
+					if /[0-9]/.match(row[10]) 
+					
+			  			nparams[-1]["verb"] = row[10]
+						url_params[0] += "&VERBOSITY#{row[10]}"
+					end
+
+				elsif (/\s/.match(row[0]) || ""==row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]) )
+					nparams << { ra: row[1], dec: row[2], size: row[3]}
+					url_params << "POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
+
+					if /[0-9]/.match(row[4]) 
 				
-		  			nparams[-1]["naxis"] = row[5]
-					url_params[0] += "&N-AXIS#{row[5]}"
-				end
-				if /[0-9]/.match(row[6]) 
+		  			nparams[-1]["intersec"] = row[4]
+					url_params[0] += "&INTERSECT#{row[4]}"
+					end
+					if /[0-9]/.match(row[5]) 
+					
+			  			nparams[-1]["naxis"] = row[5]
+						url_params[0] += "&N-AXIS#{row[5]}"
+					end
+					if /[0-9]/.match(row[6]) 
+					
+			  			nparams[-1]["cframe"] = row[6]
+						url_params[0] += "&C-FRAME#{row[6]}"
+					end
+					if /[0-9]/.match(row[7]) 
+					
+			  			nparams[-1]["rotang"] = row[7]
+						url_params[0] += "&ROTANG#{row[7]}"
+					end
+					if /[0-9]/.match(row[8]) 
+					
+			  			nparams[-1]["proj"] = row[8]
+						url_params[0] += "&PROJ#{row[8]}"
+					end
+					if /[0-9]/.match(row[9]) 
+					
+			  			nparams[-1]["data_type"] = row[9]
+						url_params[0] += "&DATA-TYPE#{row[9]}"
+					end
+					if /[0-9]/.match(row[10]) 
+					
+			  			nparams[-1]["verb"] = row[10]
+						url_params[0] += "&VERBOSITY#{row[10]}"
+					end
+
+				elsif /[0-9]/.match(row[0]) && /[0-9]/.match(row[1]) && /[0-9]/.match(row[2])
+					nparams << {ra: row[0], dec: row[1], size: row[2]}
+					url_params << "POS=#{row[0]},#{row[1]}&SIZE#{row[2]}"
+
+					if /[0-9]/.match(row[3]) 
 				
-		  			nparams[-1]["cframe"] = row[6]
-					url_params[0] += "&C-FRAME#{row[6]}"
+		  			nparams[-1]["intersec"] = row[3]
+					url_params[0] += "&INTERSECT#{row[3]}"
+					end
+					if /[0-9]/.match(row[4]) 
+					
+			  			nparams[-1]["naxis"] = row[4]
+						url_params[0] += "&N-AXIS#{row[4]}"
+					end
+					if /[0-9]/.match(row[5]) 
+					
+			  			nparams[-1]["cframe"] = row[5]
+						url_params[0] += "&C-FRAME#{row[5]}"
+					end
+					if /[0-9]/.match(row[6]) 
+					
+			  			nparams[-1]["rotang"] = row[6]
+						url_params[0] += "&ROTANG#{row[6]}"
+					end
+					if /[0-9]/.match(row[7]) 
+					
+			  			nparams[-1]["proj"] = row[7]
+						url_params[0] += "&PROJ#{row[7]}"
+					end
+					if /[0-9]/.match(row[8]) 
+					
+			  			nparams[-1]["data_type"] = row[8]
+						url_params[0] += "&DATA-TYPE#{row[8]}"
+					end
+					if /[0-9]/.match(row[9]) 
+					
+			  			nparams[-1]["verb"] = row[9]
+						url_params[0] += "&VERBOSITY#{row[9]}"
+					end
+				elsif /[a-zA-Z]/.match(row[0])
+					
+					sesame_response = Array.new # => []
+
+					sesame = row[0].split(" ").join("+")
+					sesame_response << RestClient.get("http://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-olfx/NSV?" + sesame)
+
+					xml_response = Nokogiri.XML(sesame_response[0])
+					ra = xml_response.xpath("//jradeg").children.text
+					dec = xml_response.xpath("//jdedeg").children.text
+
+					nparams << {source_name_sesame: row[0], ra: ra, dec: dec}
+					url_params << "SESAME_NAME#{row[0]}&POS=#{ra},#{dec}"
+
 				end
-				if /[0-9]/.match(row[7]) 
 				
-		  			nparams[-1]["rotang"] = row[7]
-					url_params[0] += "&ROTANG#{row[7]}"
-				end
-				if /[0-9]/.match(row[8]) 
-				
-		  			nparams[-1]["proj"] = row[8]
-					url_params[0] += "&PROJ#{row[8]}"
-				end
-				if /[0-9]/.match(row[9]) 
-				
-		  			nparams[-1]["data_type"] = row[9]
-					url_params[0] += "&DATA-TYPE#{row[9]}"
-				end
-				if /[0-9]/.match(row[10]) 
-				
-		  			nparams[-1]["verb"] = row[10]
-					url_params[0] += "&VERBOSITY#{row[10]}"
-				end
 		  	end
 
 		  @url_params = url_params
@@ -594,15 +719,74 @@ class QueryController < ApplicationController
 			rowarraydisp = CSV.parse(csv_text.gsub(";",","), :headers=> false)
 			url_params = []
 			nparams = []
+
+			if File.extname("example.csv") != ".csv"
+				print("Bad file")
+				return
+			end
 			rowarraydisp.each do |row|
 		  		
-				if /[a-zA-Z]/.match(row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]) && /[0-9]/.match(row[4]) && /[0-9]/.match(row[5]))
+				if /([a-zA-Z])/.match(row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]))
 				
-		  			nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3], band: row[4], time: row[5]}
-					url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}&BAND#{row[4]}&TIME#{row[5]}"
-				end
-		  	end
+		  			nparams << {source_name_sesame: row[0], ra: row[1], dec: row[2], size: row[3]}
+					url_params << "SESAME_NAME#{row[0]}&POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
 
+					if /[0-9]/.match(row[4]) 
+				
+		  			nparams[-1]["band"] = row[4]
+					url_params[0] += "&BAND#{row[4]}"
+					end
+					if /[0-9]/.match(row[5]) 
+					
+			  			nparams[-1]["time"] = row[5]
+						url_params[0] += "&TIME#{row[5]}"
+					end
+
+				elsif (/\s/.match(row[0]) || ""==row[0]) && (/[0-9]/.match(row[1]) && /[0-9]/.match(row[2]) && /[0-9]/.match(row[3]))
+					nparams << {ra: row[1], dec: row[2], size: row[3]}
+					url_params << "POS=#{row[1]},#{row[2]}&SIZE#{row[3]}"
+
+					if /[0-9]/.match(row[4]) 
+				
+		  			nparams[-1]["band"] = row[4]
+					url_params[0] += "&BAND#{row[4]}"
+					end
+					if /[0-9]/.match(row[5]) 
+					
+			  			nparams[-1]["time"] = row[5]
+						url_params[0] += "&TIME#{row[5]}"
+					end
+
+				elsif /[0-9]/.match(row[0]) && /[0-9]/.match(row[1]) && /[0-9]/.match(row[2])
+					nparams << {ra: row[0], dec: row[1], size: row[2]}
+					url_params << "POS=#{row[0]},#{row[1]}&SIZE#{row[2]}"
+
+					if /[0-9]/.match(row[3]) 
+				
+		  			nparams[-1]["band"] = row[3]
+					url_params[0] += "&BAND#{row[3]}"
+					end
+					if /[0-9]/.match(row[4]) 
+					
+			  			nparams[-1]["time"] = row[4]
+						url_params[0] += "&TIME#{row[4]}"
+					end
+				elsif /[a-zA-Z]/.match(row[0])
+					
+					sesame_response = Array.new # => []
+
+					sesame = row[0].split(" ").join("+")
+					sesame_response << RestClient.get("http://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-olfx/NSV?" + sesame)
+
+					xml_response = Nokogiri.XML(sesame_response[0])
+					ra = xml_response.xpath("//jradeg").children.text
+					dec = xml_response.xpath("//jdedeg").children.text
+
+					nparams << {source_name_sesame: row[0], ra: ra, dec: dec}
+					url_params << "SESAME_NAME#{row[0]}&POS=#{ra},#{dec}"
+				end
+
+			end
 		  @url_params = url_params
 		  @params = nparams
 
