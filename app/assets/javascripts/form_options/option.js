@@ -270,7 +270,6 @@ function popDisable (argument) {
 
 $(document).ready(function () {
 
-	validationState = true
 	//listtener to toggle settings
 	$('#form_settings').click( function (event){
 		$('#settings').slideToggle();
