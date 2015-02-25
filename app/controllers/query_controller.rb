@@ -112,7 +112,7 @@ class QueryController < ApplicationController
       params.delete("query")
       params.delete("source_name_sesame")
 
-      raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/scs')
+      raw_sources = RestClient.get('http://endpoint.lirae.cl:80/external/scs')
       sources_url = raw_sources.scan(/"accessurl": "(.*?)"/)
       sources_name = raw_sources.scan(/"title": "(.*?)"/)
 
@@ -180,7 +180,7 @@ class QueryController < ApplicationController
 
 			if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
 
-				raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
+				raw_sources = RestClient.get('http://endpoint.lirae.cl:80/external/sia')
 				sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
 				sources_name = raw_sources.scan(/title": "(.*?)"/)
 
@@ -270,7 +270,7 @@ class QueryController < ApplicationController
 
 			if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
 
-				raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
+				raw_sources = RestClient.get('http://endpoint.lirae.cl:80/external/sia')
 				sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
 				sources_name = raw_sources.scan(/title": "(.*?)"/)
 
@@ -487,7 +487,7 @@ class QueryController < ApplicationController
 
 				if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
 
-					raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
+					raw_sources = RestClient.get('http://endpoint.lirae.cl:80/external/sia')
 					sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
 					sources_name = raw_sources.scan(/title": "(.*?)"/)
 
@@ -614,7 +614,7 @@ class QueryController < ApplicationController
 
 				if Rails.cache.read("ssa_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
 
-					raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/ssa')
+					raw_sources = RestClient.get('http://endpoint.lirae.cl:80/external/ssa')
 					sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
 					sources_name = raw_sources.scan(/title": "(.*?)"/)
 
@@ -697,7 +697,7 @@ class QueryController < ApplicationController
 
 			if Rails.cache.read("sia_sources") == nil || tooOld == true #=> If there isn't sources on cache or the cache is too old, load them again
 
-				raw_sources = RestClient.get('http://dachs.lirae.cl:80/external/sia')
+				raw_sources = RestClient.get('http://endpoint.lirae.cl:80/external/sia')
 				sources_url = raw_sources.scan(/accessurl": "(.*?)"/)
 				sources_name = raw_sources.scan(/title": "(.*?)"/)
 
@@ -825,7 +825,7 @@ class QueryController < ApplicationController
 				format.js { render 'query/type_alma/sesame_resolver' }
 			end
 		elsif params[:commit] == "plus_position_query_list"
-			resources = RestClient.get("http://dachs.lirae.cl/external/scs")
+			resources = RestClient.get("http://endpoint.lirae.cl/external/scs")
 			resources_json = JSON.parse(resources)
 			@datas = Array.new
 
