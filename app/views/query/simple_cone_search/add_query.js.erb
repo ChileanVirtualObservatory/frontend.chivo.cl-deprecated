@@ -1,4 +1,26 @@
+$actions_state = $("#actions_states");
 
+function update_action_state (add_class, strong, text) {
+                $actions_state.removeClass("alert-warning alert-success alert-danger alert-info")
+                                .addClass(add_class).text("")
+                                .append("<strong></strong> " + text)
+                                .find("strong").text(strong);
+        }
+
+$pass = true;
+
+if (("<%=@params[:ra]%>"=="")||("<%=@params[:dec]%>"=="")) {
+                        update_action_state("alert-danger","Oh snap!", "cordinates not added to the query list by empty RA Dec field");
+                        //event.preventDefault(); /* cancel submit */
+                        $pass = false; 
+                }
+                else if (("<%=@params[:sr]%>"=="")){
+                        update_action_state("alert-danger","Oh snap!", "cordinates not added to the query list by empty Search Radius field");
+                        //event.preventDefault(); /* cancel submit */
+                        $pass = false;
+                }
+
+if($pass){
 $table = $("#query_list_table_tbody");
 tr_amount = $table.find("tr").size();
 id = 0;
@@ -79,3 +101,6 @@ $( ".form-control" ).each(function() {
   $( this ).val( "" );
 });
 
+
+update_action_state("alert-success", "Well done!", "cordinates added to the query list");
+}
