@@ -1,6 +1,8 @@
 $(".has-error").removeClass("has-error"); //=> remove all error marks from form (remove red frame)
 var has_error = "";
 
+$actions_state = $("#actions_states");
+
 function update_action_state (add_class, strong, text) {
     $actions_state.removeClass("alert-warning alert-success alert-danger alert-info")
             .addClass(add_class).text("")
@@ -12,15 +14,14 @@ $pass = true;
 
 if (("<%=@params[:ra]%>"=="")||("<%=@params[:dec]%>"=="")) {
     update_action_state("alert-danger","Oh snap!", "cordinates not added to the query list by empty RA Dec field");
-    //event.preventDefault(); /* cancel submit */
     $pass = false;
 }
 else if (("<%=@params[:size]%>"=="")){
     update_action_state("alert-danger","Oh snap!", "cordinates not added to the query list by empty Size field");
-    //event.preventDefault(); /* cancel submit */
     $pass = false;
 }
-if($pass){
+
+if ($pass){
     <% @errors.each do | id | %>
         $("#<%=id%>").parent().addClass("has-error"); //=> add error mark to form
         has_error = has_error + "<br>ERROR: <%=id%>";
@@ -72,7 +73,7 @@ if($pass){
         var config = {
         buttonWidth: '400px',
         buttonClass: 'btn btn-default btn-sm',
-        includeSelectAllOption: true,
+        includeSelectAllOption: false,
         enableFiltering: true,
         maxHeight: 200,
         checkboxName: '',
@@ -107,7 +108,10 @@ if($pass){
         $( ".form-control" ).each(function() {
           $( this ).val( "" );
         });
+        update_action_state("alert-success", "Well done!", "cordinates added to the query list");
     }
+
+
     else {
         $("#query-form-panel-body").append(has_error); //=> if theres an error, it's printed
     }

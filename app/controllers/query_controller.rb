@@ -144,13 +144,15 @@ class QueryController < ApplicationController
         if index%2 == 0
           url_params = value
           next
-        end
+				end
+
+
 
         value.each do | source | 
           query_source_name = source.split("*@*")[0]
           query_source_url = source.split("*@*")[1]
           response = RestClient.get(query_source_url+url_params)
-          if responses_dic[query_source_name] == nil 
+          if responses_dic[query_source_name] == nil
             responses_dic[query_source_name] = [response]
           else
             responses_dic[query_source_name] << response

@@ -1,6 +1,16 @@
 $("#estate_process_query_list").removeClass("fa fa-spinner fa-spin fa-lg");
 $('#resource_list').find('li').remove();
 $('#resource_content').children('div').remove();
+
+$process_state = $('#process_state')
+
+function update_process_state (add_class, strong, text) {
+    $process_state.removeClass("alert-warning alert-success alert-danger alert-info hidden")
+            .addClass(add_class).text("")
+            .append("<strong></strong> " + text)
+            .find("strong").text(strong);
+}
+
 <% @votables.each_with_index do |(key, value), index| %>
 
 	$("#result_table").append($('<div class="resource_<%= index %>"></div>'));
@@ -22,3 +32,4 @@ $('#resource_content').children('div').remove();
 	$('#resource_content').append($tab);
 
 <% end %>
+update_process_state("alert-success", "Well done!", "your query has been processes successfully");
