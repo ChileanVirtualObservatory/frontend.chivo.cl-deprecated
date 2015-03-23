@@ -1,106 +1,106 @@
 $actions_state = $("#actions_states");
 
-function update_action_state (add_class, strong, text) {
-                $actions_state.removeClass("alert-warning alert-success alert-danger alert-info")
-                                .addClass(add_class).text("")
-                                .append("<strong></strong> " + text)
-                                .find("strong").text(strong);
-        }
+function update_action_state(add_class, strong, text) {
+    $actions_state.removeClass("alert-warning alert-success alert-danger alert-info")
+            .addClass(add_class).text("")
+            .append("<strong></strong> " + text)
+            .find("strong").text(strong);
+}
 
 $pass = true;
 
-if (("<%=@params[:ra]%>"=="")||("<%=@params[:dec]%>"=="")) {
-                        update_action_state("alert-danger","Oh snap!", "cordinates not added to the query list by empty RA Dec field");
-                        //event.preventDefault(); /* cancel submit */
-                        $pass = false; 
+if (("<%=@params[:ra]%>" == "") || ("<%=@params[:dec]%>" == "")) {
+    update_action_state("alert-danger", "Oh snap!", "cordinates not added to the query list by empty RA Dec field");
+    //event.preventDefault(); /* cancel submit */
+    $pass = false;
+}
+else if (("<%=@params[:sr]%>" == "")) {
+    update_action_state("alert-danger", "Oh snap!", "cordinates not added to the query list by empty Search Radius field");
+    //event.preventDefault(); /* cancel submit */
+    $pass = false;
+}
+
+if ($pass) {
+    $table = $("#query_list_table_tbody");
+    tr_amount = $table.find("tr").size();
+    id = 0;
+    if (tr_amount == 0) {
+        id = 1
+    }
+    else {
+        id = parseInt($table.find("tr").last().attr('id')) + 1;
+    }
+
+    parameters = "Submitted data:";
+    <% @params.each do |key, value| %>
+    parameters = parameters + "<br> <%=key.upcase%>:  <%=value%>";
+    <% end %>
+
+    $newTR = $("<tr id=" + id + '> <input type="hidden" name="url_params_' + id + '" value="<%=@url_params%>"><td><%=@params[:ra]%>,<%=@params[:dec]%></td><td><%=@params[:size]%></td><td></td><td></td><td>' + parameters + "</td></tr>");
+
+
+    var multi_select = $('<select/>', {
+        id: 'multi_select_resource' + id,
+        multiple: 'multiple',
+        style: 'float:center',
+        name: 'resource_' + id + '[]'
+    });
+
+    var delete_button = $('<a/>',
+            {
+                class: 'btn btn-danger btn-xs',
+                style: 'height:20px',
+                text: '',
+                click: function () {
+                    $(this).closest("tr").remove();
                 }
-                else if (("<%=@params[:sr]%>"=="")){
-                        update_action_state("alert-danger","Oh snap!", "cordinates not added to the query list by empty Search Radius field");
-                        //event.preventDefault(); /* cancel submit */
-                        $pass = false;
-                }
+            });
 
-if($pass){
-$table = $("#query_list_table_tbody");
-tr_amount = $table.find("tr").size();
-id = 0;
-if (tr_amount == 0){
-  id = 1
-}
-else {
-  id = parseInt($table.find("tr").last().attr('id')) + 1; 
-}
+    var trash_icon = $('<i/>', {class: 'fa fa-trash-o fa-fw '});
+    delete_button.prepend(trash_icon);
 
-parameters = "Submitted data:";
-<% @params.each do |key, value| %>
-  parameters = parameters + "<br> <%=key.upcase%>:  <%=value%>";
-<% end %> 
+    $newTR.find("td").last().prev().prev().append(multi_select);
+    $newTR.find("td").last().prev().append(delete_button);
 
-$newTR = $("<tr id="+id+'> <input type="hidden" name="url_params_'+id+'" value="<%=@url_params%>"><td><%=@params[:ra]%>,<%=@params[:dec]%></td><td><%=@params[:size]%></td><td></td><td></td><td>'+parameters+"</td></tr>");
+    var config = {
+        buttonWidth: '400px',
+        buttonClass: 'btn btn-default btn-sm',
+        includeSelectAllOption: true,
+        enableFiltering: true,
+        maxHeight: 200,
+        checkboxName: '',
+        filterPlaceholder: 'Search',
+        selectedClass: null,
+        onChange: function (option, checked) {
+            var selectedOptions = multi_select.find('option:selected');
+            if (selectedOptions.length == 0) {
+                multi_select.multiselect('select', option.val());
+            }
 
+        }
+    }
 
-var multi_select = $('<select/>',{
-  id: 'multi_select_resource'+id,
-  multiple: 'multiple',
-  style: 'float:center',
-  name: 'resource_'+id+'[]'
-});
+    multi_select.multiselect(config);
 
-var delete_button = $('<a/>',
-  {
-      class: 'btn btn-danger btn-xs',
-      style: 'height:20px',
-      text: '',
-      click: function () {
-        $(this).closest("tr").remove();
-       }
-  });
-
-var trash_icon = $('<i/>',{class: 'fa fa-trash-o fa-fw '});
-delete_button.prepend(trash_icon);
-
-$newTR.find("td").last().prev().prev().append(multi_select);
-$newTR.find("td").last().prev().append(delete_button);
-
-var config = {
-buttonWidth: '400px',
-buttonClass: 'btn btn-default btn-sm',
-includeSelectAllOption: true,
-enableFiltering: true,
-maxHeight: 200,
-checkboxName: '',
-filterPlaceholder: 'Search',
-selectedClass: null,
-onChange: function(option, checked) {                     
-          var selectedOptions = multi_select.find('option:selected');
-      if (selectedOptions.length == 0) {
-          multi_select.multiselect('select', option.val());
-      }
-          
-      }
-}
-
-multi_select.multiselect(config);
-
-var data = new Array();
-<% sources = @scs_sources %>
-<% sources.each do | key, value | %>
-  var hash = { 
-      label: "<%= key[0].gsub(/[^0-9a-z ]/i, '') %>",
-      value: "<%= key[0] %>*@*<%= value[0] %>"
-  };
-  data.push(hash);
-<% end %>
+    var data = new Array();
+    <% sources = @scs_sources %>
+    <% sources.each do | key, value | %>
+    var hash = {
+        label: "<%= key[0].gsub(/[^0-9a-z ]/i, '') %>",
+        value: "<%= key[0] %>*@*<%= value[0] %>"
+    };
+    data.push(hash);
+    <% end %>
 
 
-multi_select.multiselect('dataprovider', data);
+    multi_select.multiselect('dataprovider', data);
 
-$table.append($newTR);
+    $table.append($newTR);
 
-$( ".form-control" ).each(function() {
-  $( this ).val( "" );
-});
+    $(".form-control").each(function () {
+        $(this).val("");
+    });
 
 
-update_action_state("alert-success", "Well done!", "cordinates added to the query list");
+    update_action_state("alert-success", "Well done!", "cordinates added to the query list");
 }
