@@ -24,5 +24,17 @@ $('#resource_content').children('div').remove();
 	$('#resource_list').append($li);
 	$('#resource_content').append($tab);
 
+	var table = document.getElementById("resource_<%= index %>_data");
+        for (var i = 0; i < table.rows.length ; i++) {
+                row = table.rows[i];
+                for (var j = 0; j < row.cells.length ; j++ ){
+                        cell = row.cells[j]
+                        if(cell.innerHTML.search("http")!=-1){
+                                var url = cell.innerHTML;
+                                url='<a href=' + url + '>' + url + '</a>';
+                                cell.innerHTML = url;
+                        }
+                }
+        }
 
 <% end %>
