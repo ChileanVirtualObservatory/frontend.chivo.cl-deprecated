@@ -1,28 +1,29 @@
-// ===================================================================
-// Author: Denis Howlett <feedback@isocra.com>
-// WWW: http://www.isocra.com/articles/table_dnd.php
-//
-// 11/6/07: Edited by RLW
-// - Eliminated global variables and put everything in TableDnD namespace
-// - Use class + CSS to highlight flagged rows to make it play better with other styles
-// - Use CSS to add the move cursor too
-// - Still need to get rid of global events if possible.
-//
-// ===================================================================
+/* 
+ * This file is part of ChiVO, the Chilean Virtual Observatory
+ * A project sponsored by FONDEF (D11I1060)
+ * Copyright (C) 2015 Universidad Tecnica Federico Santa Maria
+ *                    Universidad de Chile
+ *                    Pontificia Universidad Catolica
+ *                    Universidad de Concepcion
+ *                    Universidad de Santiago
+ *
+ * This program is free software; you can redistribute it and/or modify 
+ * it under the terms of the GNU General Public License as published by 
+ * the Free Software Foundation; either version 2 of the License, or 
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
+ * 02110-1301, USA or visit <http://www.gnu.org/licenses/>.
+*/
 
-// Get the namespace.
-var TableDnD = TableDnD || {};
 
-(function()
-{
-	//
-	// Private properties
-	//
-
-	// current table being dragged
-	var _currenttable = null;
-
-	// get the source element from an event in a way that works for IE and Firefox and Safari
 	// @param evt the source event for Firefox (but not IE--IE uses window.event)
 	function _getEventSource(evt) {
 		if (window.event) {

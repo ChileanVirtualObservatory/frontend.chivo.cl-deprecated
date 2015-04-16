@@ -1,28 +1,29 @@
-/*
-  dragtable v1.0
-  June 26, 2008
-  Dan Vanderkam, http://danvk.org/dragtable/
-                 http://code.google.com/p/dragtable/
+/* 
+ * This file is part of ChiVO, the Chilean Virtual Observatory
+ * A project sponsored by FONDEF (D11I1060)
+ * Copyright (C) 2015 Universidad Tecnica Federico Santa Maria
+ *                    Universidad de Chile
+ *                    Pontificia Universidad Catolica
+ *                    Universidad de Concepcion
+ *                    Universidad de Santiago
+ *
+ * This program is free software; you can redistribute it and/or modify 
+ * it under the terms of the GNU General Public License as published by 
+ * the Free Software Foundation; either version 2 of the License, or 
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
+ * 02110-1301, USA or visit <http://www.gnu.org/licenses/>.
+*/
 
-  Instructions:
-    - Download this file
-    - Add <script src="dragtable.js"></script> to your HTML.
-    - Add class="draggable" to any table you might like to reorder.
-    - Drag the headers around to reorder them.
 
-  This is code was based on:
-    - Stuart Langridge's SortTable (kryogenix.org/code/browser/sorttable)
-    - Mike Hall's draggable class (http://www.brainjar.com/dhtml/drag/)
-    - A discussion of permuting table columns on comp.lang.javascript
-
-  Licensed under the MIT license.
- */
-
-// Here's the notice from Mike Hall's draggable script:
-//*****************************************************************************
-// Do not remove this notice.
-//
-// Copyright 2001 by Mike Hall.
 // See http://www.brainjar.com for terms of use.
 //*****************************************************************************
 var dragtable = {
