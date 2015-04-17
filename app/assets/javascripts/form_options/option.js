@@ -1,11 +1,13 @@
 /* 
  * This file is part of ChiVO, the Chilean Virtual Observatory
  * A project sponsored by FONDEF (D11I1060)
- * Copyright (C) 2015 Universidad Tecnica Federico Santa Maria
- *                    Universidad de Chile
- *                    Pontificia Universidad Catolica
- *                    Universidad de Concepcion
- *                    Universidad de Santiago
+ * Copyright (C) 2015 
+ *      Universidad Tecnica Federico Santa Maria Mauricio Solar
+ *                                               Marcelo Mendoza
+ *      Universidad de Chile                     Diego Mardones
+ *      Pontificia Universidad Catolica          Karim Pichara
+ *      Universidad de Concepcion                Ricardo Contreras
+ *      Universidad de Santiago                  Victor Parada
  *
  * This program is free software; you can redistribute it and/or modify 
  * it under the terms of the GNU General Public License as published by 
