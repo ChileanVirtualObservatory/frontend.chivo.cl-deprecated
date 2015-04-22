@@ -1,4 +1,4 @@
-/* 
+###/*
  * This file is part of ChiVO, the Chilean Virtual Observatory
  * A project sponsored by FONDEF (D11I1060)
  * Copyright (C) 2015 
@@ -23,7 +23,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
  * 02110-1301, USA or visit <http://www.gnu.org/licenses/>.
-*/
+*/###
 
 
 # Place all the behaviors and hooks related to the matching controller here.

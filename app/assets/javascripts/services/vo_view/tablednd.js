@@ -25,7 +25,19 @@
  * 02110-1301, USA or visit <http://www.gnu.org/licenses/>.
 */
 
+// Get the namespace.
+var TableDnD = TableDnD || {};
 
+(function()
+{
+	//
+	// Private properties
+	//
+
+	// current table being dragged
+	var _currenttable = null;
+
+	// get the source element from an event in a way that works for IE and Firefox and Safari
 	// @param evt the source event for Firefox (but not IE--IE uses window.event)
 	function _getEventSource(evt) {
 		if (window.event) {
