@@ -27,10 +27,10 @@
 
 
   <%= render 'panel_heading' %>
-  <div id="actions_states" class="alert fade in alert-info" style="margin-bottom:0px">
-    <strong>Heads up! </strong> This will show the states of actions 
-</div>
- <div class="panel-body" id="query-form-panel-body">                    
+  <div id="actions_states" class="alert fade in alert-info hidden" style="margin-bottom:0px">
+    <strong>Heads up! </strong> This will show the states of actions
+  </div>
+ <div class="panel-body" id="query-form-panel-body">
   <!--=== Form ===-->
 
   <%= form_tag "/query/conesearch", remote: true, class: 'form-horizontal', role: 'form', method: 'get' , name: 'searchForm', id: 'queryForm' do %>

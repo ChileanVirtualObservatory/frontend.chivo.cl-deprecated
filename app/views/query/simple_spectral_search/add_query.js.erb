@@ -32,7 +32,7 @@ var has_error = "";
 $actions_state = $("#actions_states");
 
 function update_action_state (add_class, strong, text) {
-    $actions_state.removeClass("alert-warning alert-success alert-danger alert-info")
+    $actions_state.removeClass("alert-warning alert-success alert-danger alert-info hidden")
             .addClass(add_class).text("")
             .append("<strong></strong> " + text)
             .find("strong").text(strong);
@@ -145,3 +145,5 @@ if ($pass){
         $("#query-form-panel-body").append(has_error); //=> if theres an error, it's printed
     }
 }
+
+update_action_state("alert-success", "Well done!", "cordinates added to the query list");

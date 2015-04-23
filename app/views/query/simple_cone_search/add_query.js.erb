@@ -26,10 +26,11 @@
 */
 
 
+
 $actions_state = $("#actions_states");
 
 function update_action_state(add_class, strong, text) {
-    $actions_state.removeClass("alert-warning alert-success alert-danger alert-info")
+    $actions_state.removeClass("alert-warning alert-success alert-danger alert-info hidden")
             .addClass(add_class).text("")
             .append("<strong></strong> " + text)
             .find("strong").text(strong);

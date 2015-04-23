@@ -26,23 +26,7 @@
 -->
 
 
-<!--=== Slider ===-->
-<div class="slider-inner">
-  <div id="da-slider" class="da-slider">    
-    <div class="da-slide">
-      <h2><i>UTFSM</i><br /><i>Astroinformatic</i></h2>
-      <!-- <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i></p> -->
-      <div class="da-img">
-        <iframe src="http://player.vimeo.com/video/76644462" width="530" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
-      </div>
-    </div>
-    <div class="da-arrows">
-      <span class="da-arrows-prev"></span>
-      <span class="da-arrows-next"></span>  
-    </div>
-  </div><!--/da-slider-->
-</div><!--/slider-->
-<!--=== End Slider ===-->
+
 
 <!--=== Purchase Block ===-->
 <div class="purchase">
@@ -62,63 +46,8 @@
 <!--=== Content Part ===-->
 <div class="container"> 
   <!-- Recent Works -->
-<div class="headline"><h2>Recent News</h2>
-  <div class="pull-right"><a class="btn-u " href="all_news"><i class="fa fa-plus"></i>  More News</a></div>
-</div>
-  <div class="row">
-    <!-- Last New -->
-    <div class="col-md-4 col-sm-6">
-      <div class="thumbnails thumbnail-style thumbnail-kenburn">
-        <div class="thumbnail-img">
-          <div class="overflow-hidden">
-            <%= image_tag "news/workshop_august_2014_1.jpg", class: 'img-responsive' %>
-          </div>
-          <%= link_to "read more +", workshop_august_2014_path, class: "btn-more hover-effect" %>
-        </div>
-        <div class="caption">
-          <h3><%= link_to "Workshop 2014 Avances y desafíos del proyecto FONDEF D11I1060", workshop_august_2014_path %></h3>
-          <div align="justify">
-            <p>El Observatorio Virtual Chileno (ChiVO) es uno de los proyectos actualmente en curso en el mundo que busca contener los datos astronómicos en sistema transparente, permitiendo que la información esté a disposición de todos los investigadores, independiente de su...</p>
-          </div>
-        </div>
-      </div>
-    </div> 
-    <!-- New 2 -->
-    <div class="col-md-4 col-sm-6">
-      <div class="thumbnails thumbnail-style thumbnail-kenburn">
-        <div class="thumbnail-img">
-          <div class="overflow-hidden">
-            <%= image_tag "news/spie_astronomical_telescopes_instrumentation_2014_2.jpg", class: 'img-responsive' %>
-          </div>
-          <%= link_to "read more +", spie_astronomical_telescopes_instrumentation_2014_path, class: "btn-more hover-effect" %>
-        </div>
-        <div class="caption">
-          <h3><%= link_to "SPIE Astronomical Telescopes + Intrumentation 2014", spie_astronomical_telescopes_instrumentation_2014_path %></h3>
-          <div align="justify">
-            <p>SPIE is a not-for-profit international professional society for optics and photonics technology, founded in 1955. It organizes technical conferences, trade exhibitions, and continuing education programs for researchers and developers in the light-based fields of physics...</p>
-          </div>
-        </div>
-      </div>
-    </div> 
-    <!-- New 3 -->
-    <div class="col-md-4 col-sm-6">
-      <div class="thumbnails thumbnail-style thumbnail-kenburn">
-        <div class="thumbnail-img">
-          <div class="overflow-hidden">
-            <%= image_tag "news/ivoa_newsletter_012_may_2014.jpg", class: 'img-responsive' %>          
-          </div>
-          <%= link_to "read more +", ivoa_newsletter_012_may_2014_path, class: "btn-more hover-effect" %>
-        </div>
-        <div class="caption">
-          <h3><%= link_to "IVOA Newsletter 012 - May 2014", ivoa_newsletter_012_may_2014_path %></h3>
-          <div align="justify">
-            <p>The May 2014 issue of the IVOA Newsletter is now available. This biannual newsletter for astronomers is intended to highlight new capabilities of VO tools and technologies for doing astronomy research. It also lists recent papers and upcoming events. </p>
-          </div>        
-        </div>
-      </div>
-    </div>
-  </div><!--/row-->
-  <!-- End Recent Works -->
+
+
 
   <!-- Our Clients -->
   <div id="clients-flexslider" class="flexslider home clients">
@@ -126,56 +55,56 @@
   <ul class="slides">
     <li>
       <a href="#">
-        <%= image_tag "institutions/fondef_gray.png" %>
-        <%= image_tag "institutions/fondef.png", class: 'color-img' %>
+        <%= link_to image_tag("institutions/fondef_gray.png"), "http://www.conicyt.cl/fondef/" %>
+        <%= link_to image_tag("institutions/fondef.png", class: 'color-img'), "http://www.conicyt.cl/fondef/" %>
       </a>
     </li>
     <li>
       <a href="#">
-        <%= image_tag "institutions/conicyt_gray.png" %>
-        <%= image_tag "institutions/conicyt.png", class: 'color-img' %>
+          <%= link_to image_tag("institutions/conicyt_gray.png"), "http://www.conicyt.cl" %>
+          <%= link_to image_tag("institutions/conicyt.png", class: 'color-img'), "http://www.conicyt.cl" %>
       </a>
     </li>
     <li>
       <a href="#">
-        <%= image_tag "institutions/reuna_gray.png" %>
-        <%= image_tag "institutions/reuna.png", class: 'color-img' %>
+          <%= link_to image_tag("institutions/reuna_gray.png"), "http://www.reuna.cl/" %>
+          <%= link_to image_tag("institutions/reuna.png", class: 'color-img'), "http://www.reuna.cl/" %>
       </a>
     </li>
     <li>
       <a href="#">
-        <%= image_tag "institutions/utfsm_gray.png" %>
-        <%= image_tag "institutions/utfsm.png", class: 'color-img' %>
+          <%= link_to image_tag("institutions/utfsm_gray.png"), "http://www.usm.cl/" %>
+          <%= link_to image_tag("institutions/utfsm.png", class: 'color-img'), "http://www.usm.cl/" %>
       </a>
     </li>
     <li>
       <a href="#">
-        <%= image_tag "institutions/uchile_gray.png" %>
-        <%= image_tag "institutions/uchile.png", class: 'color-img' %>
+          <%= link_to image_tag("institutions/uchile_gray.png"), "http://www.uchile.cl/" %>
+          <%= link_to image_tag("institutions/uchile.png", class: 'color-img'), "http://www.uchile.cl/" %>
       </a>
     </li>
     <li>
       <a href="#">
-        <%= image_tag "institutions/puc_gray.png" %>
-        <%= image_tag "institutions/puc.png", class: 'color-img' %>
+          <%= link_to image_tag("institutions/puc_gray.png"), "http://www.uc.cl/" %>
+          <%= link_to image_tag("institutions/puc.png", class: 'color-img'), "http://www.uc.cl/" %>
       </a>
     </li>
     <li>
       <a href="#">
-        <%= image_tag "institutions/udec_gray.png" %>
-        <%= image_tag "institutions/udec.png", class: 'color-img' %>
+          <%= link_to image_tag("institutions/udec_gray.png"), "http://www.udec.cl/" %>
+          <%= link_to image_tag("institutions/udec.png", class: 'color-img'), "http://www.udec.cl/" %>
       </a>
     </li>
     <li>
       <a href="#">
-        <%= image_tag "institutions/usach_gray.png" %>
-        <%= image_tag "institutions/usach.png", class: 'color-img' %>
+          <%= link_to image_tag("institutions/usach_gray.png"), "http://www.usach.cl/" %>
+          <%= link_to image_tag("institutions/usach.png", class: 'color-img'), "http://www.usach.cl/" %>
       </a>
     </li>
     <li>
       <a href="#">
-        <%= image_tag "institutions/alma_gray.png" %>
-        <%= image_tag "institutions/alma.png", class: 'color-img' %>
+          <%= link_to image_tag("institutions/alma_gray.png"), "http://www.almaobservatory.org/" %>
+          <%= link_to image_tag("institutions/alma.png", class: 'color-img'), "http://www.almaobservatory.org/" %>
       </a>
     </li>
   </ul>

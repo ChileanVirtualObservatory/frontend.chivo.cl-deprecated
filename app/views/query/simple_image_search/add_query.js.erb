@@ -30,7 +30,7 @@ $(".has-error").removeClass("has-error"); //=> remove all error marks from form 
 var has_error = "";
 
 function update_action_state (add_class, strong, text) {
-    $actions_state.removeClass("alert-warning alert-success alert-danger alert-info")
+    $actions_state.removeClass("alert-warning alert-success alert-danger alert-info hidden")
             .addClass(add_class).text("")
             .append("<strong></strong> " + text)
             .find("strong").text(strong);
@@ -102,7 +102,7 @@ if ($pass){
         var config = {
         buttonWidth: '400px',
         buttonClass: 'btn btn-default btn-sm',
-        includeSelectAllOption: true,
+        includeSelectAllOption: false,
         enableCaseInsensitiveFiltering: true,
         enableFiltering: true,
         maxHeight: 200,
@@ -147,3 +147,5 @@ if ($pass){
         $("#query-form-panel-body").append(has_error); //=> if theres an error, it's printed
     }
 }
+
+update_action_state("alert-success", "Well done!", "cordinates added to the query list");
