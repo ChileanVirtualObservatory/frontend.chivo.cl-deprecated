@@ -115,6 +115,9 @@ class QueryController < ApplicationController
       ra = xml_response.xpath("//jradeg").children.text
       dec = xml_response.xpath("//jdedeg").children.text
 
+			puts ra
+			puts dec
+
       @ra = ra
       @dec= dec
       
@@ -122,6 +125,7 @@ class QueryController < ApplicationController
         @ra = "ERROR"
         @dec= "ERROR"           
       end
+
 
       respond_to do |format|
         format.js { render 'query/sesame_resolver'}
