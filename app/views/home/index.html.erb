@@ -47,7 +47,25 @@
 <div class="container"> 
   <!-- Recent Works -->
 
+<div id= "services" class=container>
+  <div class="headline"><h2>Services</h2></div>
 
+    <div>
+      <div class="col-sm-offset-2 col-sm-5">
+	<ul>
+	 <li>
+          <%= button_to 'ConeSearch',query_conesearch_path ,class: 'btn btn-default btn-block' %>
+	 </li>
+	 <li>
+	  <%= button_to 'ImageSearch',query_imagesearch_path ,class: 'btn btn-default btn-block' %>
+	 </li>
+	 <li>
+	  <%= button_to 'SpectralSearch',query_spectralsearch_path ,class: 'btn btn-default btn-block' %>
+	 </li>	
+	</ul>
+      </div>
+    </div>
+</div>
 
   <!-- Our Clients -->
   <div id="clients-flexslider" class="flexslider home clients">
